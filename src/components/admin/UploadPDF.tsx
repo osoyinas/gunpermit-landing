@@ -13,19 +13,18 @@ export function UploadPDF() {
   };
 
   const handleUpload = async () => {
+    if (!selectedFile) return;
     const formData = new FormData();
-    formData.append('file', selectedFile as File);
-
+    formData.append('file', selectedFile);
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/pdfs/', formData);
-      console.log(response.data);
     } catch (error) {
       console.error('Error al subir el archivo', error);
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center justify-center">
       <input 
         type="file" 
         accept="application/pdf" 
