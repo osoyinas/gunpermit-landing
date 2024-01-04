@@ -18,5 +18,4 @@ export default function TopicRetrieve ({ topic }: { topic: Topic }) {
     </div>
     )
   )
-  return (<p>topic retrieve</p>)
 }
