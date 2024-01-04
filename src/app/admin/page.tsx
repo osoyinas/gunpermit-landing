@@ -1,5 +1,5 @@
 import { TopicsList } from '@/components/admin/TopicsList'
-import UploadPDF from '@/components/admin/UploadPDF'
+import UploadTopic from '@/components/admin/UploadTopic'
 
 export default function page () {
   return (
@@ -7,7 +7,7 @@ export default function page () {
       <h1 className="text-4xl font-bold text-primary">Panel de administrador</h1>
       <div className='flex flex-col gap-4'>
       <TopicsList/>
-      <UploadPDF/>
+      <UploadTopic/>
       </div>
     </main>
   )
