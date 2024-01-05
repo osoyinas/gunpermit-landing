@@ -87,11 +87,11 @@ export default function Question ({ question } : {question: QuestionType}) {
         </ul>
         {edited && (
             <footer className='flex justify-between'>
-            <button className='btn btn-primary' onClick={() => { console.log(updatedQuestion) }}>Guardar</button>
             <button className='btn btn-error' onClick={() => {
               setUpdatedQuestion(question)
               setEdited(false)
             }}>Deshacer</button>
+            <button className='btn btn-primary' onClick={() => { console.log(updatedQuestion) }}>Guardar</button>
             </footer>
         )}
     </article>
