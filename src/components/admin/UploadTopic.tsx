@@ -34,11 +34,11 @@ export function UploadTopic () {
         type="file"
         accept="application/pdf"
         onChange={handleFileChange}
-        className=" border-gray-300"
+        className="file-input file-input-bordered file-input-info w-full max-w-xs file-input-sm"
         />
       <button
         onClick={handleUpload}
-        className={`${'btn btn-primary btn-xs'} ${selectedFile ? '' : 'btn-disabled'}`}
+        className={`${'btn btn-info btn-sm'} ${selectedFile ? '' : 'btn-disabled'}`}
         >
         subir archivo
       </button>
