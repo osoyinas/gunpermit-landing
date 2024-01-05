@@ -20,6 +20,7 @@ export default function Page ({ params }: { params: { topicId: number } }) {
   return (
     <main className='relative'>
       {topic && <TopicRetrieve topic={topic}/>}
+
     </main>
   )
 }
