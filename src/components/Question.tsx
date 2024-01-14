@@ -74,6 +74,7 @@ export default function Question ({ question } : {question: QuestionType}) {
     setUpdatedQuestion(updatedQuestion)
     setEdited(false)
   }
+
   return (
     <article className='py-8 px-12 pb-12 rounded-xl flex flex-col gap-8 relative z-30 border border-accent shadow-xl'>
         <textarea className='text-pretty text-base-content bg-base-100 min-h-max' onChange={onQuestionChange} value={updatedQuestion.question}/>

@@ -28,8 +28,8 @@ export default function TopicRetrieve ({ topic }: { topic: Topic }) {
   }
   return (
     topic &&
-    (<div className="flex flex-col gap-4 my-4">
-      <input className="font-bold text-primary text-4xl" value={updatedTopic.name} onChange={handleInputChange}/>
+    (<div className="flex flex-col gap-4 my-4 pt-8">
+      <input className="font-bold text-primary text-4xl bg-transparent" value={updatedTopic.name} onChange={handleInputChange}/>
       {edited && (
             <footer className='flex justify-between'>
             <button className='btn btn-error' onClick={() => {
