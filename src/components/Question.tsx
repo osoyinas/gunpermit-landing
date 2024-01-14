@@ -69,7 +69,7 @@ export default function Question ({ question } : {question: QuestionType}) {
   }
   return (
     <article className='py-8 px-12 pb-12 rounded-xl flex flex-col gap-8 relative z-30 border border-accent shadow-xl'>
-        <textarea className='text-pretty text-base-content bg-base-100' onChange={onQuestionChange} value={updatedQuestion.question}/>
+        <textarea className='text-pretty text-base-content bg-base-100 min-h-max' onChange={onQuestionChange} value={updatedQuestion.question}/>
         <ul className='flex flex-col gap-4'>
             {updatedQuestion.answers.map((answer, index) => (
                 <li key={index} className='w-full flex items-center gap-4'>
@@ -77,8 +77,8 @@ export default function Question ({ question } : {question: QuestionType}) {
                       if (answer.is_true) return
                       handleCorrectChange(index)
                     }}/>
-                    <input className='bg-base-300 w-full p-2 px-4 rounded-xl font-semibold' type='text' value={answer.answer} onChange={
-                        (event: React.ChangeEvent<HTMLInputElement>) => {
+                    <textarea className='bg-base-300 w-full p-2 px-4 rounded-xl font-semibold text-wrap min-h-max' value={answer.answer} onChange={
+                        (event: React.ChangeEvent<HTMLTextAreaElement>) => {
                           onAnswerChange(index, event.target.value)
                         }
                         }/>
