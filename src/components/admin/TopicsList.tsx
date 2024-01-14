@@ -1,14 +1,24 @@
 'use client'
 
 import { usePdfs } from '@/hooks/usePdfs'
+import { Loading } from '@/components/Loading'
+import { PdfType } from '@/types/Topic'
 export function TopicsList () {
-  const pdfs = usePdfs()
+  const { pdfs, error, loading } = usePdfs()
+  console.log(pdfs)
   return (
     <section className="my-4">
 
-    {pdfs && pdfs.length > 0
-      ? (
-      <table className='table table-zebra'>
+      {loading && <div className='w-full flex items-center justify-center'><Loading /></div>}
+      {error && <div className='w-full text-xl text-red-600 font-bold flex items-center justify-center'><p>{error.message}</p></div>}
+      {!loading && !error && <Table pdfs={pdfs} />}
+    </section>
+  )
+};
+
+function Table ({ pdfs }: { pdfs: PdfType[] }) {
+  return (
+  <table className='table table-zebra'>
       <thead>
         <tr>
           <th>Tema</th>
@@ -31,10 +41,5 @@ export function TopicsList () {
         ))}
       </tbody>
     </table>
-        )
-      : (
-      <p>No hay pdfs</p>
-        )}
-  </section>
   )
-};
+}

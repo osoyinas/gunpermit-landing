@@ -1,21 +1,25 @@
 'use client'
 
-import { useEffect, useState } from "react";
-import { getPdfs } from "@/services/getPdfs";
-import { PdfType } from "@/types/Topic";
+import { useEffect, useState } from 'react'
+import { getPdfs } from '@/services/getPdfs'
+import { PdfType } from '@/types/Topic'
 
-export function usePdfs() {
-  const [pdfs, setPdfs] = useState<PdfType[]>([]);
-
+export function usePdfs () {
+  const [pdfs, setPdfs] = useState<PdfType[]>([])
+  const [error, setError] = useState<null|Error>(null)
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     getPdfs()
-    .then((res) => {
-      setPdfs(res);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-  }, []);
+      .then((res) => {
+        setPdfs(res)
+      })
+      .catch((err) => {
+        setError(err)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [])
 
-  return pdfs;
+  return { pdfs, error, loading }
 }
