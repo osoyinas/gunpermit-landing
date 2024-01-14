@@ -3,9 +3,10 @@
 import { usePdfs } from '@/hooks/usePdfs'
 import { Loading } from '@/components/Loading'
 import { PdfType } from '@/types/Topic'
+import Link from 'next/link'
+
 export function TopicsList () {
   const { pdfs, error, loading } = usePdfs()
-  console.log(pdfs)
   return (
     <section className="my-4">
 
@@ -29,7 +30,11 @@ function Table ({ pdfs }: { pdfs: PdfType[] }) {
       <tbody>
         {pdfs.map((pdf, index) => (
           <tr key={index}>
-            <td> {pdf.topic.name} </td>
+            <td>
+              <Link href={`/admin/topics/${pdf.topic.id}`}>
+                {pdf.topic.name}
+              </Link>
+            </td>
             <td> {pdf.topic.questions.length} </td>
             <td>{new Date(pdf.created_at).toLocaleDateString('es-ES', {
               year: 'numeric',
