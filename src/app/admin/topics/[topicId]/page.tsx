@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react'
 import { retrieveTopic } from '@/services/retrieveTopic'
 import TopicRetrieve from '@/components/admin/TopicRetrieve'
 import { Topic } from '@/types/Topic'
+import { Loading } from '@/components/Loading'
 
 export default function Page ({ params }: { params: { topicId: number } }) {
   const [topic, setTopic] = useState<Topic | null>(null)
-
+  const [loading, setLoading] = useState<boolean>(true)
   useEffect(() => {
     const fetchTopic = async () => {
       const response = await retrieveTopic(params.topicId)
@@ -15,12 +16,13 @@ export default function Page ({ params }: { params: { topicId: number } }) {
     }
 
     fetchTopic()
+    setLoading(false)
   }, [params.topicId])
 
   return (
-    <main className='relative'>
-      {topic && <TopicRetrieve topic={topic}/>}
-
+    <main className="mx-auto p-8">
+      {loading && <div className='w-full flex items-center justify-center scale-150'><Loading /></div>}
+      {topic && !loading && <TopicRetrieve topic={topic}/>}
     </main>
   )
 }
