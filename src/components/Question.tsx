@@ -2,6 +2,7 @@
 'use client'
 import { Question as QuestionType } from '@/types/Topic'
 import React, { useState } from 'react'
+import { updateQuestion } from '@/services/updateQuestion'
 
 export default function Question ({ question } : {question: QuestionType}) {
   const [updatedQuestion, setUpdatedQuestion] = useState<QuestionType>(question)
@@ -67,6 +68,12 @@ export default function Question ({ question } : {question: QuestionType}) {
     )
     setEdited(true)
   }
+
+  const handleSave = async () => {
+    await updateQuestion(updatedQuestion)
+    setUpdatedQuestion(updatedQuestion)
+    setEdited(false)
+  }
   return (
     <article className='py-8 px-12 pb-12 rounded-xl flex flex-col gap-8 relative z-30 border border-accent shadow-xl'>
         <textarea className='text-pretty text-base-content bg-base-100 min-h-max' onChange={onQuestionChange} value={updatedQuestion.question}/>
@@ -91,7 +98,7 @@ export default function Question ({ question } : {question: QuestionType}) {
               setUpdatedQuestion(question)
               setEdited(false)
             }}>Deshacer</button>
-            <button className='btn btn-primary' onClick={() => { console.log(updatedQuestion) }}>Guardar</button>
+            <button className='btn btn-primary' onClick={handleSave}>Guardar</button>
             </footer>
         )}
     </article>
