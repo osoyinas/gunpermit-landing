@@ -18,21 +18,23 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
 import { LoginResponseError } from '@/types/Response'
 import { ErrorP } from '@/components/ui/errorP'
+import { useAuthStore } from '@/hooks/useAuthStore'
 
 export default function Page () {
   const router = useRouter()
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [error, setError] = React.useState<LoginResponseError | null>(null)
+  const setAccessToken = useAuthStore((state) => state.setAccessToken)
+
   const handleLogin = async () => {
     setError(null)
     const response = await login({ email, password })
     if (response.ok) {
-      console.log(response.val)
+      setAccessToken(response.val.access)
     } else {
       setError(response.val)
     }
-    console.log(response.val)
   }
 
   const handleRegister = async () => {
