@@ -24,7 +24,7 @@ import { useRedirectIf } from '@/hooks/redirects/useRedirectIf'
 
 export default function Page () {
   useRedirectIf({ authenticated: true }) // Redirects to home if the user is authenticated
-  const { setAccessToken } = useAuth()
+  const { setAccessToken, setIsAuthenticated } = useAuth()
   const { register } = useRegister()
   const router = useRouter()
 
@@ -43,13 +43,17 @@ export default function Page () {
     const response = await register({ userRegister })
     if (response.ok) {
       setAccessToken(response.val.access)
+      setIsAuthenticated(true)
     } else {
       setError(response.val)
     }
   }
+
   const handleAlreadyHaveAnAccount = async () => {
     router.push('/auth/login')
   }
+
+  const disable = Object.values(userRegister).some((value) => value === '')
   return (
     <main className="w-full flex justify-center items-center">
       <Card className="w-[400px]">
@@ -158,7 +162,7 @@ export default function Page () {
         </CardContent>
         <CardFooter className="flex justify-between">
           <Button variant="link" onClick={handleAlreadyHaveAnAccount}>Ya tengo una cuenta</Button>
-          <Button variant="default" onClick={handleRegister}>Registrase</Button>
+          <Button variant="default" onClick={handleRegister} disabled={disable}>Registrase</Button>
         </CardFooter>
       </Card>
     </main>
