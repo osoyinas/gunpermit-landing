@@ -5,7 +5,7 @@ import { useAuth } from './useAuth'
 const ROUTE = '/auth/login'
 
 /**
- * Custom hook that checks the authentication status and redirects to a specified route if the user is not authenticated.
+ * Custom hook that checks the authentication status and redirects to a specified route if the user is not authenticated. Use this hook to protect routes that require authentication.
  *
  * @remarks
  * This hook utilizes the `useAuth` hook to determine the authentication status of the user.
@@ -13,9 +13,10 @@ const ROUTE = '/auth/login'
  *
  * @example
  * ```typescript
- * const { isAuth } = useRedirectWithAuth();
- * if (!isAuth) {
- *   // Handle unauthenticated state
+ * export default function Page () {
+ *    useRedirectWithAuth()
+ *
+ *    return (<>...</>)
  * }
  * ```
  *
