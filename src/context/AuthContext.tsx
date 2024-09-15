@@ -36,11 +36,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     refreshToken()
   }, [])
 
-  useEffect(() => {
-    console.log('accessToken', accessToken)
-    console.log('isAuthenticated', isAuthenticated)
-  }, [accessToken, isAuthenticated])
-
   return (
     <AuthContext.Provider
       value={{
