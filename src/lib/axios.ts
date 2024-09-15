@@ -4,26 +4,21 @@ import { useAuthStore } from '@/hooks/useAuthStore'
 const axiosInstance = axios.create({
   baseURL: 'http://127.0.0.1:8000/api/v1/',
   timeout: 5000,
+  headers: { 'Content-Type': 'application/json' },
   withCredentials: true
 })
 
 // Interceptor to add the Authorization header to all requests
 axiosInstance.interceptors.request.use(
   (config) => {
-    console.log('Interceptor')
-    try {
-      const { accessToken } = useAuthStore.getState()
-      if (accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`
-      }
-    } catch (error) {
-      console.log('error', error)
+    const { accessToken } = useAuthStore.getState()
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`
     }
 
     return config
   },
   (error) => {
-    console.log('error', error)
     return Promise.reject(error)
   }
 )
@@ -35,7 +30,7 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (error.response.status === 401 && !originalRequest._retry && !originalRequest.sent) {
       originalRequest._retry = true
 
       try {
@@ -48,6 +43,7 @@ axiosInstance.interceptors.response.use(
 
         // Update the token in Zustand
         useAuthStore.getState().setAccessToken(newAccessToken)
+        useAuthStore.getState().setIsAuth(true)
 
         // Update the Authorization header for the retry
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`
@@ -55,10 +51,12 @@ axiosInstance.interceptors.response.use(
         // Retry the original request with the new token
         return axiosInstance(originalRequest)
       } catch (refreshError) {
-        console.error('Error refreshing token:', refreshError)
+        console.error('Error refreshing token', refreshError)
       }
     }
-
+    // If the refresh token fails, logout the user
+    useAuthStore.getState().setAccessToken(null)
+    useAuthStore.getState().setIsAuth(false)
     return Promise.reject(error)
   }
 )
