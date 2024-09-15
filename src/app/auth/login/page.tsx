@@ -12,30 +12,31 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { redirect, useRouter } from 'next/navigation'
-import { login } from '@/services/auth/login'
+import { useRouter } from 'next/navigation'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
 import { LoginResponseError } from '@/types/Response'
 import { ErrorP } from '@/components/ui/errorP'
 import { useAuth } from '@/hooks/useAuth'
+import { useLogin } from '@/hooks/api/auth/useLogin'
+import { useRedirectIf } from '@/hooks/redirects/useRedirectIf'
 
 export default function Page () {
+  useRedirectIf({ authenticated: true }) // Redirects to home if the user is authenticated
+
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<LoginResponseError | null>(null)
-  const { setAccessToken, isAuth } = useAuth()
-
-  if (isAuth) {
-    redirect('/')
-  }
+  const { setAccessToken, setIsAuthenticated } = useAuth()
+  const { login } = useLogin()
 
   const handleLogin = async () => {
     setError(null)
     const response = await login({ email, password })
     if (response.ok) {
       setAccessToken(response.val.access)
+      setIsAuthenticated(true)
     } else {
       setError(response.val)
     }

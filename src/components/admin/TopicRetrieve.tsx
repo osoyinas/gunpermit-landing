@@ -3,11 +3,12 @@ import { Topic } from '@/types/Topic'
 import Question from '../Question'
 import React, { useState } from 'react'
 import { updateTopic } from '@/services/updateTopic'
+import useAxios from '@/hooks/useAxios'
 
 export default function TopicRetrieve ({ topic }: { topic: Topic }) {
   const [updatedTopic, setUpdatedTopic] = useState<Topic>(topic)
   const [edited, setEdited] = useState<boolean>(false)
-
+  const axiosInstance = useAxios()
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUpdatedTopic((prevTopic) => {
       if (prevTopic.name === event.target.value) {
@@ -22,7 +23,7 @@ export default function TopicRetrieve ({ topic }: { topic: Topic }) {
     setEdited(true)
   }
   const handleSave = async () => {
-    await updateTopic(updatedTopic)
+    await updateTopic(updatedTopic, axiosInstance)
     setUpdatedTopic(updatedTopic)
     setEdited(false)
   }

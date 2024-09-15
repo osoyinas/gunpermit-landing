@@ -1,7 +1,7 @@
 import { Topic } from '@/types/Topic'
-import { axiosInstance as axios } from '@/lib/axios'
+import { AxiosInstance } from 'axios'
 
-export async function retrieveTopic (id: number): Promise<Topic> {
-  const response = await axios.get('topics/' + id)
+export async function retrieveTopic (id: number, axiosInstance:AxiosInstance): Promise<Topic> {
+  const response = await axiosInstance.get('topics/' + id)
   return response.data
 }

@@ -3,6 +3,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 import React from 'react'
 import { Navbar } from '@/components/Navbar'
+import { AuthProvider } from '@/context/AuthContext'
 
 export const metadata: Metadata = {
   title: 'Tests del permiso de armas',
@@ -16,16 +17,18 @@ export default function RootLayout ({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className='min-h-screen'>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          {children}
-        </ThemeProvider>
+      <body className="min-h-screen">
+        <AuthProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar />
+            {children}
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )

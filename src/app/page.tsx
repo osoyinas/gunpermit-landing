@@ -1,12 +1,12 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { useAuth } from '@/hooks/useAuth'
+import { useLogout } from '@/hooks/api/auth/useLogout'
 import { useRouter } from 'next/navigation'
 
 export default function Home () {
   const router = useRouter()
-  const { logout } = useAuth()
+  const { logout } = useLogout()
   const handleLogin = async () => {
     router.push('/auth/login')
   }
