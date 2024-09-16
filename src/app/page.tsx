@@ -1,5 +1,6 @@
 'use client'
 
+import { DashboardComponent } from '@/components/dashboard'
 import { Button } from '@/components/ui/button'
 import { useLogout } from '@/hooks/api/auth/useLogout'
 import { useRouter } from 'next/navigation'
@@ -16,9 +17,10 @@ export default function Home () {
   }
   return (
     <>
-      <p>main page</p>
+      {/* <p>main page</p>
       <Button onClick={handleLogin}>login</Button>
-      <Button onClick={handleLogout}>logout</Button>
+      <Button onClick={handleLogout}>logout</Button> */}
+      <DashboardComponent />
     </>
   )
 }
