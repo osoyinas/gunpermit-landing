@@ -1,25 +1,79 @@
-import Link from 'next/link'
 import { ModeToggle } from './ui/ModeToggle'
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem
+} from '@radix-ui/react-dropdown-menu'
+import { MenuIcon } from 'lucide-react'
+import { Button } from './ui/button'
 
 export function Navbar () {
   return (
-<nav className="navbar w-full m-0 sticky top-0 z-50">
-  <div className="flex-none">
-    <button className="btn btn-square btn-ghost">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-    </button>
-  </div>
-  <div className="flex-1">
-    <Link className="btn btn-ghost text-xl" href={'/'}>Inicio</Link>
-    <Link className="btn btn-ghost text-xl" href={'/admin'}>Admin</Link>
-  </div>
-
-  <div className="flex-none">
-    <button className="btn btn-square btn-ghost">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
-    </button>
-  </div>
-  <ModeToggle />
-</nav>
+      <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-14 items-center m-auto">
+          <div className="mr-4 hidden md:flex">
+            <a className="mr-6 flex items-center space-x-2" href="/">
+              <span className="hidden font-bold sm:inline-block">
+                Licencia de Armas
+              </span>
+            </a>
+            <nav className="flex items-center space-x-6 text-sm font-medium">
+              <a
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+                href="/dashboard"
+              >
+                Dashboard
+              </a>
+              <a
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+                href="/examenes"
+              >
+                Exámenes
+              </a>
+              <a
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+                href="/recursos"
+              >
+                Recursos
+              </a>
+              <a
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+                href="/perfil"
+              >
+                Perfil
+              </a>
+            </nav>
+          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="icon" className="md:hidden">
+                <MenuIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem>
+                <a href="/dashboard">Dashboard</a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="/examenes">Exámenes</a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="/recursos">Recursos</a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="/perfil">Perfil</a>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+            <nav className="flex items-center">
+              <ModeToggle />
+            </nav>
+            <Button variant="outline">Cerrar Sesión</Button>
+          </div>
+        </div>
+      </header>
   )
 }
