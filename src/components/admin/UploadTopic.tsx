@@ -4,10 +4,12 @@ import React, { useState } from 'react'
 import { Topic } from '@/types/Topic'
 import { postPdf } from '@/services/postPdf'
 import TopicRetrieve from './TopicRetrieve'
+import useAxios from '@/hooks/useAxios'
 
 export function UploadTopic () {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [uploadedTopic, setUploadedTopic] = useState<Topic | null>(null)
+  const axiosInstance = useAxios()
 
   const handleFileChange = (event : React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
@@ -18,7 +20,7 @@ export function UploadTopic () {
 
   const handleUpload = async () => {
     if (!selectedFile) return
-    postPdf(selectedFile)
+    postPdf(selectedFile, axiosInstance)
       .then((topic) => {
         setUploadedTopic(topic)
       })
