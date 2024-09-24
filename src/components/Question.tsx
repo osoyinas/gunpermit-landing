@@ -3,11 +3,13 @@
 import { Question as QuestionType } from '@/types/Topic'
 import React, { useState } from 'react'
 import { updateQuestion } from '@/services/updateQuestion'
+import useAxios from '@/hooks/useAxios'
 
 export default function Question ({ question } : {question: QuestionType}) {
   const [updatedQuestion, setUpdatedQuestion] = useState<QuestionType>(question)
   const [edited, setEdited] = useState<boolean>(false)
 
+  const axiosInstance = useAxios()
   const onQuestionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setUpdatedQuestion((prevQuestion) => {
       console.log(updatedQuestion)
@@ -70,7 +72,7 @@ export default function Question ({ question } : {question: QuestionType}) {
   }
 
   const handleSave = async () => {
-    await updateQuestion(updatedQuestion)
+    await updateQuestion(updatedQuestion, axiosInstance)
     setUpdatedQuestion(updatedQuestion)
     setEdited(false)
   }

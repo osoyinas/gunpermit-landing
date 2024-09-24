@@ -43,8 +43,11 @@ export default function TopicRetrieve ({ topic }: { topic: Topic }) {
       <div className="flex flex-col gap-4">
        <div className='divider'></div>
         <ul className='flex flex-col gap-8'>
-          {topic.questions.map((question) => (
+          {topic.questions.map((question, index) => (
+            <>
+              {index + 1}
             <Question key={question.id} question={question}/>
+            </>
           ))}
         </ul>
       </div>

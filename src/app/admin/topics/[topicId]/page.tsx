@@ -5,13 +5,15 @@ import { retrieveTopic } from '@/services/retrieveTopic'
 import TopicRetrieve from '@/components/admin/TopicRetrieve'
 import { Topic } from '@/types/Topic'
 import { Loading } from '@/components/Loading'
+import useAxios from '@/hooks/useAxios'
 
 export default function Page ({ params }: { params: { topicId: number } }) {
   const [topic, setTopic] = useState<Topic | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
+  const axiosInstance = useAxios()
   useEffect(() => {
     const fetchTopic = async () => {
-      const response = await retrieveTopic(params.topicId)
+      const response = await retrieveTopic(params.topicId, axiosInstance)
       setTopic(response ?? null)
     }
 
