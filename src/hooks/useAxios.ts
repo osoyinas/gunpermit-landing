@@ -29,7 +29,7 @@ function useAxios (): AxiosInstance {
 
         // If the error is a 401 (Unauthorized), try to refresh the token
         if (
-          error.response.status === 401 &&
+          error.response?.status === 401 &&
           !originalRequest._retry) {
           originalRequest._retry = true
           try {
