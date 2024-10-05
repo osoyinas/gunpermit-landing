@@ -1,6 +1,7 @@
 'use client'
 
-import { MakeQuizz } from '@/components/quizzes/questions/MakeQuizz'
+import { MakeQuiz } from '@/components/quizzes/questions/MakeQuiz'
+import { MakeQuizProvider } from '@/context/MakeQuizContext'
 import { useQuizzes } from '@/hooks/api/quizzes/useQuizzes'
 import { CompleteQuiz } from '@/types/Quizzes'
 import { useEffect, useState } from 'react'
@@ -23,5 +24,9 @@ export default function Page ({ params }: { params: { id: number } }) {
     return <>cargando</>
   }
 
-  return <MakeQuizz quiz={quiz} />
+  return (
+    <MakeQuizProvider>
+      <MakeQuiz quiz={quiz} />
+    </MakeQuizProvider>
+  )
 }

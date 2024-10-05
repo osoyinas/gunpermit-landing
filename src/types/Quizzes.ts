@@ -14,3 +14,11 @@ export interface QuizAttempt extends Quiz {
 export interface CompleteQuiz extends QuizAttempt {
     questions: Question[];
 }
+
+export interface QuizAnswer {
+    question: number;
+    answer?: number;
+}
+export interface QuizResponse {
+    answers: QuizAnswer[];
+}
