@@ -1,16 +1,21 @@
 'use client'
 
-import { CompleteQuiz } from '@/types/Quizzes'
 import { QuizQuestion } from './QuizQuestion'
 import { AnimatedBottomButtons } from './BottomButtons'
+import { useSetupQuiz } from '@/hooks/make-quiz/useSetupQuiz'
+import { useMakeQuizQuestions } from '@/hooks/make-quiz/useMakeQuizQuestions'
 
 interface MakeQuizProps {
-  quiz: CompleteQuiz
+  quizId: number
 }
 export function MakeQuiz (props: MakeQuizProps) {
+  const { quizId } = props
+  useSetupQuiz(quizId)
+
+  const { actualQuestion } = useMakeQuizQuestions()
   return (
     <>
-    <QuizQuestion question={props.quiz.questions[0].question} answers={props.quiz.questions[0].answers} />
+    <QuizQuestion question={actualQuestion} />
     <AnimatedBottomButtons />
     </>
   )

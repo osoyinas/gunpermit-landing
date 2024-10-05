@@ -32,7 +32,6 @@ export function BottomButtons () {
         disabled={previousQuestionDisable}
       >
         <ArrowLeftIcon className="mr-2 h-4 w-4 md:h-5 md:w-5" />
-        Anterior
       </Button>
       <Button
         onClick={goToNextQuestion}
@@ -40,7 +39,6 @@ export function BottomButtons () {
         variant="outline"
         disabled={nextQuestionDisable}
       >
-        Siguiente
         <ArrowRightIcon className="ml-2 h-4 w-4 md:h-5 md:w-5" />
       </Button>
     </>

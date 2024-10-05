@@ -7,8 +7,8 @@ interface MakeQuizContextType {
   setQuiz: (quiz: CompleteQuiz) => void;
   quizResponse: QuizResponse | null;
   setQuizResponse: (quizResponse: QuizResponse) => void;
-  actualQuestion: number;
-  setActualQuestion: (actualQuestion: number) => void;
+  actualQuestionIndex: number;
+  setActualQuestionIndex: (actualQuestion: number) => void;
 }
 
 export const MakeQuizContext = createContext<MakeQuizContextType | undefined>(
@@ -21,7 +21,7 @@ export const MakeQuizProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [quiz, setQuiz] = useState<CompleteQuiz | null>(null)
   const [quizResponse, setQuizResponse] = useState<QuizResponse | null>(null)
-  const [actualQuestion, setActualQuestion] = useState<number>(0)
+  const [actualQuestionIndex, setActualQuestionIndex] = useState<number>(0)
 
   useSetupResponseQuiz(
     {
@@ -37,8 +37,8 @@ export const MakeQuizProvider: React.FC<{ children: ReactNode }> = ({
         setQuiz,
         quizResponse,
         setQuizResponse,
-        actualQuestion,
-        setActualQuestion
+        actualQuestionIndex,
+        setActualQuestionIndex
       }}
     >
       {children}

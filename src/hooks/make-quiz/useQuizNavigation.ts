@@ -1,7 +1,7 @@
 import { useMakeQuiz } from '@/hooks/make-quiz/useMakeQuiz'
 
 export function useQuizNavigation () {
-  const { quiz, actualQuestion, setActualQuestion } = useMakeQuiz()
+  const { quiz, actualQuestionIndex: actualQuestion, setActualQuestionIndex: setActualQuestion } = useMakeQuiz()
 
   const goToNextQuestion = () => {
     if (!quiz) return
