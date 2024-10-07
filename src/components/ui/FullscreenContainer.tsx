@@ -1,15 +1,15 @@
-import { ReactNode } from 'react'
+import { HTMLAttributes, ReactNode } from 'react'
 
-interface FullscreenContainerProps {
+interface FullscreenContainerProps extends HTMLAttributes<HTMLDivElement> {
     children: ReactNode
 }
 
 export function FullscreenContainer (props: FullscreenContainerProps) {
   return (
-    <div className="text-foreground bg-background p-8 md:p-16" style={
+    <main className={`text-foreground bg-background p-8 md:p-16 ${props.className}`} {...props} style={
       { minHeight: 'calc(100vh - 4rem)' }
     }>
       {props.children}
-    </div>
+    </main>
   )
 }
