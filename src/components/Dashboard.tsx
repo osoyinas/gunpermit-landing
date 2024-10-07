@@ -45,7 +45,7 @@ const radarChartData = [
   { subject: 'Mantenimiento', A: 65, fullMark: 150 }
 ]
 
-export function DashboardComponent () {
+export function Dashboard () {
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground max-w-7xl m-auto">
       <main className="flex-1 p-4 lg:p-6 space-y-6">
