@@ -51,7 +51,7 @@ export function QuizQuestion (props: QuizQuestionProps) {
 
   return (
 
-      <Card className="m-auto w-full max-w-4xl h-full md:h-auto overflow-hidden rounded-none md:rounded-2xl shadow-lg flex flex-col items-center border-none md:border-solid">
+      <Card className="m-auto w-full max-w-4xl h-full md:h-auto overflow-hidden rounded-none md:rounded-2xl shadow-none md:shadow-lg flex flex-col items-center border-none md:border-solid">
         <CardHeader className="bg-primary/10 p-4 md:p-6 lg:p-8 flex-shrink-0 flex flex-row justify-between items-center w-full">
           <Button
             onClick={goToPreviousQuestion}
