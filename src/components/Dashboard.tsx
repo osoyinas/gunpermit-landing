@@ -26,6 +26,7 @@ import {
   PolarRadiusAxis,
   Radar
 } from 'recharts'
+import { FullscreenContainer } from './ui/FullscreenContainer'
 
 const lineChartData = [
   { date: '01/05', score: 65 },
@@ -47,7 +48,7 @@ const radarChartData = [
 
 export function Dashboard () {
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground max-w-7xl m-auto">
+    <FullscreenContainer className="flex flex-col max-w-7xl m-auto">
       <main className="flex-1 p-4 lg:p-6 space-y-6">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           <Card>
@@ -161,6 +162,6 @@ export function Dashboard () {
           </Card>
         </div>
       </main>
-    </div>
+    </FullscreenContainer>
   )
 }
