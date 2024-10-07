@@ -13,6 +13,7 @@ import { useMakeQuizQuestions } from '@/hooks/make-quiz/useMakeQuizQuestions'
 import { Button } from '@/components/ui/button'
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
 import { useQuizNavigation } from '@/hooks/make-quiz/useQuizNavigation'
+import { FullscreenLoading } from '@/components/FullscreenLoading'
 
 interface QuizQuestionProps {
   question: Question | undefined;
@@ -24,7 +25,7 @@ export function AnimatedQuizQuestion (props: QuizQuestionProps) {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="flex-grow flex flex-col md:justify-center md:items-center p-4"
+      className="flex-grow flex flex-col md:justify-center md:items-center md:py-16"
     >
       <AnimatePresence mode='wait'>
         <QuizQuestion key={props.question?.id} {...props} />
@@ -45,18 +46,12 @@ export function QuizQuestion (props: QuizQuestionProps) {
     previousQuestionDisable
   } = useQuizNavigation()
   if (!question) {
-    return <div>La pregunta no existe</div>
+    return <FullscreenLoading />
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.1 }}
-      className="w-full"
-    >
-      <Card className="m-auto w-full max-w-4xl h-full md:h-auto overflow-hidden rounded-none md:rounded-2xl shadow-lg flex flex-col sm:h-screen">
+
+      <Card className="m-auto w-full max-w-4xl h-full md:h-auto overflow-hidden rounded-none md:rounded-2xl shadow-lg flex flex-col items-center border-none md:border-solid">
         <CardHeader className="bg-primary/10 p-4 md:p-6 lg:p-8 flex-shrink-0 flex flex-row justify-between items-center w-full">
           <Button
             onClick={goToPreviousQuestion}
@@ -120,6 +115,5 @@ export function QuizQuestion (props: QuizQuestionProps) {
           </motion.div>
         </CardContent>
       </Card>
-    </motion.div>
   )
 }
