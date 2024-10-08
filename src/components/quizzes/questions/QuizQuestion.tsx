@@ -52,6 +52,7 @@ export function QuizQuestion (props: QuizQuestionProps) {
     const previusAnswer = getQuizResponse(questionId)
     if (!previusAnswer) return
     if (previusAnswer.answer === answerIndex) {
+      updateQuizResponse(questionId, undefined)
       return
     }
     console.log('updateQuizResponse', questionId, answerIndex)

@@ -3,12 +3,12 @@ import { QuizAnswer, QuizResponse } from '@/types/Quizzes'
 
 export function useResponseQuiz (): {
   quizResponse: QuizResponse | undefined,
-  updateQuizResponse: (questionId: number, answerIndex: number) => void,
+  updateQuizResponse: (questionId: number, answerIndex: number | undefined) => void,
   getQuizResponse: (questionId:number) => QuizAnswer | undefined
   } {
   const { quizResponse, setQuizResponse } = useMakeQuiz()
 
-  const updateQuizResponse = (questionId: number, answerIndex: number) => {
+  const updateQuizResponse = (questionId: number, answerIndex: number | undefined) => {
     if (!quizResponse) return
 
     const newAnswers = quizResponse.answers.filter(
