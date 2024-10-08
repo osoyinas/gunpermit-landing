@@ -19,7 +19,6 @@ export function QuizSelection () {
     const fetchData = async () => {
       const response = await getQuizzes()
       if (response.ok) {
-        console.log('Seting data', response.val)
         setQuizzes(response.val)
       } else {
         console.error(response.val)

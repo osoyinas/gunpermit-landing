@@ -48,14 +48,12 @@ export function QuizQuestion (props: QuizQuestionProps) {
   } = useQuizNavigation()
 
   const handleAnswerSelection = (questionId:number, answerIndex:number) => {
-    console.log('handleAnswerSelection')
     const previusAnswer = getQuizResponse(questionId)
     if (!previusAnswer) return
     if (previusAnswer.answer === answerIndex) {
       updateQuizResponse(questionId, undefined)
       return
     }
-    console.log('updateQuizResponse', questionId, answerIndex)
     updateQuizResponse(questionId, answerIndex)
   }
 

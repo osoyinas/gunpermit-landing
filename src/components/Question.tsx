@@ -12,8 +12,6 @@ export default function Question ({ question } : {question: QuestionType}) {
   const axiosInstance = useAxios()
   const onQuestionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setUpdatedQuestion((prevQuestion) => {
-      console.log(updatedQuestion)
-
       if (prevQuestion.question === event.target.value) {
         return prevQuestion
       } else {
