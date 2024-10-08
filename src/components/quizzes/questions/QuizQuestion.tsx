@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button'
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
 import { useQuizNavigation } from '@/hooks/make-quiz/useQuizNavigation'
 import { FullscreenLoading } from '@/components/FullscreenLoading'
+import { useResponseQuiz } from '@/hooks/make-quiz/useResponseQuiz'
 
 interface QuizQuestionProps {
   question: Question | undefined;
@@ -38,19 +39,30 @@ export function QuizQuestion (props: QuizQuestionProps) {
   const { question } = props
 
   const { actualQuestionIndex, questions } = useMakeQuizQuestions()
-
+  const { updateQuizResponse, getQuizResponse } = useResponseQuiz()
   const {
     goToNextQuestion,
     goToPreviousQuestion,
     nextQuestionDisable,
     previousQuestionDisable
   } = useQuizNavigation()
+
+  const handleAnswerSelection = (questionId:number, answerIndex:number) => {
+    console.log('handleAnswerSelection')
+    const previusAnswer = getQuizResponse(questionId)
+    if (!previusAnswer) return
+    if (previusAnswer.answer === answerIndex) {
+      return
+    }
+    console.log('updateQuizResponse', questionId, answerIndex)
+    updateQuizResponse(questionId, answerIndex)
+  }
+
   if (!question) {
     return <FullscreenLoading />
   }
 
   return (
-
       <Card className="m-auto w-full max-w-4xl h-full md:h-auto overflow-hidden rounded-none md:rounded-2xl shadow-none md:shadow-lg flex flex-col items-center border-none md:border-solid">
         <CardHeader className="bg-primary/10 p-4 md:p-6 lg:p-8 flex-shrink-0 flex flex-row justify-between items-center w-full">
           <Button
@@ -98,9 +110,13 @@ export function QuizQuestion (props: QuizQuestionProps) {
                 >
                   <div className="flex items-center space-x-3 bg-primary/5 p-4 rounded-xl transition-colors hover:bg-primary/10">
                     <RadioGroupItem
+                    checked={getQuizResponse(question.id)?.answer === index}
                       value={index.toString()}
                       id={index.toString()}
                       className="text-primary"
+                      onClick={() => {
+                        handleAnswerSelection(question.id, index)
+                      }}
                     />
                     <Label
                       htmlFor={index.toString()}
