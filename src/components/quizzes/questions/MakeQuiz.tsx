@@ -8,7 +8,7 @@ import { QuestionSelection } from './QuestionSelection'
 import { BottomButtons } from './BottomButtons'
 
 interface MakeQuizProps {
-  quizId: number
+  quizId: number;
 }
 export function MakeQuiz (props: MakeQuizProps) {
   const { quizId } = props
@@ -21,9 +21,9 @@ export function MakeQuiz (props: MakeQuizProps) {
   }
   return (
     <>
-    <AnimatedQuizQuestion question={actualQuestion} />
-    <QuestionSelection />
-    <BottomButtons/>
+      <AnimatedQuizQuestion question={actualQuestion} />
+      <QuestionSelection />
+      <BottomButtons />
     </>
   )
 }
