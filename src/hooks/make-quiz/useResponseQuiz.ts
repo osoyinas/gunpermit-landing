@@ -11,12 +11,12 @@ export function useResponseQuiz (): {
   const updateQuizResponse = (questionId: number, answerIndex: number | undefined) => {
     if (!quizResponse) return
 
-    const newAnswers = quizResponse.answers.filter(
-      (answer) => answer.question !== questionId
+    const newAnswers = quizResponse.answers.map(
+      (answer) => answer.question === questionId
+        ? { ...answer, answer: answerIndex }
+        : answer
     )
-    setQuizResponse({
-      answers: [...newAnswers, { question: questionId, answer: answerIndex }]
-    })
+    setQuizResponse({ ...quizResponse, answers: newAnswers })
   }
   const getQuizResponse = (questionId:number) => {
     if (!quizResponse) return
