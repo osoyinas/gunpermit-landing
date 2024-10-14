@@ -2,6 +2,7 @@ import { useMakeQuiz } from '@/hooks/make-quiz/useMakeQuiz'
 
 export function useQuizNavigation ():
 {
+  actualQuestionIndex: number,
   goToQuestion: (questionId:number) => void,
   goToQuestionIndex: (questionIndex:number) => void,
   goToNextQuestion: () => void,
@@ -9,7 +10,7 @@ export function useQuizNavigation ():
   nextQuestionDisable: boolean,
   previousQuestionDisable: boolean
   } {
-  const { quiz, actualQuestionIndex: actualQuestion, setActualQuestionIndex: setActualQuestion } = useMakeQuiz()
+  const { quiz, actualQuestionIndex, setActualQuestionIndex: setActualQuestion } = useMakeQuiz()
 
   const goToQuestion = (questionId:number) => {
     const questionIndex = quiz?.questions.findIndex(question => question.id === questionId)
@@ -25,21 +26,22 @@ export function useQuizNavigation ():
   }
   const goToNextQuestion = () => {
     if (!quiz) return
-    if (actualQuestion < quiz!.questions.length - 1) {
-      setActualQuestion(actualQuestion + 1)
+    if (actualQuestionIndex < quiz!.questions.length - 1) {
+      setActualQuestion(actualQuestionIndex + 1)
     }
   }
 
   const goToPreviousQuestion = () => {
     if (!quiz) return
-    if (actualQuestion > 0) {
-      setActualQuestion(actualQuestion - 1)
+    if (actualQuestionIndex > 0) {
+      setActualQuestion(actualQuestionIndex - 1)
     }
   }
 
-  const nextQuestionDisable = quiz ? actualQuestion === quiz.questions.length - 1 : true
-  const previousQuestionDisable = actualQuestion === 0
+  const nextQuestionDisable = quiz ? actualQuestionIndex === quiz.questions.length - 1 : true
+  const previousQuestionDisable = actualQuestionIndex === 0
   return {
+    actualQuestionIndex,
     goToQuestion,
     goToQuestionIndex,
     goToNextQuestion,
