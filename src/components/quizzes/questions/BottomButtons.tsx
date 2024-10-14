@@ -1,9 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { useQuizzes } from '@/hooks/api/quizzes/useQuizzes'
 import { useMakeQuiz } from '@/hooks/make-quiz/useMakeQuiz'
-import { useQuizNavigation } from '@/hooks/make-quiz/useQuizNavigation'
 import { useResponseQuiz } from '@/hooks/make-quiz/useResponseQuiz'
-import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons'
 import { motion } from 'framer-motion'
 
 export function AnimatedBottomButtons () {
