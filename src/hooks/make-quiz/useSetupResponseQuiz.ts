@@ -1,10 +1,5 @@
-import { CompleteQuiz, QuizResponse } from '@/types/Quizzes'
 import { useEffect } from 'react'
-
-interface SetupResponseQuizParams {
-    quiz: CompleteQuiz | null;
-    setQuizResponse: (response: QuizResponse) => void;
-}
+import { useMakeQuiz } from './useMakeQuiz'
 
 /**
  * Custom hook that sets up the initial response structure for a quiz.
@@ -12,8 +7,8 @@ interface SetupResponseQuizParams {
  *
  * @returns {void}
  */
-export function useSetupResponseQuiz (params: SetupResponseQuizParams): void {
-  const { quiz, setQuizResponse } = params
+export function useSetupResponseQuiz (): void {
+  const { quiz, setQuizResponse } = useMakeQuiz()
   useEffect(() => {
     if (!quiz) return
     setQuizResponse({

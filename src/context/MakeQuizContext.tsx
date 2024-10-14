@@ -1,6 +1,5 @@
-import { useSetupResponseQuiz } from '@/hooks/make-quiz/useSetupResponseQuiz'
 import { CompleteQuiz, QuizResponse } from '@/types/Quizzes'
-import React, { createContext, ReactNode, useState } from 'react'
+import React, { createContext, ReactNode, useEffect, useState } from 'react'
 
 interface MakeQuizContextType {
   quiz: CompleteQuiz | null;
@@ -23,13 +22,10 @@ export const MakeQuizProvider: React.FC<{ children: ReactNode }> = ({
   const [quizResponse, setQuizResponse] = useState<QuizResponse | null>(null)
   const [actualQuestionIndex, setActualQuestionIndex] = useState<number>(0)
 
-  useSetupResponseQuiz(
-    {
-      quiz,
-      setQuizResponse
-    }
-  )
-
+  useEffect(() => {
+    console.log('Actualizando...')
+    console.log(quizResponse)
+  }, [quizResponse])
   return (
     <MakeQuizContext.Provider
       value={{
