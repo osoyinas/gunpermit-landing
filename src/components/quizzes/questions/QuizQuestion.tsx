@@ -40,13 +40,16 @@ export function QuizQuestion (props: QuizQuestionProps) {
 
   const { actualQuestionIndex, questions } = useMakeQuizQuestions()
   const { updateQuizResponse, getQuizResponse } = useResponseQuiz()
+
   const {
     goToNextQuestion,
     goToPreviousQuestion,
     nextQuestionDisable,
     previousQuestionDisable
   } = useQuizNavigation()
-
+  if (!question) {
+    return <FullscreenLoading />
+  }
   const handleAnswerSelection = (questionId:number, answerIndex:number) => {
     const previusAnswer = getQuizResponse(questionId)
     if (!previusAnswer) return
@@ -56,12 +59,8 @@ export function QuizQuestion (props: QuizQuestionProps) {
     }
     updateQuizResponse(questionId, answerIndex)
   }
-
-  if (!question) {
-    return <FullscreenLoading />
-  }
-
   return (
+
       <Card className="m-auto w-full max-w-4xl h-full md:h-auto overflow-hidden rounded-none md:rounded-2xl shadow-none md:shadow-lg flex flex-col items-center border-none md:border-solid">
         <CardHeader className="bg-primary/10 p-4 md:p-6 lg:p-8 flex-shrink-0 flex flex-row justify-between items-center w-full">
           <Button
@@ -89,7 +88,7 @@ export function QuizQuestion (props: QuizQuestionProps) {
             <ChevronRightIcon className="h-4 w-4" />
           </Button>
         </CardHeader>
-        <CardContent className="p-4 md:p-6 lg:p-8 flex-grow overflow-y-hidden">
+        <CardContent className="p-4 md:p-6 lg:p-8 flex-grow overflow-y-hidden w-full">
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -107,23 +106,25 @@ export function QuizQuestion (props: QuizQuestionProps) {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.2 + index * 0.1, duration: 0.3 }}
                 >
-                  <div className="flex items-center space-x-3 bg-primary/5 p-4 rounded-xl transition-colors hover:bg-primary/10">
+                  <RadioGroup className="w-full flex items-center justify-start gap-4 bg-primary/5 px-4  rounded-xl transition-colors hover:bg-primary/10"
+                    value={getQuizResponse(question.id)?.answer?.toString() ?? ''}
+                  >
                     <RadioGroupItem
-                    checked={getQuizResponse(question.id)?.answer === index}
+
                       value={index.toString()}
                       id={index.toString()}
-                      className="text-primary"
                       onClick={() => {
                         handleAnswerSelection(question.id, index)
                       }}
+                      className="text-primary"
                     />
                     <Label
                       htmlFor={index.toString()}
-                      className="text-base md:text-lg cursor-pointer flex-grow"
+                      className="text-left text-base md:text-lg cursor-pointer flex-grow py-4"
                     >
                       {option.answer}
                     </Label>
-                  </div>
+                  </RadioGroup>
                 </motion.div>
               ))}
             </RadioGroup>
