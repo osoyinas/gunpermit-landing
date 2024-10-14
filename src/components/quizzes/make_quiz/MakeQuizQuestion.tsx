@@ -23,7 +23,7 @@ interface QuizQuestionProps {
 
 export function AnimatedMakeQuizQuestion (props: QuizQuestionProps) {
   return (
-    <AnimatedGenericQuestionCard>
+    <AnimatedGenericQuestionCard className='md:py-16'>
       <MakeQuizQuestion key={props.question?.id} {...props} />
     </AnimatedGenericQuestionCard>
   )

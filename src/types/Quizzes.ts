@@ -22,3 +22,11 @@ export interface QuizAnswer {
 export interface QuizResponse {
     answers: QuizAnswer[];
 }
+
+export interface QuizResult {
+    quiz: string,
+    correct_answers: number,
+    score: number,
+    passed: number,
+    total_questions: number,
+}

@@ -1,6 +1,6 @@
 import { Result, Ok, Err } from 'ts-results'
 import useAxios from '@/hooks/useAxios'
-import { CompleteQuiz, QuizAttempt, QuizResponse } from '@/types/Quizzes'
+import { CompleteQuiz, QuizAttempt, QuizResponse, QuizResult } from '@/types/Quizzes'
 
 export function useQuizzes (): {
   getQuiz: (id: number) => Promise<Result<CompleteQuiz, string>>;
@@ -8,7 +8,7 @@ export function useQuizzes (): {
   makeQuiz: (
     quizId: number,
     quizResponse: QuizResponse
-  ) => Promise<Result<CompleteQuiz, string>>;
+  ) => Promise<Result<QuizResult, string>>;
   } {
   const axios = useAxios()
 
@@ -30,7 +30,7 @@ export function useQuizzes (): {
     }
   }
 
-  const makeQuiz = async (quizId: number, quizResponse: QuizResponse) => {
+  const makeQuiz = async (quizId: number, quizResponse: QuizResponse): Promise<Result<QuizResult, string>> => {
     try {
       const response = await axios.post(
         `/quizzes/${quizId}/make/`,

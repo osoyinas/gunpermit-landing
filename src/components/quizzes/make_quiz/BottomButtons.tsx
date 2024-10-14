@@ -3,6 +3,7 @@ import { useQuizzes } from '@/hooks/api/quizzes/useQuizzes'
 import { useMakeQuiz } from '@/hooks/make-quiz/useMakeQuiz'
 import { useResponseQuiz } from '@/hooks/make-quiz/useResponseQuiz'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 
 export function AnimatedBottomButtons () {
   return (
@@ -22,10 +23,22 @@ export function BottomButtons () {
   const { quiz } = useMakeQuiz()
   const { quizResponse } = useResponseQuiz()
   const disabled = quizResponse?.answers.some(question => question.answer == null)
+  const router = useRouter()
 
-  const handleCompleteQuiz = () => {
+  const handleCompleteQuiz = async () => {
     if (quiz && quizResponse) {
-      makeQuiz(quiz.id, quizResponse)
+      const result = await makeQuiz(quiz.id, quizResponse)
+      if (!result.ok) {
+        console.error(result.val)
+        return
+      }
+      const serializedQuizResponse = JSON.stringify(quizResponse)
+      const encodedQuizReponse = encodeURIComponent(serializedQuizResponse)
+
+      const serializedQuizResult = JSON.stringify(result.val)
+      const encodedQuizResult = encodeURIComponent(serializedQuizResult)
+
+      router.push(`/tests/${quiz.id}/revision?quizResponse=${encodedQuizReponse}&quizResult=${encodedQuizResult}`)
     }
   }
 

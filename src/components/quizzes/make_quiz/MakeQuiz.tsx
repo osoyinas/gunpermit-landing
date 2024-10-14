@@ -6,6 +6,7 @@ import { useMakeQuizQuestions } from '@/hooks/make-quiz/useMakeQuizQuestions'
 import { FullscreenLoading } from '@/components/FullscreenLoading'
 import { QuestionSelection } from './QuestionSelection'
 import { BottomButtons } from './BottomButtons'
+import { useSetupResponseQuiz } from '@/hooks/make-quiz/useSetupResponseQuiz'
 
 interface MakeQuizProps {
   quizId: number;
@@ -13,6 +14,7 @@ interface MakeQuizProps {
 export function MakeQuiz (props: MakeQuizProps) {
   const { quizId } = props
   const { loading } = useSetupQuiz(quizId)
+  useSetupResponseQuiz()
 
   const { actualQuestion } = useMakeQuizQuestions()
 

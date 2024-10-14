@@ -20,13 +20,14 @@ import { GenericQuestionHeader } from '../generics/GenericQuestionHeader'
 import { GenericQuizQuestionContent } from '../generics/GenericQuestionContent'
 import { AnimatedGenericQuestionOption } from '../generics/AnimatedGenericQuestionOption'
 import { GenericQuestionFooter } from '../generics/GenericQuestionFooter'
+import { TypographyH2 } from '@/components/typography/TypographyH2'
 
 interface QuizQuestionResultProps {
   question: Question | undefined;
 }
 export function AnimatedQuizResultQuestion (props: QuizQuestionResultProps) {
   return (
-    <AnimatedGenericQuestionCard>
+    <AnimatedGenericQuestionCard className='mb-8'>
       <QuizResultQuestion key={props.question?.id} {...props} />
     </AnimatedGenericQuestionCard>
   )
@@ -53,6 +54,8 @@ export function QuizResultQuestion (props: QuizQuestionResultProps) {
     actualQuestion?.answers.findIndex((answer) => answer.is_true) ===
     getQuizResponse(question.id)?.answer
   return (
+    <>
+    <TypographyH2 className=' max-w-4xl w-full mb-4 text-center'>Respuestas</TypographyH2>
     <GenericQuestionCard>
       <GenericQuestionHeader>
         <Button
@@ -60,7 +63,7 @@ export function QuizResultQuestion (props: QuizQuestionResultProps) {
           variant="outline"
           size="icon"
           disabled={previousQuestionDisable}
-        >
+          >
           <ChevronLeftIcon className="h-4 w-4" />
         </Button>
         <div>
@@ -76,7 +79,7 @@ export function QuizResultQuestion (props: QuizQuestionResultProps) {
           variant="outline"
           size="icon"
           disabled={nextQuestionDisable}
-        >
+          >
           <ChevronRightIcon className="h-4 w-4" />
         </Button>
       </GenericQuestionHeader>
@@ -94,30 +97,30 @@ export function QuizResultQuestion (props: QuizQuestionResultProps) {
             const isCorrect = isSelected && correctAnswerIndex === index
             return (
               <AnimatedGenericQuestionOption
-                index={index}
-                key={index}
-                className={`
+              index={index}
+              key={index}
+              className={`
                 hover:cursor-default hover:bg-primary/5
                 ${isSelected ? (isCorrect ? 'bg-green-600 hover:bg-green-600' : 'bg-red-500 hover:bg-red-500') : ''}
-                  `}
-              >
+                `}
+                >
                 {isSelected
                   ? (
                       isCorrect
                         ? (
-                    <CheckCircledIcon className="h-5 w-5" />
+                      <CheckCircledIcon className="h-5 w-5" />
                           )
                         : (
-                    <XIcon className="h-5 w-5" />
+                      <XIcon className="h-5 w-5" />
                           )
                     )
                   : (
-                  <CircleIcon className="h-4 w-4 text-primary" />
+                    <CircleIcon className="h-4 w-4 text-primary" />
                     )}
                 <Label
                   htmlFor={index.toString()}
                   className="hover:cursor-default text-left text-base md:text-lg cursor-pointer flex-grow py-4"
-                >
+                  >
                   {option.answer}
                 </Label>
               </AnimatedGenericQuestionOption>
@@ -137,5 +140,6 @@ export function QuizResultQuestion (props: QuizQuestionResultProps) {
         </GenericQuestionFooter>
       )}
     </GenericQuestionCard>
+      </>
   )
 }
