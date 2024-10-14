@@ -1,5 +1,8 @@
 import { Button } from '@/components/ui/button'
+import { useQuizzes } from '@/hooks/api/quizzes/useQuizzes'
+import { useMakeQuiz } from '@/hooks/make-quiz/useMakeQuiz'
 import { useQuizNavigation } from '@/hooks/make-quiz/useQuizNavigation'
+import { useResponseQuiz } from '@/hooks/make-quiz/useResponseQuiz'
 import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons'
 import { motion } from 'framer-motion'
 
@@ -17,30 +20,28 @@ export function AnimatedBottomButtons () {
 }
 
 export function BottomButtons () {
-  const {
-    goToNextQuestion,
-    goToPreviousQuestion,
-    nextQuestionDisable,
-    previousQuestionDisable
-  } = useQuizNavigation()
+  const { makeQuiz } = useQuizzes()
+  const { quiz } = useMakeQuiz()
+  const { quizResponse } = useResponseQuiz()
+  const disabled = quizResponse?.answers.some(question => question.answer == null)
+
+  const handleCompleteQuiz = () => {
+    if (quiz && quizResponse) {
+      makeQuiz(quiz.id, quizResponse)
+    }
+  }
+
   return (
-    <>
+    <footer className='mx-auto my-8 max-w-4xl flex justify-between'>
+      <div></div>
       <Button
-        onClick={goToPreviousQuestion}
+        onClick={handleCompleteQuiz}
         className="text-sm md:text-base lg:text-lg py-2 md:py-4 px-4 md:px-6 rounded-xl transition-all duration-300 hover:scale-105 flex items-center"
         variant="outline"
-        disabled={previousQuestionDisable}
+        disabled={disabled}
       >
-        <ArrowLeftIcon className="mr-2 h-4 w-4 md:h-5 md:w-5" />
+        Enviar respuestas
       </Button>
-      <Button
-        onClick={goToNextQuestion}
-        className="text-sm md:text-base lg:text-lg py-2 md:py-4 px-4 md:px-6 rounded-xl transition-all duration-300 hover:scale-105 flex items-center"
-        variant="outline"
-        disabled={nextQuestionDisable}
-      >
-        <ArrowRightIcon className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-      </Button>
-    </>
+    </footer>
   )
 }

@@ -6,6 +6,7 @@ import { useMakeQuizQuestions } from '@/hooks/make-quiz/useMakeQuizQuestions'
 import { FullscreenLoading } from '@/components/FullscreenLoading'
 import { useResponseQuiz } from '@/hooks/make-quiz/useResponseQuiz'
 import { QuestionSelection } from './QuestionSelection'
+import { BottomButtons } from './BottomButtons'
 
 interface MakeQuizProps {
   quizId: number
@@ -18,18 +19,14 @@ export function MakeQuiz (props: MakeQuizProps) {
 
   const { quizResponse } = useResponseQuiz()
 
-  const handleSubmit = () => {
-    console.log(quizResponse)
-  }
-
   if (loading) {
     return <FullscreenLoading />
   }
   return (
     <>
-    <QuestionSelection />
     <AnimatedQuizQuestion question={actualQuestion} />
-    <button onClick={handleSubmit}>Submit</button>
+    <QuestionSelection />
+    <BottomButtons/>
     </>
   )
 }
