@@ -3,13 +3,13 @@
 import { useSetupQuiz } from '@/hooks/make-quiz/useSetupQuiz'
 import { useMakeQuizQuestions } from '@/hooks/make-quiz/useMakeQuizQuestions'
 import { FullscreenLoading } from '@/components/FullscreenLoading'
-import { AnimatedQuizQuestionResult } from '../quiz_result/QuizQuestionResult'
 import { QuestionSelectionResult } from '../quiz_result/QuestionSelectionResult'
+import { AnimatedQuizResultQuestion } from './QuizQuestionResult'
 
 interface MakeQuizProps {
   quizId: number
 }
-export function MakeQuiz (props: MakeQuizProps) {
+export function QuizRevision (props: MakeQuizProps) {
   const { quizId } = props
   const { loading } = useSetupQuiz(quizId)
 
@@ -20,7 +20,7 @@ export function MakeQuiz (props: MakeQuizProps) {
   }
   return (
     <>
-    <AnimatedQuizQuestionResult question={actualQuestion} />
+    <AnimatedQuizResultQuestion question={actualQuestion} />
     <QuestionSelectionResult />
     </>
   )

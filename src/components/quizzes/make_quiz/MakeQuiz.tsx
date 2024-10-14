@@ -1,6 +1,6 @@
 'use client'
 
-import { AnimatedQuizQuestion } from './QuizQuestion'
+import { AnimatedMakeQuizQuestion } from './MakeQuizQuestion'
 import { useSetupQuiz } from '@/hooks/make-quiz/useSetupQuiz'
 import { useMakeQuizQuestions } from '@/hooks/make-quiz/useMakeQuizQuestions'
 import { FullscreenLoading } from '@/components/FullscreenLoading'
@@ -21,7 +21,7 @@ export function MakeQuiz (props: MakeQuizProps) {
   }
   return (
     <>
-      <AnimatedQuizQuestion question={actualQuestion} />
+      <AnimatedMakeQuizQuestion question={actualQuestion} />
       <QuestionSelection />
       <BottomButtons />
     </>

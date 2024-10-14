@@ -11,8 +11,8 @@ export function QuestionSelection (): React.ReactElement {
     return <Loading />
   }
 
-  const selectedQuestionStyle = 'border-blue-500 border-2 text-white'
-  const CompletedQuestionStyle = 'bg-gray-700 text-white'
+  const selectedQuestionStyle = 'border-blue-500 border-2'
+  const CompletedQuestionStyle = 'bg-gray-700'
   const UnansweredQuestionStyle = ''
   return (
     <ul className="m-auto max-w-4xl w-full flex flex-wrap gap-2 justify-center">
