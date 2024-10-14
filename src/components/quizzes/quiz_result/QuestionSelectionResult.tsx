@@ -15,8 +15,8 @@ export function QuestionSelectionResult (): React.ReactElement {
   }
 
   const selectedQuestionStyle = 'border-blue-500 border-2'
-  const correctQuestionStyle = 'bg-green-900'
-  const incorrectQuestionStyle = 'bg-red-900'
+  const correctQuestionStyle = 'bg-green-500'
+  const incorrectQuestionStyle = 'bg-red-600'
   return (
     <ul className="m-auto max-w-4xl w-full flex flex-wrap gap-2 justify-center">
       {answers.map((quizAnswer, index) => {
