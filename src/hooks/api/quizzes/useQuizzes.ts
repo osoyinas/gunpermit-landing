@@ -1,10 +1,14 @@
 import { Result, Ok, Err } from 'ts-results'
 import useAxios from '@/hooks/useAxios'
-import { CompleteQuiz, QuizAttempt } from '@/types/Quizzes'
+import { CompleteQuiz, QuizAttempt, QuizResponse } from '@/types/Quizzes'
 
 export function useQuizzes (): {
-getQuiz: (id:number) => Promise<Result<CompleteQuiz, string>>;
+  getQuiz: (id: number) => Promise<Result<CompleteQuiz, string>>;
   getQuizzes: () => Promise<Result<Array<QuizAttempt>, string>>;
+  makeQuiz: (
+    quizId: number,
+    quizResponse: QuizResponse
+  ) => Promise<Result<CompleteQuiz, string>>;
   } {
   const axios = useAxios()
 
@@ -25,5 +29,17 @@ getQuiz: (id:number) => Promise<Result<CompleteQuiz, string>>;
       return Err('Ha ocurrido un error al obtener los exámenes')
     }
   }
-  return { getQuiz, getQuizzes }
+
+  const makeQuiz = async (quizId: number, quizResponse: QuizResponse) => {
+    try {
+      const response = await axios.post(
+        `/quizzes/${quizId}/make/`,
+        quizResponse
+      )
+      return Ok(response.data)
+    } catch (error) {
+      return Err('Ha ocurrido un error al completar el examen')
+    }
+  }
+  return { getQuiz, getQuizzes, makeQuiz }
 }
