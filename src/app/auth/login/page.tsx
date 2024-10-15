@@ -47,8 +47,8 @@ export default function Page () {
   }
 
   return (
-    <main className="w-full flex justify-center items-center">
-      <Card className="w-[400px]">
+    <main className="w-full flex justify-center items-center md:my-16">
+      <Card className="w-full max-w-[28rem] border-none md:border">
         <CardHeader>
           <CardTitle>Inicia sesión</CardTitle>
           <CardDescription>
