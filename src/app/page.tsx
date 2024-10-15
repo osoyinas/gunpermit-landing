@@ -1,25 +1,12 @@
 'use client'
 
 import { Dashboard } from '@/components/Dashboard'
-// import { Button } from '@/components/ui/button'
-// import { useLogout } from '@/hooks/api/auth/useLogout'
-// import { useRouter } from 'next/navigation'
+import { useRedirectIf } from '@/hooks/redirects/useRedirectIf'
 
 export default function Home () {
-  // const router = useRouter()
-  // const { logout } = useLogout()
-  // const handleLogin = async () => {
-  //   router.push('/auth/login')
-  // }
-  // const handleLogout = async () => {
-  //   await logout()
-  //   router.push('/auth/login')
-  // }
+  useRedirectIf({ authenticated: false })
   return (
     <>
-      {/* <p>main page</p>
-      <Button onClick={handleLogin}>login</Button>
-      <Button onClick={handleLogout}>logout</Button> */}
       <Dashboard />
     </>
   )
