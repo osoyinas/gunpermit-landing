@@ -1,3 +1,5 @@
+'use client'
+
 import { ModeToggle } from './ui/ModeToggle'
 import {
   DropdownMenu,
@@ -7,8 +9,16 @@ import {
 } from '@radix-ui/react-dropdown-menu'
 import { MenuIcon } from 'lucide-react'
 import { Button } from './ui/button'
+import { useLogout } from '@/hooks/api/auth/useLogout'
+import { useRouter } from 'next/navigation'
 
 export function Navbar () {
+  const { logout } = useLogout()
+  const router = useRouter()
+  const handleLogout = async () => {
+    await logout()
+    router.push('/auth/login')
+  }
   return (
       <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 items-center m-auto">
@@ -71,7 +81,7 @@ export function Navbar () {
             <nav className="flex items-center">
               <ModeToggle />
             </nav>
-            <Button variant="outline">Cerrar Sesión</Button>
+            <Button variant="outline" onClick={handleLogout} >Cerrar Sesión</Button>
           </div>
         </div>
       </header>
