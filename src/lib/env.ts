@@ -1,5 +1,5 @@
 export const ENVIROMENT = process.env.NODE_ENV
-export const API_URI = process.env.API_URI
+export const API_URI = process.env.NEXT_PUBLIC_API_URI
 
 if (!ENVIROMENT) {
   throw new Error('NODE_ENV not found')
