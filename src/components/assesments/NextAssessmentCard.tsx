@@ -127,7 +127,7 @@ export function NextAssessmentCard () {
             <div>
               <p className="text-sm font-medium">Fecha del Examen</p>
               <p className="text-lg">
-                <span>{localeDate}</span>
+                <span className='font-bold'>{localeDate}</span>
                 <br />
                 <TypographyMuted>
                   <ReactTimeAgo
