@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { BookOpenIcon, ClipboardIcon, TrophyIcon, CalendarIcon } from 'lucide-react'
+import { BookOpenIcon, ClipboardIcon, TrophyIcon } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import {
@@ -27,6 +27,7 @@ import {
   Radar
 } from 'recharts'
 import { FullscreenContainer } from './ui/FullscreenContainer'
+import { NextAssessmentCard } from './assesments/NextAssessmentCard'
 
 const lineChartData = [
   { date: '01/05', score: 65 },
@@ -100,30 +101,7 @@ export function Dashboard () {
               </Table>
             </CardContent>
           </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Próxima Prueba</CardTitle>
-              <CardDescription>Información sobre tu próximo examen</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <CalendarIcon className="h-10 w-10 text-primary" />
-                <div>
-                  <p className="text-sm font-medium">Fecha del Examen</p>
-                  <p className="text-2xl font-bold">15 Julio 2023</p>
-                </div>
-              </div>
-              <div>
-                <p className="text-sm font-medium mb-1">Tipo de Examen</p>
-                <p className="text-lg">Licencia de Armas - Nivel Avanzado</p>
-              </div>
-              <div>
-                <p className="text-sm font-medium mb-1">Ubicación</p>
-                <p className="text-lg">Centro de Exámenes Central</p>
-              </div>
-              <Button className="w-full">Ver Detalles</Button>
-            </CardContent>
-          </Card>
+          <NextAssessmentCard />
           <Card className="col-span-2">
             <CardHeader>
               <CardTitle>Progreso de Puntuación</CardTitle>

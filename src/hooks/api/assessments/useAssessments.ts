@@ -19,7 +19,7 @@ export function useAssessments (): {
 
   const getNextAssessment = async (placeId:number): Promise<Result<Assessment, string>> => {
     try {
-      const response = await axios.get(`/assessments/${placeId}/next/`)
+      const response = await axios.get(`/places/${placeId}/next-assessment/`)
       return Ok(response.data)
     } catch (error) {
       return Err('Ha ocurrido un error al obtener el próximo examen')
