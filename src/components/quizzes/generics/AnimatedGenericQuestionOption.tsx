@@ -17,3 +17,17 @@ export function AnimatedGenericQuestionOption (props: {
     </motion.div>
   )
 }
+
+export function GenericQuestionOption (props: {
+  index: number;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+    className={`w-full bg-primary/5 hover:bg-primary/10 px-4 flex items-center justify-start rounded-xl gap-4 transition-colors ${props.className}`}
+    >
+      {props.children}
+    </div>
+  )
+}
