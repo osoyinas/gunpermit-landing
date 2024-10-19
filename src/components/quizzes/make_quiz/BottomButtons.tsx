@@ -43,12 +43,12 @@ export function BottomButtons () {
   }
 
   return (
-    <footer className='mx-auto my-8 max-w-4xl flex justify-between'>
+    <footer className='mx-auto py-8 max-w-4xl flex justify-between'>
       <div></div>
       <Button
         onClick={handleCompleteQuiz}
         className="text-sm md:text-base lg:text-lg py-2 md:py-4 px-4 md:px-6 rounded-xl transition-all duration-300 hover:scale-105 flex items-center"
-        variant="outline"
+        variant="default"
         disabled={disabled}
       >
         Enviar respuestas
