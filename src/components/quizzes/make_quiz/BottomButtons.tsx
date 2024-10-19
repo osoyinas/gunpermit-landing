@@ -43,7 +43,7 @@ export function BottomButtons () {
   }
 
   return (
-    <footer className='mx-auto py-8 max-w-4xl flex justify-between'>
+    <footer className='mx-auto px-2 md:px-0 py-8 max-w-4xl flex justify-between'>
       <div></div>
       <Button
         onClick={handleCompleteQuiz}
