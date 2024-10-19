@@ -7,6 +7,7 @@ import { QuestionSelection } from '@components/quizzes/make_quiz/QuestionSelecti
 import { useSetupResponseQuiz } from '@hooks/make-quiz/useSetupResponseQuiz'
 import { AnimatedStudyQuizQuestion } from './StudyQuizQuestion'
 import { BottomButtons } from './BottomButtons'
+import { TypographyMuted } from '@components/typography/TypographyMuted'
 
 interface StudyQuizProps {
   quizId: number;
@@ -26,6 +27,13 @@ export function StudyQuiz (props: StudyQuizProps) {
       <AnimatedStudyQuizQuestion question={actualQuestion} />
       <QuestionSelection />
       <BottomButtons />
+      <footer className="max-w-4xl text-center mx-auto py-4">
+        <TypographyMuted>
+            Estas en <span className='font-bold'>modo estudio</span>.
+          Las respuestas se mostrarán inmediatamente después de seleccionar una
+          opción y no se guardará tu progreso.
+        </TypographyMuted>
+      </footer>
     </>
   )
 }
