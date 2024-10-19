@@ -101,7 +101,7 @@ export function QuizResultQuestion (props: QuizQuestionResultProps) {
               key={index}
               className={`
                 hover:cursor-default hover:bg-primary/5
-                ${isSelected ? (isCorrect ? 'bg-green-600 hover:bg-green-600' : 'bg-red-500 hover:bg-red-500') : ''}
+                ${isSelected ? (isCorrect ? 'bg-green-700 hover:bg-green-700' : 'bg-red-500 hover:bg-red-500') : ''}
                 `}
                 >
                 {isSelected
