@@ -13,6 +13,7 @@ import { GenericQuestionCard } from '../generics/GenericQuestionCard'
 import { GenericQuestionHeader } from '../generics/GenericQuestionHeader'
 import { GenericQuizQuestionContent } from '../generics/GenericQuestionContent'
 import { AnimatedGenericQuestionOption } from '../generics/AnimatedGenericQuestionOption'
+import { BottomNavigationButtons } from '../navigation_buttons/BottomNavigationButtons'
 
 interface QuizQuestionProps {
   question: Question | undefined;
@@ -105,35 +106,7 @@ export function MakeQuizQuestion (props: QuizQuestionProps) {
             </AnimatedGenericQuestionOption>
           ))}
         </RadioGroup>
-        <footer className="flex justify-between pt-6">
-          <aside className="flex gap-4 items-center">
-            <Button
-              onClick={goToPreviousQuestion}
-              variant="outline"
-              size="icon"
-              disabled={previousQuestionDisable}
-              className="flex items-center"
-            >
-              <ChevronLeftIcon className="h-4 w-4" />
-            </Button>
-            <span className={previousQuestionDisable ? 'opacity-60' : ''}>
-              Anterior
-            </span>
-          </aside>
-          <aside className="flex gap-4 items-center">
-            <span className={nextQuestionDisable ? 'opacity-60' : ''}>
-              Siguiente
-            </span>
-            <Button
-              onClick={goToNextQuestion}
-              variant="outline"
-              size="icon"
-              disabled={nextQuestionDisable}
-            >
-              <ChevronRightIcon className="h-4 w-4" />
-            </Button>
-          </aside>
-        </footer>
+        <BottomNavigationButtons />
       </GenericQuizQuestionContent>
     </GenericQuestionCard>
   )
