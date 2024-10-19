@@ -5,7 +5,7 @@ export function CopyToSaveMessage () {
   const { copyURL } = useCopyUrl()
 
   return (
-    <footer className="max-w-4xl m-auto text-center pb-8">
+    <footer className="max-w-4xl m-auto text-center pb-8 px-2">
       <TypographyMuted>
         Recuerda que solo almacenamos los resultados del examén, no las respuestas.
         <br />
