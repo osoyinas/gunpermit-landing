@@ -1,8 +1,5 @@
 import { Question } from '@/types/Topic'
-import {
-  CardDescription,
-  CardTitle
-} from '@/components/ui/card'
+import { CardDescription, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { useMakeQuizQuestions } from '@/hooks/make-quiz/useMakeQuizQuestions'
@@ -23,7 +20,7 @@ interface QuizQuestionProps {
 
 export function AnimatedMakeQuizQuestion (props: QuizQuestionProps) {
   return (
-    <AnimatedGenericQuestionCard className='md:py-16'>
+    <AnimatedGenericQuestionCard className="md:py-16">
       <MakeQuizQuestion key={props.question?.id} {...props} />
     </AnimatedGenericQuestionCard>
   )
@@ -108,6 +105,35 @@ export function MakeQuizQuestion (props: QuizQuestionProps) {
             </AnimatedGenericQuestionOption>
           ))}
         </RadioGroup>
+        <footer className="flex justify-between pt-6">
+          <aside className="flex gap-4 items-center">
+            <Button
+              onClick={goToPreviousQuestion}
+              variant="outline"
+              size="icon"
+              disabled={previousQuestionDisable}
+              className="flex items-center"
+            >
+              <ChevronLeftIcon className="h-4 w-4" />
+            </Button>
+            <span className={previousQuestionDisable ? 'opacity-60' : ''}>
+              Anterior
+            </span>
+          </aside>
+          <aside className="flex gap-4 items-center">
+            <span className={nextQuestionDisable ? 'opacity-60' : ''}>
+              Siguiente
+            </span>
+            <Button
+              onClick={goToNextQuestion}
+              variant="outline"
+              size="icon"
+              disabled={nextQuestionDisable}
+            >
+              <ChevronRightIcon className="h-4 w-4" />
+            </Button>
+          </aside>
+        </footer>
       </GenericQuizQuestionContent>
     </GenericQuestionCard>
   )
