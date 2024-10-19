@@ -15,7 +15,7 @@ export function QuestionSelection (): React.ReactElement {
   const CompletedQuestionStyle = 'bg-gray-700'
   const UnansweredQuestionStyle = ''
   return (
-    <ul className="m-auto max-w-4xl w-full flex flex-wrap gap-2 justify-center">
+    <ul className="my-4 md:my-0 mx-auto max-w-4xl w-full flex flex-wrap gap-2 justify-center">
       {answers.map((question, index) => {
         const isAnswered = question.answer !== undefined
         const isSelected = actualQuestionIndex === index
