@@ -31,7 +31,7 @@ export function BottomButtons () {
     goToQuestionIndex(0)
   }
   return (
-    <footer className="mx-auto py-8 max-w-4xl flex justify-between">
+    <footer className="mx-auto py-8 px-2 md:px-0 max-w-4xl flex justify-between">
       <Button
         onClick={handleReset}
         className="text-sm md:text-base lg:text-lg py-2 md:py-4 px-4 md:px-6 rounded-xl transition-all duration-300 hover:scale-105 flex items-center"
