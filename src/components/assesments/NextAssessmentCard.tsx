@@ -26,8 +26,9 @@ import {
 } from '@/components/ui/select'
 import useAssessmentLocalStorage from '@/hooks/assessments/useAssessmentLocalStorage'
 import { Skeleton } from '../ui/skeleton'
-import { DetailsButton } from './DetailsButton'
-import { TypographyMuted } from '../typography/TypographyMuted'
+import { DetailsButton } from '@components/assesments/DetailsButton'
+import { TypographyMuted } from '@components/typography/TypographyMuted'
+import AddToCalendarButton from '@components/assesments/AddToCalendarButton'
 
 TimeAgo.addDefaultLocale(es)
 
@@ -83,7 +84,12 @@ export function NextAssessmentCard () {
       </Card>
     )
   }
-  const localeDate = new Date(assessment.date).toLocaleDateString()
+  const localeDateString = new Date(assessment.date).toLocaleDateString()
+  const date = new Date(assessment.date)
+
+  const selectedPlaceName = places.find((place) => {
+    return place.id === selectedPlaceId
+  })?.name
 
   return (
     <Card>
@@ -127,7 +133,7 @@ export function NextAssessmentCard () {
             <div>
               <p className="text-sm font-medium">Fecha del Examen</p>
               <p className="text-lg">
-                <span className='font-bold'>{localeDate}</span>
+                <span className="font-bold">{localeDateString}</span>
                 <br />
                 <TypographyMuted>
                   <ReactTimeAgo
@@ -143,7 +149,14 @@ export function NextAssessmentCard () {
           <p className="text-sm font-medium mb-1">Tipo de Examen</p>
           <p className="text-lg">Licencia de armas de caza (D, E, AEM)</p>
         </div>
-        <DetailsButton />
+        <DetailsButton className="w-full" />
+        <AddToCalendarButton
+          className="w-full"
+          title="Examen para Licencia de armas de caza (D, E, AEM)"
+          startDate={date}
+          details="Licencia de armas de caza (D, E, AEM)"
+          location={`Comandancia de la Guardia Civil, ${selectedPlaceName ?? ''} `}
+        />
       </CardContent>
     </Card>
   )
