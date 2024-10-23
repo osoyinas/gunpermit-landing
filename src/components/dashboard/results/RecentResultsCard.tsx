@@ -43,7 +43,7 @@ export function RecentResultsCard () {
   }
 
   return (
-    <Card className="">
+    <Card>
       <CardHeader>
         <CardTitle>Resultados Recientes</CardTitle>
         <CardDescription>Tus últimos intentos de examen</CardDescription>

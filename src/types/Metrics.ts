@@ -5,3 +5,9 @@ export interface QuizAttemptResult {
     mark: number // ex  75
     passed: boolean
 }
+
+export interface TopicPerformance {
+    topic: string
+    mark: number
+    full_mark: number
+}

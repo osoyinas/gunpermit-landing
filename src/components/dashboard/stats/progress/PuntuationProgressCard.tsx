@@ -17,12 +17,13 @@ import {
   Tooltip,
   ResponsiveContainer
 } from 'recharts'
-import { Loading } from '@components/Loading'
 import { useQuizAttempts } from '@hooks/api/metrics/useQuizResults'
 import { useEffect, useState } from 'react'
 import { QuizAttemptResult } from '@/types/Metrics'
 import { CustomTooltip } from './CustomStatsTooltip'
 import { CustomDot } from './CustomDot'
+import { HowItWorksDrawerDialog } from './HowItWorksDrawerDialog'
+import { Skeleton } from '@components/ui/skeleton'
 
 export function PuntuationProgressCard () {
   const { getQuizAttempts } = useQuizAttempts()
@@ -40,28 +41,27 @@ export function PuntuationProgressCard () {
 
   if (!attempts) {
     return (
-      <Card className="flex justify-center items-center">
-        <Loading></Loading>
+      <Card>
+          <CardHeader>
+            <CardTitle>Progreso de Puntuación</CardTitle>
+            <CardDescription>
+              Evolución de tus resultados en el tiempo
+            </CardDescription>
+            <Skeleton className='h-[300px]' />
+          </CardHeader>
       </Card>
     )
   }
 
   const lineChartData = attempts.map((attempt) => ({
-    date: new Date(attempt.date).toLocaleString('es-ES', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric'
-    }),
+    date: new Date(attempt.date).toLocaleString(),
     mark: attempt.mark,
     score: attempt.score,
     score_to_pass: 80,
     passed: attempt.passed
   }))
   return (
-    <Card className="col-span-2">
+    <Card>
       <CardHeader>
         <CardTitle>Progreso de Puntuación</CardTitle>
         <CardDescription>
@@ -93,6 +93,7 @@ export function PuntuationProgressCard () {
             />
           </LineChart>
         </ResponsiveContainer>
+        <HowItWorksDrawerDialog />
       </CardContent>
     </Card>
   )
