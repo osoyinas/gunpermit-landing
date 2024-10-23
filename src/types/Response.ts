@@ -14,3 +14,10 @@ export interface RegisterResponseError extends ResponseError {
   password?: string[];
   repeat_password?: string[];
 }
+
+export interface PagedResponse<T> {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T[];
+}

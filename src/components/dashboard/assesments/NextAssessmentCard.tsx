@@ -10,11 +10,11 @@ import {
   CardTitle,
   CardDescription,
   CardContent
-} from '../ui/card'
+} from '../../ui/card'
 import { useEffect, useState } from 'react'
 import { Assessment, Place } from '@/types/Assessments'
 import { useAssessments } from '@/hooks/api/assessments/useAssessments'
-import { Loading } from '../Loading'
+import { Loading } from '../../Loading'
 import {
   Select,
   SelectContent,
@@ -25,10 +25,10 @@ import {
   SelectValue
 } from '@/components/ui/select'
 import useAssessmentLocalStorage from '@/hooks/assessments/useAssessmentLocalStorage'
-import { Skeleton } from '../ui/skeleton'
-import { DetailsButton } from '@components/assesments/DetailsButton'
+import { Skeleton } from '../../ui/skeleton'
+import { DetailsButton } from '@/components/dashboard/assesments/DetailsButton'
 import { TypographyMuted } from '@components/typography/TypographyMuted'
-import AddToCalendarButton from '@components/assesments/AddToCalendarButton'
+import AddToCalendarButton from '@/components/dashboard/assesments/AddToCalendarButton'
 
 TimeAgo.addDefaultLocale(es)
 

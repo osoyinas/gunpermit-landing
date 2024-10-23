@@ -27,7 +27,8 @@ import {
   Radar
 } from 'recharts'
 import { FullscreenContainer } from './ui/FullscreenContainer'
-import { NextAssessmentCard } from './assesments/NextAssessmentCard'
+import { NextAssessmentCard } from './dashboard/assesments/NextAssessmentCard'
+import { RecentResultsCard } from './dashboard/results/RecentResultsCard'
 
 const lineChartData = [
   { date: '01/05', score: 65 },
@@ -72,35 +73,7 @@ export function Dashboard () {
               </Button>
             </CardContent>
           </Card>
-          <Card className="col-span-2 lg:col-span-1">
-            <CardHeader>
-              <CardTitle>Resultados Recientes</CardTitle>
-              <CardDescription>Tus últimos intentos de examen</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="text-foreground">Fecha</TableHead>
-                    <TableHead className="text-foreground">Puntuación</TableHead>
-                    <TableHead className="text-foreground">Estado</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>10/05/2023</TableCell>
-                    <TableCell>85%</TableCell>
-                    <TableCell className="text-green-400">Aprobado</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>03/05/2023</TableCell>
-                    <TableCell>72%</TableCell>
-                    <TableCell className="text-red-400">Reprobado</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+          <RecentResultsCard />
           <NextAssessmentCard />
           <Card className="col-span-2">
             <CardHeader>
