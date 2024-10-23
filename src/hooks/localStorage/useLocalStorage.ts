@@ -3,6 +3,7 @@ import { useState } from 'react'
 const useStorage = (key: string, initialValue: string) => {
   const [storedValue, setStoredValue] = useState<string>(() => {
     try {
+      if (!window) return initialValue
       const item = window.localStorage.getItem(key)
       return item || initialValue
     } catch (error) {
