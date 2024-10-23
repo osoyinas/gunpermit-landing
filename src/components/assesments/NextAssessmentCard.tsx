@@ -155,7 +155,9 @@ export function NextAssessmentCard () {
           title="Examen para Licencia de armas de caza (D, E, AEM)"
           startDate={date}
           details="Licencia de armas de caza (D, E, AEM)"
-          location={`Comandancia de la Guardia Civil, ${selectedPlaceName ?? ''} `}
+          location={`Comandancia de la Guardia Civil, ${
+            selectedPlaceName ?? ''
+          } `}
         />
       </CardContent>
     </Card>
