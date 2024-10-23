@@ -1,5 +1,4 @@
 import { QuizAttemptResult } from '@/types/Metrics'
-import { Loading } from '@components/Loading'
 import { TypographyMuted } from '@components/typography/TypographyMuted'
 import {
   Card,

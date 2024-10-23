@@ -14,7 +14,6 @@ import {
 import { useEffect, useState } from 'react'
 import { Assessment, Place } from '@/types/Assessments'
 import { useAssessments } from '@/hooks/api/assessments/useAssessments'
-import { Loading } from '../../Loading'
 import {
   Select,
   SelectContent,
@@ -68,7 +67,7 @@ export function NextAssessmentCard () {
       if (response.ok) {
         setAssessment(response.val)
       }
-      setTimeout(() => setLoadingNextAssessment(false), 200)
+      setTimeout(() => setLoadingNextAssessment(false), 300)
     }
     fetchNextAssessment()
   }, [selectedPlaceId, places])
@@ -79,8 +78,16 @@ export function NextAssessmentCard () {
 
   if (assessment == null || places == null) {
     return (
-      <Card className="flex justify-center items-center">
-        <Loading />
+      <Card className='h-96'>
+        <CardHeader>
+          <CardTitle>Próxima Prueba</CardTitle>
+          <CardDescription>Información sobre tu próximo examen</CardDescription>
+        </CardHeader>
+        <CardContent>
+        <div className='w-full h-64'>
+          <Skeleton className="w-full h-full" />
+        </div>
+        </CardContent>
       </Card>
     )
   }
@@ -92,7 +99,7 @@ export function NextAssessmentCard () {
   })?.name
 
   return (
-    <Card>
+    <Card className='h-96'>
       <CardHeader>
         <CardTitle>Próxima Prueba</CardTitle>
         <CardDescription>Información sobre tu próximo examen</CardDescription>
@@ -126,7 +133,7 @@ export function NextAssessmentCard () {
             ? (
             <div>
               <p className="text-sm font-medium">Fecha del Examen</p>
-              <Skeleton className="w-24 h-6" />
+              <Skeleton className="w-24 h-12" />
             </div>
               )
             : (
@@ -145,10 +152,8 @@ export function NextAssessmentCard () {
             </div>
               )}
         </div>
-        <div>
-          <p className="text-sm font-medium mb-1">Tipo de Examen</p>
-          <p className="text-lg">Licencia de armas de caza (D, E, AEM)</p>
-        </div>
+        <br />
+        <br />
         <DetailsButton className="w-full" />
         <AddToCalendarButton
           className="w-full"
