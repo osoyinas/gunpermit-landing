@@ -1,5 +1,4 @@
 import { TopicPerformance } from '@/types/Metrics'
-import { Loading } from '@components/Loading'
 import {
   Card,
   CardContent,
