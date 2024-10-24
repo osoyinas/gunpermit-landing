@@ -19,6 +19,7 @@ import {
   ResponsiveContainer
 } from 'recharts'
 import { HowItWorksDrawerDialog } from './HowItWorksDrawerDialog'
+import { Skeleton } from '@components/ui/skeleton'
 
 export function TopicPerformanceCard () {
   const { getTopicsPerformace } = useQuizAttempts()
@@ -43,8 +44,14 @@ export function TopicPerformanceCard () {
 
   if (!topicsPerformance) {
     return (
-      <Card className="flex justify-center items-center">
-        <Loading></Loading>
+      <Card>
+        <CardHeader>
+        <CardTitle>Rendimiento por Tema</CardTitle>
+        <CardDescription>Preguntas correctas de cada tema y las totales</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Skeleton className='h-[300px]' />
+      </CardContent>
       </Card>
     )
   }
