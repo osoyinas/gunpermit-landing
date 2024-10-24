@@ -9,3 +9,15 @@ export interface UserRegister {
     password: string;
     repeat_password: string;
 }
+
+export interface User {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+}
+
+export interface EditableUser {
+    first_name: string;
+    last_name: string;
+}

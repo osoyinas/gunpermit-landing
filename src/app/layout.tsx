@@ -4,6 +4,7 @@ import './globals.css'
 import React from 'react'
 import { Navbar } from '@/components/Navbar'
 import { AuthProvider } from '@/context/AuthContext'
+import { Toaster } from '@components/ui/toaster'
 
 export const metadata: Metadata = {
   title: 'Tests del permiso de armas',
@@ -25,6 +26,7 @@ export default function RootLayout ({
             enableSystem
             disableTransitionOnChange
           >
+            <Toaster />
             <Navbar />
             {children}
           </ThemeProvider>
