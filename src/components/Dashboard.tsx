@@ -13,7 +13,7 @@ import { TopicPerformanceCard } from './dashboard/stats/topics/TopicPerformanceC
 export function Dashboard () {
   return (
     <FullscreenContainer className="flex flex-col max-w-7xl m-auto">
-      <main className="flex-1 p-4 lg:p-6 space-y-6">
+      <main className="flex-1  px-2 py-4 space-y-6">
         <div className="grid gap-4 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           <Card>
             <CardHeader>
