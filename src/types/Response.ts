@@ -15,6 +15,20 @@ export interface RegisterResponseError extends ResponseError {
   repeat_password?: string[];
 }
 
+export interface ForgotPasswordResponseError extends ResponseError {
+  email?: string[];
+}
+
+export interface ChangePasswordResponseError extends ResponseError {
+  password?: string[];
+  token?: string[];
+}
+
+export interface ResetPasswordResponseError extends ResponseError {
+  token?: string[];
+  password?: string[];
+}
+
 export interface PagedResponse<T> {
   count: number;
   next: string | null;
