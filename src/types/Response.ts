@@ -20,6 +20,11 @@ export interface ForgotPasswordResponseError extends ResponseError {
 }
 
 export interface ChangePasswordResponseError extends ResponseError {
+  old_password?: string[];
+  new_password?: string[];
+}
+
+export interface ConfirmChangePasswordResponseError extends ResponseError {
   password?: string[];
   token?: string[];
 }
