@@ -20,6 +20,7 @@ import { ErrorP } from '@/components/ui/errorP'
 import { useAuth } from '@/hooks/useAuth'
 import { useLogin } from '@/hooks/api/auth/useLogin'
 import { useRedirectIf } from '@/hooks/redirects/useRedirectIf'
+import { TypographyMuted } from '@components/typography/TypographyMuted'
 
 export default function Page () {
   useRedirectIf({ authenticated: true }) // Redirects to home if the user is authenticated
@@ -87,6 +88,7 @@ export default function Page () {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 {error?.password && <ErrorP>{error.password}</ErrorP>}
+                <a className='underline underline-offset-2' href='/auth/forgot-password'><TypographyMuted>He olvidado mi contraseña</TypographyMuted></a>
               </div>
             </div>
           </form>
