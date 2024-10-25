@@ -16,7 +16,6 @@ import { useSearchParams } from 'next/navigation'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { ExclamationTriangleIcon, ReloadIcon } from '@radix-ui/react-icons'
 import {
-  ForgotPasswordResponseError,
   ResetPasswordResponseError
 } from '@/types/Response'
 import { ErrorP } from '@/components/ui/errorP'
