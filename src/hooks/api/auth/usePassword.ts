@@ -1,5 +1,5 @@
 import {
-  ChangePasswordResponseError,
+  ConfirmChangePasswordResponseError,
   ForgotPasswordResponseError
 } from '@/types/Response'
 import useAxios from '@hooks/useAxios'
@@ -41,7 +41,7 @@ export function usePassword () {
   const resetPasswordConfirm = async (
     token: string,
     password: string
-  ): Promise<Result<string, ChangePasswordResponseError>> => {
+  ): Promise<Result<string, ConfirmChangePasswordResponseError>> => {
     return await axiosInstance
       .post('/auth/password-reset/confirm/', { token, password })
       .then(() => {
@@ -49,13 +49,32 @@ export function usePassword () {
       })
       .catch((error) => {
         if (error.response) {
-          return Err(error.response.data as ChangePasswordResponseError)
+          return Err(error.response.data as ConfirmChangePasswordResponseError)
         }
         return Err({
           non_field_errors: ['Ha ocurrido un error inesperado']
-        } as ChangePasswordResponseError)
+        } as ConfirmChangePasswordResponseError)
       })
   }
 
-  return { resetPassword, checkResetPasswordToken, resetPasswordConfirm }
+  const changePassword = async (
+    oldPassword: string,
+    newPassword: string
+  ): Promise<Result<string, ConfirmChangePasswordResponseError>> => {
+    return await axiosInstance
+      .post('/auth/change-password/', { old_password: oldPassword, new_password: newPassword })
+      .then(() => {
+        return Ok('Contraseña cambiada exitosamente')
+      })
+      .catch((error) => {
+        if (error.response) {
+          return Err(error.response.data as ConfirmChangePasswordResponseError)
+        }
+        return Err({
+          non_field_errors: ['Ha ocurrido un error inesperado']
+        } as ConfirmChangePasswordResponseError)
+      })
+  }
+
+  return { resetPassword, checkResetPasswordToken, resetPasswordConfirm, changePassword }
 }
