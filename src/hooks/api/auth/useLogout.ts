@@ -9,7 +9,9 @@ export function useLogout (): {
   async function logout (): Promise<void> {
     setIsAuthenticated(false)
     setAccessToken(null)
-    return await axiosInstance.delete('/auth/logout/')
+    await axiosInstance.delete('/auth/logout/').catch(() => {
+      console.error('Error logging out')
+    })
   }
 
   return { logout }
