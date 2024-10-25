@@ -16,7 +16,7 @@ export function Navbar () {
   const { logout } = useLogout()
   const router = useRouter()
   const handleLogout = async () => {
-    await logout()
+    await logout().catch(() => {})
     router.push('/auth/login')
   }
   return (
