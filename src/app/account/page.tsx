@@ -12,22 +12,14 @@ import {
 import { Input } from '@components/ui/input'
 import { Label } from '@components/ui/label'
 import { Button } from '@components/ui/button'
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger
-} from '@components/ui/alert-dialog'
+
 import { useRedirectIf } from '@hooks/redirects/useRedirectIf'
 import { useUser } from '@hooks/api/auth/useUser'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { toast } from '@hooks/use-toast'
 import { ReloadIcon } from '@radix-ui/react-icons'
+import { DeleteAccountButtonDialog } from '@components/account/DeleteAccountButtonDialog'
+import { ChangePasswordButtonDialog } from '@components/account/ChangePasswordButtonDialog'
 
 export default function AccountSettings () {
   const [name, setName] = useState('John')
@@ -84,11 +76,6 @@ export default function AccountSettings () {
     setTimeout(() => setLoading(false), 300)
   }
 
-  const handleDeleteAccount = () => {
-    // Logic to delete account
-    console.log('Deleting account')
-  }
-
   return (
     <div className="bg-background text-foreground p-4 md:p-8">
       <motion.div
@@ -131,12 +118,7 @@ export default function AccountSettings () {
                 placeholder="••••••••"
                 disabled
               />
-              <Button
-                variant="link"
-                className="p-0 h-auto text-sm text-primary"
-              >
-                Cambiar Contraseña
-              </Button>
+              <ChangePasswordButtonDialog />
             </div>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4 sm:flex-row sm:justify-between sm:space-y-0">
@@ -144,27 +126,7 @@ export default function AccountSettings () {
               {loading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
               Guardar Cambios
             </Button>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant="destructive">Eliminar Cuenta</Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    Esta acción no se puede deshacer. Esto eliminará
-                    permanentemente tu cuenta y removerá tus datos de nuestros
-                    servidores.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                  <AlertDialogAction onClick={handleDeleteAccount}>
-                    Eliminar Cuenta
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+        <DeleteAccountButtonDialog />
           </CardFooter>
         </Card>
       </motion.div>
