@@ -28,14 +28,18 @@ export default function Page () {
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
 
+  const [verifyingToken, setVerifyingToken] = useState(true)
+
   const [error, setError] = useState<ResetPasswordResponseError | null>(null)
+
+  const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
 
   const [loading, setLoading] = useState(false)
-  const [verifyingToken, setVerifyingToken] = useState(true)
-  const [password, setPassword] = useState('')
-  const { checkResetPasswordToken, resetPasswordConfirm } = usePassword()
+
   const [passwordChanged, setPasswordChanged] = useState(false)
+
+  const { checkResetPasswordToken, resetPasswordConfirm } = usePassword()
 
   const handleChangeVerification = async () => {
     setLoading(true)
