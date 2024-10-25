@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 import React from 'react'
-import { Navbar } from '@/components/Navbar'
+import { Navbar } from '@components/navigation/Navbar'
 import { AuthProvider } from '@/context/AuthContext'
 import { Toaster } from '@components/ui/toaster'
 
