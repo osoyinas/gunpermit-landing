@@ -30,7 +30,7 @@ export function MobileAccountMenu () {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
+        <Button variant="ghost" size="icon" className="mr-2">
         <AvatarIcon className="w-10 h-10" strokeWidth={1} />
         </Button>
       </SheetTrigger>
