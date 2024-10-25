@@ -4,10 +4,10 @@ import {
   LogOutIcon,
   UserPen
 } from 'lucide-react'
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
 import { useLogout } from '@/hooks/api/auth/useLogout'
 import { usePathname, useRouter } from 'next/navigation'
-import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
+import { Sheet, SheetContent, SheetTrigger } from '../../ui/sheet'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Separator } from '@components/ui/separator'
