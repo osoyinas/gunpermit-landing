@@ -7,7 +7,7 @@ interface FullscreenContainerProps extends HTMLAttributes<HTMLDivElement> {
 export function FullscreenContainer (props: FullscreenContainerProps) {
   return (
     <main className={`text-foreground bg-background p-8 md:p-16 ${props.className}`} {...props} style={
-      { minHeight: 'calc(100vh - 4rem)' }
+      { minHeight: 'calc(100dvh - 4rem)' }
     }>
       {props.children}
     </main>
