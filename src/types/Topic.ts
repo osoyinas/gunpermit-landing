@@ -1,8 +1,8 @@
 /* eslint-disable no-use-before-define */
 export interface Topic {
     id: number;
-    name: string;
-    questions: Question[];
+    title: string;
+    description: string;
 }
 
 export interface Question {
