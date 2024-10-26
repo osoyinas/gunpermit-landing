@@ -31,7 +31,6 @@ function useAxios (): AxiosInstance {
         if (
           error.response?.status === 401 &&
           !originalRequest._retry) {
-          originalRequest._retry = true
           try {
             const accessToken = await refresh()
             setAccessToken(accessToken)
