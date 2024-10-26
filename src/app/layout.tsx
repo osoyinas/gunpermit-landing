@@ -6,6 +6,7 @@ import { Navbar } from '@components/navigation/Navbar'
 import { AuthProvider } from '@/context/AuthContext'
 import { Toaster } from '@components/ui/toaster'
 import { FullscreenLoading } from '@components/FullscreenLoading'
+import NoSsr from '@components/NoSsr'
 
 export const metadata: Metadata = {
   title: 'Tests del permiso de armas',
@@ -29,7 +30,7 @@ export default function RootLayout ({
               disableTransitionOnChange
             >
               <Toaster />
-              <Navbar />
+              <NoSsr><Navbar /></NoSsr>
               {children}
             </ThemeProvider>
           </AuthProvider>
