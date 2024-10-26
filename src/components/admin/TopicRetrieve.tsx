@@ -11,12 +11,12 @@ export default function TopicRetrieve ({ topic }: { topic: Topic }) {
   const axiosInstance = useAxios()
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUpdatedTopic((prevTopic) => {
-      if (prevTopic.name === event.target.value) {
+      if (prevTopic.title === event.target.value) {
         return prevTopic
       } else {
         return {
           ...prevTopic,
-          name: event.target.value
+          title: event.target.value
         }
       }
     })
@@ -30,7 +30,7 @@ export default function TopicRetrieve ({ topic }: { topic: Topic }) {
   return (
     topic &&
     (<div className="flex flex-col gap-4 my-4">
-      <input className="font-bold text-primary text-4xl bg-transparent" value={updatedTopic.name} onChange={handleInputChange}/>
+      <input className="font-bold text-primary text-4xl bg-transparent" value={updatedTopic.title} onChange={handleInputChange}/>
       {edited && (
             <footer className='flex justify-between'>
             <button className='btn btn-error' onClick={() => {

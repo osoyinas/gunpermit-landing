@@ -32,7 +32,7 @@ function Table ({ pdfs }: { pdfs: PdfType[] }) {
           <tr key={index}>
             <td>
               <Link href={`/admin/topics/${pdf.topic.id}`}>
-                {pdf.topic.name}
+                {pdf.topic.title}
               </Link>
             </td>
             <td> {pdf.topic.questions.length} </td>
