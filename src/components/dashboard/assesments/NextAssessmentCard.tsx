@@ -54,7 +54,11 @@ export function NextAssessmentCard () {
 
   useEffect(() => {
     if (places == null) return
-    if (selectedPlaceId == null && places.length > 0) {
+    console.log('selectedPlaceId', selectedPlaceId)
+    const selectedPlaceExists = places.some((place) => {
+      return place.id === selectedPlaceId
+    })
+    if ((selectedPlaceId == null || !selectedPlaceExists) && places.length > 0) {
       setSelectedPlaceId(places[0].id)
     }
   }, [selectedPlaceId, places])
