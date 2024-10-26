@@ -36,7 +36,7 @@ export function MobileAccountMenu () {
       </SheetTrigger>
 
       <SheetContent side="right">
-        <ul className="p-2 text-left flex flex-col gap-4 font-bold">
+        <ul className="p-2 text-left flex flex-col gap-4">
           <li className="font-bold opacity-70">Ajustes</li>
           <Separator />
           <li>
