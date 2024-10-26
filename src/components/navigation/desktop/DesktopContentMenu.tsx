@@ -1,6 +1,6 @@
 export function DesktopContentMenu () {
   return (
-    <header className="flex">
+    <section className="flex">
       <a className="mr-6 flex items-center space-x-2" href="/">
         <span className="hidden font-bold sm:inline-block">
           Licencia de Armas
@@ -25,13 +25,7 @@ export function DesktopContentMenu () {
         >
           Recursos
         </a>
-        <a
-          className="transition-colors hover:text-foreground/80 text-foreground/60"
-          href="/perfil"
-        >
-          Perfil
-        </a>
       </nav>
-    </header>
+    </section>
   )
 }
