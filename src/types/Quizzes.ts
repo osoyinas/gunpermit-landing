@@ -30,3 +30,10 @@ export interface QuizResult {
     passed: number,
     total_questions: number,
 }
+
+export interface QuizCategory {
+    id: number;
+    title: string;
+    description: string;
+    tag: string;
+}
