@@ -49,7 +49,7 @@ export function TopicPerformanceCard () {
         <CardDescription>Preguntas correctas de cada tema y las totales</CardDescription>
       </CardHeader>
       <CardContent>
-        <Skeleton className='h-[300px]' />
+        <Skeleton className='h-[250px]' />
       </CardContent>
       </Card>
     )
@@ -61,7 +61,7 @@ export function TopicPerformanceCard () {
         <CardDescription>Preguntas correctas de cada tema y las totales</CardDescription>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={250}>
           <RadarChart
             cx="50%"
             cy="50%"

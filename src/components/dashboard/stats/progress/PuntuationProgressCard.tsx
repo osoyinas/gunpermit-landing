@@ -47,7 +47,7 @@ export function PuntuationProgressCard () {
             <CardDescription>
               Evolución de tus resultados en el tiempo
             </CardDescription>
-            <Skeleton className='h-[300px]' />
+            <Skeleton className='h-[250px]' />
           </CardHeader>
       </Card>
     )
@@ -59,7 +59,7 @@ export function PuntuationProgressCard () {
     score: attempt.score,
     score_to_pass: 80,
     passed: attempt.passed
-  }))
+  })).toReversed()
   return (
     <Card>
       <CardHeader>
@@ -69,7 +69,7 @@ export function PuntuationProgressCard () {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={250}>
           <LineChart data={lineChartData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#333" />
             <XAxis dataKey="date" stroke="#888" />
