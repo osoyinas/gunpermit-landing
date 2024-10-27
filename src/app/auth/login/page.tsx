@@ -48,7 +48,7 @@ export default function Page () {
   }
 
   return (
-    <main className="w-full flex justify-center items-center md:my-16">
+    <main className="w-full flex justify-center items-center md:py-16">
       <Card className="w-full max-w-[28rem] border-none md:border">
         <CardHeader>
           <CardTitle>Inicia sesión</CardTitle>
