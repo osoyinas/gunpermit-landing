@@ -17,7 +17,12 @@ import { FullscreenContainer } from '../ui/FullscreenContainer'
 import { Switch } from '../ui/switch'
 import { Label } from '../ui/label'
 
-export function QuizSelection () {
+interface QuizSelectionProps {
+  category?: any
+}
+
+export function QuizSelection (props: QuizSelectionProps) {
+  const { category } = props
   const [quizzes, setQuizzes] = useState<QuizAttempt[]>([])
   const { loading, stopLoading } = useLoading()
   const { getQuizzes } = useQuizzes()
@@ -25,7 +30,9 @@ export function QuizSelection () {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getQuizzes()
+      const response = await getQuizzes(
+        { category }
+      )
       if (response.ok) {
         setQuizzes(response.val)
       } else {

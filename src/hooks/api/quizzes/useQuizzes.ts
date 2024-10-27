@@ -1,6 +1,12 @@
 import { Result, Ok, Err } from 'ts-results'
 import useAxios from '@/hooks/useAxios'
-import { CompleteQuiz, QuizAttempt, QuizCategory, QuizResponse, QuizResult } from '@/types/Quizzes'
+import {
+  CompleteQuiz,
+  QuizAttempt,
+  QuizCategory,
+  QuizResponse,
+  QuizResult
+} from '@/types/Quizzes'
 
 export function useQuizzes () {
   const axios = useAxios()
@@ -14,16 +20,24 @@ export function useQuizzes () {
     }
   }
 
-  const getQuizzes = async (): Promise<Result<Array<QuizAttempt>, string>> => {
+  const getQuizzes = async (
+    params: { category?: string } = {}
+  ): Promise<Result<Array<QuizAttempt>, string>> => {
     try {
-      const response = await axios.get('/quizzes/')
+      console.log(params)
+      const url = params.category ? `/quizzes/?category=${params.category}` : '/quizzes/'
+      console.log(url)
+      const response = await axios.get(url)
       return Ok(response.data)
     } catch (error) {
       return Err('Ha ocurrido un error al obtener los exámenes')
     }
   }
 
-  const makeQuiz = async (quizId: number, quizResponse: QuizResponse): Promise<Result<QuizResult, string>> => {
+  const makeQuiz = async (
+    quizId: number,
+    quizResponse: QuizResponse
+  ): Promise<Result<QuizResult, string>> => {
     try {
       const response = await axios.post(
         `/quizzes/${quizId}/make/`,
@@ -35,12 +49,16 @@ export function useQuizzes () {
     }
   }
 
-  const getQuizCategories = async (): Promise<Result<Array<QuizCategory>, string>> => {
+  const getQuizCategories = async (): Promise<
+    Result<Array<QuizCategory>, string>
+  > => {
     try {
       const response = await axios.get('/quizzes/categories/')
       return Ok(response.data)
     } catch (error) {
-      return Err('Ha ocurrido un error al obtener las categorías de los exámenes')
+      return Err(
+        'Ha ocurrido un error al obtener las categorías de los exámenes'
+      )
     }
   }
   return { getQuiz, getQuizzes, makeQuiz, getQuizCategories }
