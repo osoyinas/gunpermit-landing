@@ -22,20 +22,32 @@ import {
   DrawerTrigger
 } from '@components/ui/drawer'
 import { useState } from 'react'
+import { useUser } from '@hooks/api/auth/useUser'
+import { useRouter } from 'next/navigation'
+import { useLogout } from '@hooks/api/auth/useLogout'
 
 const INFO = {
   title: '¿Estás seguro de que quieres eliminar tu cuenta?',
   description:
-      'Esta acción no se puede deshacer. Esto eliminará permanentemente tu cuenta y removerá tus datos de nuestros servidores.',
+    'Esta acción no se puede deshacer. Esto eliminará permanentemente tu cuenta y removerá tus datos de nuestros servidores.',
   buttonLabel: 'Eliminar Cuenta'
 }
 
 export function DeleteAccountButtonDialog () {
   const [open, setOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
-  const handleDeleteAccount = () => {
-    // Logic to delete account
-    console.log('Deleting account')
+  const { deleteMe } = useUser()
+  const { logout } = useLogout()
+
+  const router = useRouter()
+  const handleDeleteAccount = async () => {
+    try {
+      await deleteMe()
+      await logout()
+      router.push('/auth/login')
+    } catch (error) {
+      console.error(error)
+    }
   }
   if (isDesktop) {
     return (
@@ -46,13 +58,11 @@ export function DeleteAccountButtonDialog () {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>{INFO.title}</AlertDialogTitle>
-            <AlertDialogDescription>
-              {INFO.description}
-            </AlertDialogDescription>
+            <AlertDialogDescription>{INFO.description}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <Button variant='destructive' onClick={handleDeleteAccount}>
+            <Button variant="destructive" onClick={handleDeleteAccount}>
               {INFO.buttonLabel}
             </Button>
           </AlertDialogFooter>
@@ -71,9 +81,9 @@ export function DeleteAccountButtonDialog () {
           <DrawerDescription>{INFO.description}</DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="pt-2">
-            <Button variant="destructive" onClick={handleDeleteAccount}>
-                {INFO.buttonLabel}
-            </Button>
+          <Button variant="destructive" onClick={handleDeleteAccount}>
+            {INFO.buttonLabel}
+          </Button>
           <DrawerClose asChild>
             <Button variant="outline">Cancelar</Button>
           </DrawerClose>

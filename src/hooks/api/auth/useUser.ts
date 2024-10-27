@@ -23,5 +23,14 @@ export function useUser () {
     }
   }
 
-  return { getMe, updateMe }
+  const deleteMe = async (): Promise<Result<null, string>> => {
+    try {
+      await axiosInstance.delete('/auth/me/delete/')
+      return Ok(null)
+    } catch (error) {
+      return Err('No se pudo eliminar la cuenta')
+    }
+  }
+
+  return { getMe, updateMe, deleteMe }
 }
