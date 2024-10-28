@@ -63,9 +63,9 @@ export function QuizSelection (props: QuizSelectionProps) {
         <BookOpenCheck strokeWidth={1.5} size={28} />
       </div>
       <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {quizzes.map((quizz, index) => (
+        {quizzes.map((quiz, index) => (
           <motion.div
-            key={quizz.id}
+            key={quiz.id}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
@@ -73,8 +73,8 @@ export function QuizSelection (props: QuizSelectionProps) {
             <a
               href={
                 isInStudyMode
-                  ? `/tests/${quizz.id}/study`
-                  : `/tests/${quizz.id}`
+                  ? `/tests/${quiz.id}/study`
+                  : `/tests/${quiz.id}`
               }
             >
               <Card
@@ -83,9 +83,9 @@ export function QuizSelection (props: QuizSelectionProps) {
                   ${
                     isInStudyMode
                       ? 'bg-primary/10'
-                      : quizz.passed === true
+                      : quiz.passed === true
                       ? 'bg-green-500/20 hover:bg-green-500/30'
-                      : quizz.passed === false
+                      : quiz.passed === false
                       ? 'bg-red-500/20 hover:bg-red-500/30'
                       : 'bg-primary/10 hover:bg-primary/20'
                   }
@@ -94,17 +94,17 @@ export function QuizSelection (props: QuizSelectionProps) {
                 {isInStudyMode
                   ? (
                   <CardContent className="p-4 flex flex-col items-center justify-center h-24">
-                    <span className="text-2xl font-bold mb-2">{index + 1}</span>
+                    <span className="text-2xl font-bold mb-2">{quiz.number}</span>
                     <BookOpenCheck/>
                   </CardContent>
                     )
                   : (
                   <CardContent className="p-4 flex flex-col items-center justify-center h-24">
-                    <span className="text-2xl font-bold mb-2">{index + 1}</span>
-                    {quizz.passed === true && (
+                    <span className="text-2xl font-bold mb-2">{quiz.number}</span>
+                    {quiz.passed === true && (
                       <CheckIcon className="h-6 w-6 text-green-500" />
                     )}
-                    {quizz.passed === false && (
+                    {quiz.passed === false && (
                       <XIcon className="h-6 w-6 text-red-500" />
                     )}
                   </CardContent>
