@@ -16,6 +16,14 @@ import { FullscreenLoading } from '../FullscreenLoading'
 import { FullscreenContainer } from '../ui/FullscreenContainer'
 import { Switch } from '../ui/switch'
 import { Label } from '../ui/label'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator
+} from '@/components/ui/breadcrumb'
 
 interface QuizSelectionProps {
   category?: any
@@ -48,9 +56,25 @@ export function QuizSelection (props: QuizSelectionProps) {
   }
   return (
     <FullscreenContainer>
-      <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">
-        Selección de Test
-      </h1>
+      <Breadcrumb className='max-w-2xl mx-auto'>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Inicio</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <span className='text-xl'>/</span>
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbLink href='/tests'>Tests</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <span className='text-2xl'>/</span>
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbPage>{category}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
       <div className="flex items-center space-x-2 w-full justify-center mb-16">
         <Switch
           id="airplane-mode"
@@ -99,7 +123,7 @@ export function QuizSelection (props: QuizSelectionProps) {
                   </CardContent>
                     )
                   : (
-                  <CardContent className="p-4 flex flex-col items-center justify-center h-24">
+                <CardContent className="p-4 flex flex-col items-center justify-center h-24">
                     <span className="text-2xl font-bold mb-2">{quiz.number}</span>
                     {quiz.passed === true && (
                       <CheckIcon className="h-6 w-6 text-green-500" />

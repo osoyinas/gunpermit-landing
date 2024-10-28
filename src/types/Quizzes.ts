@@ -33,8 +33,11 @@ export interface QuizResult {
 }
 
 export interface QuizCategory {
-    id: number;
-    title: string;
-    description: string;
-    tag: string;
+    id: number
+    title: string
+    description: string
+    tag: string
+    total_quizzes: number
+    failed_quizzes: number
+    passed_quizzes: number
 }

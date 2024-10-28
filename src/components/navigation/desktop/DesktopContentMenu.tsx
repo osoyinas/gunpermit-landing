@@ -40,7 +40,7 @@ export function DesktopContentMenu () {
 
   const tests = categories?.map((category) => ({
     title: category.title,
-    href: `/tests/${category.id}`,
+    href: `/tests/categories/${category.tag}`,
     description: category.description
   }))
 
