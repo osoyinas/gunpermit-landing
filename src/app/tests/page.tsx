@@ -1,10 +1,10 @@
 'use client'
-import { QuizSelection } from '@/components/quizzes/QuizSelection'
+import { CategorySelection } from '@/components/quizzes/CategorySelection'
 import { useRedirectIf } from '@/hooks/redirects/useRedirectIf'
 
 export default function Page () {
   useRedirectIf({ authenticated: false })
   return (
-    <QuizSelection />
+    <CategorySelection />
   )
 }

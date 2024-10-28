@@ -4,6 +4,7 @@ export interface Quiz {
     id: number;
     title: string;
     description: string;
+    number: number;
 }
 
 export interface QuizAttempt extends Quiz {
