@@ -6,7 +6,7 @@ import { DesktopContentMenu } from './desktop/DesktopContentMenu'
 import { MobileContentMenu } from './mobile/MobileContentMenu'
 import { usePathname } from 'next/navigation'
 
-const ROUTES_WITHOUT_NAVBAR = ['/auth/login', '/auth/register']
+const ROUTES_WITHOUT_NAVBAR = ['/', '/auth/login', '/auth/register']
 
 export function Navbar () {
   const isDesktop = useMediaQuery('(min-width: 768px)')
