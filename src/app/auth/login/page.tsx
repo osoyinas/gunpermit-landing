@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useRouter } from 'next/navigation'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
+import { ExclamationTriangleIcon, ReloadIcon } from '@radix-ui/react-icons'
 import { LoginResponseError } from '@/types/Response'
 import { ErrorP } from '@/components/ui/errorP'
 import { useAuth } from '@/hooks/useAuth'
@@ -28,12 +28,14 @@ export default function Page () {
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<LoginResponseError | null>(null)
   const { setAccessToken, setIsAuthenticated } = useAuth()
   const { login } = useLogin()
 
   const handleLogin = async () => {
     setError(null)
+    setLoading(true)
     const response = await login({ email, password })
     if (response.ok) {
       setAccessToken(response.val.access)
@@ -41,6 +43,7 @@ export default function Page () {
     } else {
       setError(response.val)
     }
+    setLoading(false)
   }
 
   const handleRegister = async () => {
@@ -88,7 +91,12 @@ export default function Page () {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 {error?.password && <ErrorP>{error.password}</ErrorP>}
-                <a className='underline underline-offset-2' href='/auth/forgot-password'><TypographyMuted>He olvidado mi contraseña</TypographyMuted></a>
+                <a
+                  className="underline underline-offset-2"
+                  href="/auth/forgot-password"
+                >
+                  <TypographyMuted>He olvidado mi contraseña</TypographyMuted>
+                </a>
               </div>
             </div>
           </form>
@@ -97,7 +105,10 @@ export default function Page () {
           <Button variant="link" onClick={handleRegister}>
             Registrase
           </Button>
-          <Button onClick={handleLogin}>Iniciar sesión</Button>
+          <Button onClick={handleLogin} disabled={loading}>
+            {loading && <ReloadIcon className="h-4 w-4 animate-spin mr-2" />}
+            {loading ? 'Inciando...' : 'Iniciar sesión'}
+          </Button>
         </CardFooter>
       </Card>
     </main>
