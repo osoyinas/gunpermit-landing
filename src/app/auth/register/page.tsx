@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useRouter } from 'next/navigation'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
+import { ExclamationTriangleIcon, ReloadIcon } from '@radix-ui/react-icons'
 import { RegisterResponseError } from '@/types/Response'
 import { ErrorP } from '@/components/ui/errorP'
 import { UserRegister } from '@/types/Auth'
@@ -29,7 +29,7 @@ export default function Page () {
   const router = useRouter()
 
   const [error, setError] = useState<RegisterResponseError | null>(null)
-
+  const [loading, setLoading] = useState(false)
   const [userRegister, setUserRegister] = useState<UserRegister>({
     first_name: '',
     last_name: '',
@@ -40,6 +40,7 @@ export default function Page () {
 
   const handleRegister = async () => {
     setError(null)
+    setLoading(true)
     const response = await register({ userRegister })
     if (response.ok) {
       setAccessToken(response.val.access)
@@ -47,13 +48,15 @@ export default function Page () {
     } else {
       setError(response.val)
     }
+    setLoading(false)
   }
 
   const handleAlreadyHaveAnAccount = async () => {
     router.push('/auth/login')
   }
 
-  const disable = Object.values(userRegister).some((value) => value === '')
+  const disable =
+    Object.values(userRegister).some((value) => value === '') || loading
   return (
     <main className="w-full flex justify-center items-center">
       <Card className="w-[400px]">
@@ -155,14 +158,26 @@ export default function Page () {
                     }))
                   }}
                 />
-                {error?.repeat_password && <ErrorP>{error.repeat_password}</ErrorP>}
+                {error?.repeat_password && (
+                  <ErrorP>{error.repeat_password}</ErrorP>
+                )}
               </div>
             </div>
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button variant="link" onClick={handleAlreadyHaveAnAccount}>Ya tengo una cuenta</Button>
-          <Button variant="default" onClick={handleRegister} disabled={disable}>Registrase</Button>
+          <Button variant="link" onClick={handleAlreadyHaveAnAccount}>
+            Ya tengo una cuenta
+          </Button>
+          <Button
+            variant="default"
+            className="pl-2"
+            onClick={handleRegister}
+            disabled={disable}
+          >
+            {loading && <ReloadIcon className="h-4 w-4 animate-spin mr-2" />}
+            Registrarse
+          </Button>
         </CardFooter>
       </Card>
     </main>
