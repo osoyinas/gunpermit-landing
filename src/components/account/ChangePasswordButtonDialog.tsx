@@ -70,7 +70,6 @@ export function ChangePasswordButtonDialog () {
       } else {
         setErrors(response.val)
       }
-      console.log(response.val)
     })
     setLoading(false)
   }

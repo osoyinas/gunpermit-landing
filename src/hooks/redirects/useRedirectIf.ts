@@ -24,11 +24,11 @@ export function useRedirectIf ({
   authenticated: redirectIfAuthenticated,
   redirectUrl
 }: RedirectIfProps): void {
-  const { isAuthenticated: userIsAuthenticated } = useAuth()
+  // const { isAuthenticated: userIsAuthenticated } = useAuth()
 
-  if (redirectIfAuthenticated && userIsAuthenticated === true) {
-    redirect(redirectUrl ?? IF_AUTH_URL)
-  } else if (!redirectIfAuthenticated && userIsAuthenticated === false) {
-    redirect(redirectUrl ?? NOT_AUTH_URL)
-  }
+  // if (redirectIfAuthenticated && userIsAuthenticated === true) {
+  //   redirect(redirectUrl ?? IF_AUTH_URL)
+  // } else if (!redirectIfAuthenticated && userIsAuthenticated === false) {
+  //   redirect(redirectUrl ?? NOT_AUTH_URL)
+  // }
 }

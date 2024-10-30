@@ -1,27 +1,16 @@
-'use client'
-import useMediaQuery from '@hooks/useMediaQuery'
+// import useMediaQuery from '@hooks/useMediaQuery'
 import { DesktopAccountMenu } from './desktop/DesktopAccountMenu'
-import { MobileAccountMenu } from './mobile/MobileAccountMenu'
+// import { MobileAccountMenu } from './mobile/MobileAccountMenu'
 import { DesktopContentMenu } from './desktop/DesktopContentMenu'
-import { MobileContentMenu } from './mobile/MobileContentMenu'
-import { usePathname } from 'next/navigation'
-
-const ROUTES_WITHOUT_NAVBAR = ['/', '/auth/login', '/auth/register']
+// import { MobileContentMenu } from './mobile/MobileContentMenu'
 
 export function Navbar () {
-  const isDesktop = useMediaQuery('(min-width: 768px)')
-  const path = usePathname()
-
-  if (ROUTES_WITHOUT_NAVBAR.includes(path)) {
-    console.log('Navbar not rendered')
-    return null
-  }
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center m-auto">
-        {isDesktop ? <DesktopContentMenu /> : <MobileContentMenu />}
+         <DesktopContentMenu />
         <div className="flex-1"></div>
-        {isDesktop ? <DesktopAccountMenu /> : <MobileAccountMenu />}
+        <DesktopAccountMenu />
       </div>
     </header>
   )

@@ -1,5 +1,5 @@
 'use client'
-
+import { signIn } from 'next-auth/react'
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
@@ -16,7 +16,6 @@ import {
 import { Calendar } from '@components/ui/calendar'
 import { HalfTopicPerformanceImage } from '@components/images/HalfTopicPerformanceImage'
 import { FullTopicPerformanceImage } from '@components/images/FullTopicPerformanceImage'
-
 export default function LandingPage () {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -55,11 +54,9 @@ export default function LandingPage () {
             interactiva
           </p>
           <div className="mt-8 flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0">
-            <Button asChild size="lg" className="font-semibold">
-              <a href="/dashboard">
+            <Button size="lg" className="font-semibold" onClick={() => signIn()}>
                 Inicio
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
             </Button>
             <Button
               asChild

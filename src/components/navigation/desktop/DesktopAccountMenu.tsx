@@ -9,17 +9,11 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@components/ui/button'
-import { useLogout } from '@hooks/api/auth/useLogout'
-import { useRouter } from 'next/navigation'
 
 export function DesktopAccountMenu () {
-  const { logout } = useLogout()
-  const router = useRouter()
-
-  const handleLogout = async () => {
-    await logout().catch(() => {})
-    router.push('/auth/login')
-  }
+  // const handleLogout = async () => {
+  //   console.log('logout')
+  // }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -53,9 +47,6 @@ export function DesktopAccountMenu () {
 
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={() => {
-            handleLogout()
-          }}
         >
           Cerrar sesión
         </DropdownMenuItem>

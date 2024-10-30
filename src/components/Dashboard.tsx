@@ -8,8 +8,13 @@ import { RecentResultsCard } from './dashboard/results/RecentResultsCard'
 import { PuntuationProgressCard } from './dashboard/stats/progress/PuntuationProgressCard'
 import { TopicPerformanceCard } from './dashboard/stats/topics/TopicPerformanceCard'
 import { QuickAccessCard } from './dashboard/quick_access/QuickAccessCard'
+import { useSession } from 'next-auth/react'
+import { FullscreenLoading } from './FullscreenLoading'
 
 export function Dashboard () {
+  const { status } = useSession()
+  if (status === 'loading') return <FullscreenLoading></FullscreenLoading>
+  if (status === 'unauthenticated') return null
   return (
     <FullscreenContainer className="flex flex-col max-w-7xl m-auto">
       <main className="flex-1  px-2 py-4 space-y-6">
