@@ -1,5 +1,5 @@
 import { Topic } from '@/types/Topic'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,31 +11,40 @@ import {
 } from '@/components/ui/navigation-menu'
 import Link from 'next/link'
 import { ListItem } from './ListItem'
+import { useTopics } from '@hooks/api/quizzes/useTopics'
 import { QuizCategory } from '@/types/Quizzes'
-import { getTopics } from '@/services/topics/getTopics'
-import { getQuizCategories } from '@/services/quizzes/getQuizCategories'
+import { useQuizzes } from '@hooks/api/quizzes/useQuizzes'
 
-export async function DesktopContentMenu () {
-  const topicsResponse = await getTopics()
+export function DesktopContentMenu () {
+  const [topics, setTopics] = useState<Topic[] | undefined>()
+  const [categories, setCategories] = useState<QuizCategory[] | undefined>()
+  const { getTopics } = useTopics()
+  const { getQuizCategories } = useQuizzes()
+  useEffect(() => {
+    const fetchTopics = async () => {
+      const response = await getTopics()
+      if (response.ok) {
+        setTopics(response.val)
+      }
+    }
+    const fetchCategories = async () => {
+      const response = await getQuizCategories()
+      if (response.ok) {
+        setCategories(response.val)
+      }
+    }
 
-  const categoriesResponse = await getQuizCategories()
+    fetchTopics()
+    fetchCategories()
+  }, [])
 
-  let topics = [] as Topic[]
-  let categories = [] as QuizCategory[]
-
-  if (topicsResponse.ok) {
-    topics = topicsResponse.val
-  }
-  if (categoriesResponse.ok) {
-    categories = categoriesResponse.val
-  }
-  const tests = categories.map((category) => ({
+  const tests = categories?.map((category) => ({
     title: category.title,
     href: `/tests/categories/${category.tag}`,
     description: category.description
   }))
 
-  const resources = topics.map((topic) => ({
+  const resources = topics?.map((topic) => ({
     title: topic.title,
     href: `/resources/${topic.id}`,
     description: topic.description
@@ -45,7 +54,7 @@ export async function DesktopContentMenu () {
     <NavigationMenu>
       <NavigationMenuList>
       <NavigationMenuItem>
-          <Link href="/dashboard" legacyBehavior passHref>
+          <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Dashboard
             </NavigationMenuLink>

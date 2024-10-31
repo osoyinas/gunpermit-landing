@@ -34,10 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.token_type = 'Bearer'
         token.expires_in = credentialUser?.expires_in
       }
-      console.log(token.expires_in)
-      console.log(Date.now())
       if (Date.now() > token.expires_in) {
-        console.log('Token expired')
         return null
       }
       return token

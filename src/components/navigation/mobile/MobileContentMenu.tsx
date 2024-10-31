@@ -6,16 +6,25 @@ import {
   Trophy
 } from 'lucide-react'
 import { Button } from '@components/ui/button'
+import { usePathname } from 'next/navigation'
 import { Sheet, SheetContent, SheetTrigger } from '../../ui/sheet'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Separator } from '@components/ui/separator'
 import { TypographyP } from '@components/typography/TypographyP'
 
 export function MobileContentMenu () {
+  const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
+
   return (
     <section>
-ß
-    <Sheet>
+
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="ml-2">
           <MenuIcon className="w-10 h-10" strokeWidth={1} />

@@ -11,7 +11,6 @@ export default auth((req) => {
   if (!isProtected) return NextResponse.next()
 
   if (!req.auth && req.nextUrl.pathname !== LOGIN_ROUTE) {
-    console.log('redirect')
     const newUrl = new URL(LOGIN_ROUTE, req.nextUrl.origin)
     newUrl.searchParams.set('callbackUrl', req.nextUrl.href)
     return Response.redirect(newUrl)

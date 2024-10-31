@@ -9,11 +9,12 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@components/ui/button'
+import { signOut } from 'next-auth/react'
 
 export function DesktopAccountMenu () {
-  // const handleLogout = async () => {
-  //   console.log('logout')
-  // }
+  const handleLogout = async () => {
+    await signOut()
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -47,6 +48,9 @@ export function DesktopAccountMenu () {
 
         <DropdownMenuSeparator />
         <DropdownMenuItem
+          onClick={() => {
+            handleLogout()
+          }}
         >
           Cerrar sesión
         </DropdownMenuItem>

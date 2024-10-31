@@ -5,15 +5,28 @@ import {
   UserPen
 } from 'lucide-react'
 import { Button } from '../../ui/button'
+import { usePathname } from 'next/navigation'
 import { Sheet, SheetContent, SheetTrigger } from '../../ui/sheet'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Separator } from '@components/ui/separator'
 import { TypographyP } from '@components/typography/TypographyP'
 import { AvatarIcon, GitHubLogoIcon } from '@radix-ui/react-icons'
+import { signOut } from 'next-auth/react'
 
 export function MobileAccountMenu () {
+  const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
+
+  const handleLogout = async () => {
+    await signOut()
+  }
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="mr-2">
         <AvatarIcon className="w-10 h-10" strokeWidth={1} />
@@ -59,7 +72,7 @@ export function MobileAccountMenu () {
           </li>
           <Separator />
           <li>
-            <button className="flex items-center gap-2">
+            <button onClick={handleLogout} className="flex items-center gap-2">
               <LogOutIcon />
               <span>
                 <TypographyP>Cerrar sesión</TypographyP>

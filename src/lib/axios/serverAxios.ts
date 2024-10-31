@@ -1,6 +1,7 @@
-import { getAccessToken } from '../auth'
+'use server'
 import axios from 'axios'
 import { API_URI } from '../env'
+import { getSession } from 'next-auth/react'
 
 export const axiosServerInstance = axios.create({
   baseURL: `${API_URI}/api/v1/`,
@@ -9,10 +10,12 @@ export const axiosServerInstance = axios.create({
 
 axiosServerInstance.interceptors.request.use(
   async (config) => {
-    const accessToken = await getAccessToken()
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`
-    }
+    console.log('INTERCEPTOoRRRRRRRRRRRRRRRRRRRRRRRRR')
+    const session = await getSession()
+    console.log(session)
+    // if (accessToken) {
+    //   config.headers.Authorization = `Bearer ${accessToken}`
+    // }
     return config
   },
   (error) => {
