@@ -42,7 +42,7 @@ export function MobileContentMenu () {
           </li>
           <Separator />
           <li>
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/dashboard" className="flex items-center gap-2">
               <LayoutDashboard />
               <span>
                 <TypographyP>Dashboard</TypographyP>

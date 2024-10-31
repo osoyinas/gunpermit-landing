@@ -4,18 +4,21 @@ import { DesktopAccountMenu } from './desktop/DesktopAccountMenu'
 import { MobileAccountMenu } from './mobile/MobileAccountMenu'
 import { DesktopContentMenu } from './desktop/DesktopContentMenu'
 import { MobileContentMenu } from './mobile/MobileContentMenu'
-import { usePathname } from 'next/navigation'
-
-const ROUTES_WITHOUT_NAVBAR = ['/', '/auth/login', '/auth/register']
+import { useSession } from 'next-auth/react'
 
 export function Navbar () {
   const isDesktop = useMediaQuery('(min-width: 768px)')
-  const path = usePathname()
-
-  if (ROUTES_WITHOUT_NAVBAR.includes(path)) {
-    console.log('Navbar not rendered')
-    return null
+  const { status } = useSession()
+  if (status === 'loading') {
+    return (
+      <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-14 items-center m-auto">
+          <div className="flex-1"></div>
+        </div>
+      </header>
+    )
   }
+
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center m-auto">

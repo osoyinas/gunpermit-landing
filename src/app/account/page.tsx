@@ -13,24 +13,27 @@ import { Input } from '@components/ui/input'
 import { Label } from '@components/ui/label'
 import { Button } from '@components/ui/button'
 
-import { useRedirectIf } from '@hooks/redirects/useRedirectIf'
 import { useUser } from '@hooks/api/auth/useUser'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { toast } from '@hooks/use-toast'
 import { ReloadIcon } from '@radix-ui/react-icons'
 import { DeleteAccountButtonDialog } from '@components/account/DeleteAccountButtonDialog'
 import { ChangePasswordButtonDialog } from '@components/account/ChangePasswordButtonDialog'
+import { useSession } from 'next-auth/react'
+import { FullscreenLoading } from '@components/FullscreenLoading'
 
 export default function AccountSettings () {
   const [name, setName] = useState('John')
   const [surnames, setSurnames] = useState('Doe')
   const [email, setEmail] = useState('john.doe@example.com')
   const [loading, setLoading] = useState(false)
-  useRedirectIf({ authenticated: false })
-
   const { getMe, updateMe } = useUser()
 
+  const { status } = useSession()
+
   useEffect(() => {
+    if (status !== 'authenticated') return
+
     const fetchData = async () => {
       const response = await getMe()
       if (response.ok) {
@@ -40,8 +43,9 @@ export default function AccountSettings () {
       }
     }
     fetchData()
-  }, [])
+  }, [status])
 
+  if (status === 'loading') return <FullscreenLoading />
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) =>
     setName(e.target.value)
   const handleSurnamesChange = (e: ChangeEvent<HTMLInputElement>) =>

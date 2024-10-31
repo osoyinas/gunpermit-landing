@@ -1,9 +1,11 @@
 'use client'
 import { CategorySelection } from '@/components/quizzes/CategorySelection'
-import { useRedirectIf } from '@/hooks/redirects/useRedirectIf'
+import { FullscreenLoading } from '@components/FullscreenLoading'
+import { useSession } from 'next-auth/react'
 
 export default function Page () {
-  useRedirectIf({ authenticated: false })
+  const { status } = useSession()
+  if (status === 'loading') return <FullscreenLoading />
   return (
     <CategorySelection />
   )

@@ -2,11 +2,9 @@ import type { Metadata } from 'next'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 import React, { Suspense } from 'react'
-import { Navbar } from '@components/navigation/Navbar'
-import { AuthProvider } from '@/context/AuthContext'
 import { Toaster } from '@components/ui/toaster'
+import { Provider } from '@components/providers/Provider'
 import { FullscreenLoading } from '@components/FullscreenLoading'
-import NoSsr from '@components/NoSsr'
 
 export const metadata: Metadata = {
   title: 'Tests del permiso de armas',
@@ -22,7 +20,7 @@ export default function RootLayout ({
     <html lang="es" suppressHydrationWarning>
       <body className="min-h-screen">
         <Suspense fallback={<FullscreenLoading />}>
-          <AuthProvider>
+          <Provider>
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
@@ -30,10 +28,9 @@ export default function RootLayout ({
               disableTransitionOnChange
             >
               <Toaster />
-              <NoSsr><Navbar /></NoSsr>
               {children}
             </ThemeProvider>
-          </AuthProvider>
+          </Provider>
         </Suspense>
       </body>
     </html>

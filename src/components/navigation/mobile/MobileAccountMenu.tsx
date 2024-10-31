@@ -5,27 +5,25 @@ import {
   UserPen
 } from 'lucide-react'
 import { Button } from '../../ui/button'
-import { useLogout } from '@/hooks/api/auth/useLogout'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { Sheet, SheetContent, SheetTrigger } from '../../ui/sheet'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Separator } from '@components/ui/separator'
 import { TypographyP } from '@components/typography/TypographyP'
 import { AvatarIcon, GitHubLogoIcon } from '@radix-ui/react-icons'
+import { signOut } from 'next-auth/react'
 
 export function MobileAccountMenu () {
-  const { logout } = useLogout()
-  const router = useRouter()
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
     setOpen(false)
   }, [pathname])
+
   const handleLogout = async () => {
-    await logout().catch(() => {})
-    router.push('/auth/login')
+    await signOut()
   }
   return (
     <Sheet open={open} onOpenChange={setOpen}>

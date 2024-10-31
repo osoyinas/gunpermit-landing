@@ -24,8 +24,7 @@ import {
 import { useState } from 'react'
 import { useUser } from '@hooks/api/auth/useUser'
 import { useRouter } from 'next/navigation'
-import { useLogout } from '@hooks/api/auth/useLogout'
-
+import { signOut } from 'next-auth/react'
 const INFO = {
   title: '¿Estás seguro de que quieres eliminar tu cuenta?',
   description:
@@ -37,13 +36,12 @@ export function DeleteAccountButtonDialog () {
   const [open, setOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
   const { deleteMe } = useUser()
-  const { logout } = useLogout()
 
   const router = useRouter()
   const handleDeleteAccount = async () => {
     try {
       await deleteMe()
-      await logout()
+      await signOut()
       router.push('/auth/login')
     } catch (error) {
       console.error(error)

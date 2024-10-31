@@ -9,16 +9,11 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@components/ui/button'
-import { useLogout } from '@hooks/api/auth/useLogout'
-import { useRouter } from 'next/navigation'
+import { signOut } from 'next-auth/react'
 
 export function DesktopAccountMenu () {
-  const { logout } = useLogout()
-  const router = useRouter()
-
   const handleLogout = async () => {
-    await logout().catch(() => {})
-    router.push('/auth/login')
+    await signOut()
   }
   return (
     <DropdownMenu>

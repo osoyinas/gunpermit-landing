@@ -1,5 +1,5 @@
 'use client'
-
+import { signIn } from 'next-auth/react'
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
@@ -16,7 +16,7 @@ import {
 import { Calendar } from '@components/ui/calendar'
 import { HalfTopicPerformanceImage } from '@components/images/HalfTopicPerformanceImage'
 import { FullTopicPerformanceImage } from '@components/images/FullTopicPerformanceImage'
-
+import Link from 'next/link'
 export default function LandingPage () {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -55,11 +55,9 @@ export default function LandingPage () {
             interactiva
           </p>
           <div className="mt-8 flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0">
-            <Button asChild size="lg" className="font-semibold">
-              <a href="/dashboard">
+            <Button size="lg" className="font-semibold" onClick={() => signIn()}>
                 Inicio
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
             </Button>
             <Button
               asChild
@@ -67,7 +65,7 @@ export default function LandingPage () {
               size="lg"
               className="font-semibold"
             >
-              <a href="/register">Registrarse</a>
+              <Link href="/auth/register">Registrarse</Link>
             </Button>
           </div>
         </motion.div>
@@ -189,7 +187,7 @@ export default function LandingPage () {
             size="lg"
             className="font-semibold bg-green-500 hover:bg-green-600 text-white"
           >
-            <a href="/register">Comenzar Ahora</a>
+            <Link href="/auth/register">Comenzar Ahora</Link>
           </Button>
         </motion.div>
       </main>

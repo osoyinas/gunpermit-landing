@@ -1,4 +1,4 @@
-import { axiosDefaultInstance } from '@/lib/axios'
+import { axiosDefaultInstance } from '@/lib/axios/clientAxios'
 
 /**
  * Hook that provides the `refresh` function to request a new access token.
