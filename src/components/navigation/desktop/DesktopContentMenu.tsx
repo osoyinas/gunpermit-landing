@@ -45,7 +45,7 @@ export async function DesktopContentMenu () {
     <NavigationMenu>
       <NavigationMenuList>
       <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
+          <Link href="/dashboard" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Dashboard
             </NavigationMenuLink>
