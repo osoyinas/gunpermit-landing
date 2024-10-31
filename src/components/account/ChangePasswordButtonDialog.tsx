@@ -30,8 +30,7 @@ import { usePassword } from '@hooks/api/auth/usePassword'
 import { toast } from '@hooks/use-toast'
 import { ReloadIcon } from '@radix-ui/react-icons'
 import { useRouter } from 'next/navigation'
-import { useLogout } from '@hooks/api/auth/useLogout'
-
+import { signOut } from 'next-auth/react'
 const INFO = {
   title: 'Cambio de contraseña',
   description:
@@ -54,7 +53,7 @@ export function ChangePasswordButtonDialog () {
   const [loading, setLoading] = useState(false)
 
   const router = useRouter()
-  const { logout } = useLogout()
+
   const handleChangePassword = async () => {
     setLoading(true)
     await changePassword(password, newPassword).then(async (response) => {
@@ -63,7 +62,7 @@ export function ChangePasswordButtonDialog () {
         toast({
           description: `${response.val}. Por motivos de seguridad, debes volver a iniciar sesión.`
         })
-        await logout()
+        await signOut()
         setTimeout(() => {
           router.push('/auth/login')
         }, 2000)
