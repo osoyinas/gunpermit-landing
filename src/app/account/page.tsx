@@ -13,7 +13,6 @@ import { Input } from '@components/ui/input'
 import { Label } from '@components/ui/label'
 import { Button } from '@components/ui/button'
 
-import { useRedirectIf } from '@hooks/redirects/useRedirectIf'
 import { useUser } from '@hooks/api/auth/useUser'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { toast } from '@hooks/use-toast'
@@ -26,7 +25,6 @@ export default function AccountSettings () {
   const [surnames, setSurnames] = useState('Doe')
   const [email, setEmail] = useState('john.doe@example.com')
   const [loading, setLoading] = useState(false)
-  useRedirectIf({ authenticated: false })
 
   const { getMe, updateMe } = useUser()
 

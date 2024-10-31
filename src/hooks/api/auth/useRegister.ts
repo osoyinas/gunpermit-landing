@@ -1,22 +1,22 @@
 import { AuthTokens, UserRegister } from '@/types/Auth'
 import { RegisterResponseError } from '@/types/Response'
 import { Result, Ok, Err } from 'ts-results'
-import useAxios from '@/hooks/useAxios'
+import { defaultInstace as axios } from '@/lib/axios/defaultAxiosInstance'
+
 interface RegisterParams {
   userRegister: UserRegister;
 }
+
 export function useRegister (): {
   register: (
     params: RegisterParams
   ) => Promise<Result<AuthTokens, RegisterResponseError>>;
   } {
-  const axiosInstance = useAxios()
-
   async function register (
     params: RegisterParams
   ): Promise<Result<AuthTokens, RegisterResponseError>> {
     const { userRegister } = params
-    return await axiosInstance
+    return await axios
       .post('/auth/register/', userRegister)
       .then((response) => {
         return Ok(response.data as AuthTokens)
