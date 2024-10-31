@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { ExclamationTriangleIcon, ReloadIcon } from '@radix-ui/react-icons'
 import { LoginResponseError } from '@/types/Response'
@@ -20,24 +20,48 @@ import { ErrorP } from '@/components/ui/errorP'
 import { TypographyMuted } from '@components/typography/TypographyMuted'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
+import { z } from '@/lib/zod'
+import { ZodError } from 'zod'
+import { LinkButton } from '@components/ui/linkButton'
+
+const LoginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6)
+})
 
 export default function Page () {
-  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<LoginResponseError | null>(null)
+  const searchParams = useSearchParams()
 
   const handleLogin = async () => {
-    setError(null)
     setLoading(true)
-    await signIn('credentials', { email, password })
+    setError(null)
 
+    try {
+      LoginSchema.parse({ email, password })
+    } catch (e) {
+      if (e instanceof ZodError) {
+        console.log(e.errors)
+        setError(
+          {
+            email: [e.errors.filter((error) => error.path[0] === 'email')[0]?.message],
+            password: [e.errors.filter((error) => error.path[0] === 'password')[0]?.message]
+          }
+        )
+      }
+      return
+    }
+
+    const callbackUrl = searchParams?.get('callbackUrl') || '/dashboard'
+    await signIn('django', {
+      email,
+      password,
+      redirectTo: callbackUrl
+    })
     setLoading(false)
-  }
-
-  const handleRegister = async () => {
-    router.push('/auth/register')
   }
 
   return (
@@ -92,9 +116,9 @@ export default function Page () {
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button variant="link" onClick={handleRegister}>
+          <LinkButton variant="link" href='/auth/register'>
             Registrase
-          </Button>
+          </LinkButton>
           <Button onClick={handleLogin} disabled={loading}>
             {loading && <ReloadIcon className="h-4 w-4 animate-spin mr-2" />}
             {loading ? 'Inciando...' : 'Iniciar sesión'}

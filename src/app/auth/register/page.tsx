@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 'use client'
 import { useState } from 'react'
 
@@ -12,22 +13,36 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useRouter } from 'next/navigation'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { ExclamationTriangleIcon, ReloadIcon } from '@radix-ui/react-icons'
 import { RegisterResponseError } from '@/types/Response'
 import { ErrorP } from '@/components/ui/errorP'
 import { UserRegister } from '@/types/Auth'
-import { useAuth } from '@/hooks/useAuth'
 import { useRegister } from '@/hooks/api/auth/useRegister'
-import { useRedirectIf } from '@/hooks/redirects/useRedirectIf'
+import { z } from '@/lib/zod'
+import { ZodError } from 'zod'
+import { LinkButton } from '@components/ui/linkButton'
+import { signIn } from 'next-auth/react'
+
+const RegisterSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+  repeat_password: z.string().min(8),
+  first_name: z.string().min(2),
+  last_name: z.string().min(2)
+}
+).superRefine(({ repeat_password, password }, ctx) => {
+  if (repeat_password !== password) {
+    ctx.addIssue({
+      code: 'custom',
+      message: 'Las contraseñas no coinciden',
+      path: ['repeat_password']
+    })
+  }
+})
 
 export default function Page () {
-  useRedirectIf({ authenticated: true }) // Redirects to home if the user is authenticated
-  const { setAccessToken, setIsAuthenticated } = useAuth()
   const { register } = useRegister()
-  const router = useRouter()
-
   const [error, setError] = useState<RegisterResponseError | null>(null)
   const [loading, setLoading] = useState(false)
   const [userRegister, setUserRegister] = useState<UserRegister>({
@@ -37,22 +52,38 @@ export default function Page () {
     password: '',
     repeat_password: ''
   })
-
   const handleRegister = async () => {
-    setError(null)
     setLoading(true)
+    setError(null)
+    try {
+      RegisterSchema.parse(userRegister)
+    } catch (e) {
+      if (e instanceof ZodError) {
+        console.log(e.errors)
+        setError(
+          {
+            email: [e.errors.filter((error) => error.path[0] === 'email')[0]?.message],
+            password: [e.errors.filter((error) => error.path[0] === 'password')[0]?.message],
+            repeat_password: [e.errors.filter((error) => error.path[0] === 'repeat_password')[0]?.message],
+            first_name: [e.errors.filter((error) => error.path[0] === 'first_name')[0]?.message],
+            last_name: [e.errors.filter((error) => error.path[0] === 'last_name')[0]?.message]
+
+          }
+        )
+        setLoading(false)
+      }
+    }
     const response = await register({ userRegister })
     if (response.ok) {
-      setAccessToken(response.val.access)
-      setIsAuthenticated(true)
+      await signIn('django', {
+        email: userRegister.email,
+        password: userRegister.password,
+        redirectTo: '/dashboard'
+      })
     } else {
       setError(response.val)
+      setLoading(false)
     }
-    setLoading(false)
-  }
-
-  const handleAlreadyHaveAnAccount = async () => {
-    router.push('/auth/login')
   }
 
   const disable =
@@ -166,9 +197,9 @@ export default function Page () {
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button variant="link" onClick={handleAlreadyHaveAnAccount}>
+          <LinkButton variant="link" href='/auth/login'>
             Ya tengo una cuenta
-          </Button>
+          </LinkButton>
           <Button
             variant="default"
             className="pl-2"
