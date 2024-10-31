@@ -1,5 +1,5 @@
 import NextAuth, { CredentialsSignin } from 'next-auth'
-import { axiosDefaultInstance } from './lib/axios/clientAxios'
+import { defaultInstace as axios } from '@/lib/axios/defaultAxiosInstance'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -13,8 +13,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: { label: 'Password', type: 'password' }
       },
       async authorize (credentials: any) {
-        console.log('Posting credentials', credentials)
-        const response = await axiosDefaultInstance.post('/auth/login/', credentials)
+        const response = await axios.post('/auth/login/', credentials)
         const data = response.data
         if (response.status !== 200) throw new CredentialsSignin(data.detail)
         return data
@@ -27,7 +26,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         case 'django':
           // eslint-disable-next-line no-case-declarations
           const credentialUser = user as any
-          console.log('DJANGO CREDENTIALS', credentialUser)
           token.access_token = credentialUser?.access_token
           token.user = credentialUser?.user
           token.token_type = 'Bearer'
