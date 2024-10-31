@@ -30,6 +30,7 @@
     "cookie": "^1.0.1",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.5.4",
+    "i18next": "^23.16.4",
     "javascript-time-ago": "^2.5.11",
     "lucide-react": "^0.441.0",
     "next": "^14.2.11",
@@ -46,6 +47,7 @@
     "ts-results": "^3.3.0",
     "vaul": "^1.1.0",
     "zod": "^3.23.8",
+    "zod-i18n-map": "^2.27.0",
     "zustand": "^4.5.5"
   },
   "devDependencies": {
