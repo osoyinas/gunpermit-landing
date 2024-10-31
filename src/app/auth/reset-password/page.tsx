@@ -26,7 +26,7 @@ import { FullscreenLoading } from '@components/FullscreenLoading'
 
 export default function Page () {
   const searchParams = useSearchParams()
-  const token = searchParams.get('token')
+  const token = searchParams?.get('token')
 
   const [verifyingToken, setVerifyingToken] = useState(true)
 
