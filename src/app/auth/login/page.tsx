@@ -12,13 +12,13 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useSearchParams } from 'next/navigation'
+import { redirect, useSearchParams } from 'next/navigation'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { ExclamationTriangleIcon, ReloadIcon } from '@radix-ui/react-icons'
 import { LoginResponseError } from '@/types/Response'
 import { ErrorP } from '@/components/ui/errorP'
 import { TypographyMuted } from '@components/typography/TypographyMuted'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { z } from '@/lib/zod'
 import { ZodError } from 'zod'
@@ -36,6 +36,11 @@ export default function Page () {
   const [error, setError] = useState<LoginResponseError | null>(null)
   const searchParams = useSearchParams()
 
+  const { status } = useSession()
+
+  if (status === 'authenticated') {
+    redirect('/dashboard')
+  }
   const handleLogin = async () => {
     setLoading(true)
     setError(null)
