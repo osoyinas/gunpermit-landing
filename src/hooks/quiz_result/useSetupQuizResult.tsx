@@ -13,8 +13,8 @@ export function useSetupQuizResult (): {
   const { setQuizResponse } = useMakeQuiz()
 
   useEffect(() => {
-    const encodedQuizReponse = query.get('quizResponse')
-    const encodedQuizResult = query.get('quizResult')
+    const encodedQuizReponse = query?.get('quizResponse')
+    const encodedQuizResult = query?.get('quizResult')
     if (!encodedQuizReponse) return
     if (!encodedQuizResult) return
     const quizReponse = JSON.parse(decodeURIComponent(encodedQuizReponse))
