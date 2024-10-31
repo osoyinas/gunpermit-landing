@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Toaster } from '@components/ui/toaster'
 import { Provider } from '@components/providers/Provider'
+import { FullscreenLoading } from '@components/FullscreenLoading'
 
 export const metadata: Metadata = {
   title: 'Tests del permiso de armas',
@@ -18,6 +19,7 @@ export default function RootLayout ({
   return (
     <html lang="es" suppressHydrationWarning>
       <body className="min-h-screen">
+        <Suspense fallback={<FullscreenLoading />}>
           <Provider>
             <ThemeProvider
               attribute="class"
@@ -29,6 +31,7 @@ export default function RootLayout ({
               {children}
             </ThemeProvider>
           </Provider>
+        </Suspense>
       </body>
     </html>
   )
