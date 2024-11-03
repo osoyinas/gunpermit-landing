@@ -25,7 +25,8 @@ function AddToCalendarButton (props: Props):React.ReactNode {
   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${newStartDate}/${newEndDate}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`
 
   return (
-    <LinkButton variant='secondary' href={googleCalendarUrl} target="_blank" rel="noopener noreferrer" {...props}>
+    <LinkButton variant='secondary' href={googleCalendarUrl} target="_blank" rel="noopener noreferrer"
+    className={props.className}>
       Añadir a Google Calendar
     </LinkButton>
   )

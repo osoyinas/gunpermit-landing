@@ -4,8 +4,8 @@ export function FullTopicPerformanceImage () {
       cx="50%"
       cy="50%"
       className="recharts-surface"
-      width="full"
-      height="auto"
+      width="100%"
+      height="100%"
       viewBox="0 0 350 300"
     >
       <title></title>
@@ -164,7 +164,7 @@ export function FullTopicPerformanceImage () {
               x="175.00000000000003"
               y="35.599999999999994"
               className="recharts-text recharts-polar-angle-axis-tick-value"
-              text-anchor="middle"
+              textAnchor="middle"
               fill="#888"
             >
               <tspan x="175.00000000000003" dy="0em">
@@ -195,7 +195,7 @@ export function FullTopicPerformanceImage () {
               x="264.4415215943426"
               y="78.67276666736085"
               className="recharts-text recharts-polar-angle-axis-tick-value"
-              text-anchor="start"
+              textAnchor="start"
               fill="#888"
             >
               <tspan x="264.4415215943426" dy="0em">
@@ -226,7 +226,7 @@ export function FullTopicPerformanceImage () {
               x="286.5317531536006"
               y="175.45639484460236"
               className="recharts-text recharts-polar-angle-axis-tick-value"
-              text-anchor="start"
+              textAnchor="start"
               fill="#888"
             >
               <tspan x="286.5317531536006" dy="0em">
@@ -257,7 +257,7 @@ export function FullTopicPerformanceImage () {
               x="224.63629975504864"
               y="253.07083848803677"
               className="recharts-text recharts-polar-angle-axis-tick-value"
-              text-anchor="start"
+              textAnchor="start"
               fill="#888"
             >
               <tspan x="224.63629975504864" dy="0em">
@@ -288,7 +288,7 @@ export function FullTopicPerformanceImage () {
               x="125.36370024495136"
               y="253.07083848803677"
               className="recharts-text recharts-polar-angle-axis-tick-value"
-              text-anchor="end"
+              textAnchor="end"
               fill="#888"
             >
               <tspan x="125.36370024495136" dy="0em">
@@ -319,7 +319,7 @@ export function FullTopicPerformanceImage () {
               x="63.46824684639938"
               y="175.45639484460244"
               className="recharts-text recharts-polar-angle-axis-tick-value"
-              text-anchor="end"
+              textAnchor="end"
               fill="#888"
             >
               <tspan x="63.46824684639938" dy="0em">
@@ -350,7 +350,7 @@ export function FullTopicPerformanceImage () {
               x="85.55847840565737"
               y="78.6727666673609"
               className="recharts-text recharts-polar-angle-axis-tick-value"
-              text-anchor="end"
+              textAnchor="end"
               fill="#888"
             >
               <tspan x="85.55847840565737" dy="0em">
@@ -384,7 +384,7 @@ export function FullTopicPerformanceImage () {
               x="175"
               y="150"
               className="recharts-text recharts-polar-radius-axis-tick-value"
-              text-anchor="start"
+              textAnchor="start"
               fill="#888"
             >
               <tspan x="175" dy="0em">
@@ -403,7 +403,7 @@ export function FullTopicPerformanceImage () {
               x="201.6"
               y="150"
               className="recharts-text recharts-polar-radius-axis-tick-value"
-              text-anchor="start"
+              textAnchor="start"
               fill="#888"
             >
               <tspan x="201.6" dy="0em">
@@ -422,7 +422,7 @@ export function FullTopicPerformanceImage () {
               x="228.2"
               y="150"
               className="recharts-text recharts-polar-radius-axis-tick-value"
-              text-anchor="start"
+              textAnchor="start"
               fill="#888"
             >
               <tspan x="228.2" dy="0em">
@@ -441,7 +441,7 @@ export function FullTopicPerformanceImage () {
               x="254.8"
               y="150"
               className="recharts-text recharts-polar-radius-axis-tick-value"
-              text-anchor="start"
+              textAnchor="start"
               fill="#888"
             >
               <tspan x="254.8" dy="0em">
@@ -460,7 +460,7 @@ export function FullTopicPerformanceImage () {
               x="281.4"
               y="150"
               className="recharts-text recharts-polar-radius-axis-tick-value"
-              text-anchor="start"
+              textAnchor="start"
               fill="#888"
             >
               <tspan x="281.4" dy="0em">
@@ -476,7 +476,7 @@ export function FullTopicPerformanceImage () {
             name="Preguntas correctas"
             stroke="#8884d8"
             fill="#8884d8"
-            fill-opacity="0.9"
+            fillOpacity="0.9"
             className="recharts-polygon"
             d="M175.00000000000003,59.56L244.66900340272613,94.44082375636822L260.5791721313205,169.53288758268525L215.39457611184466,233.88020160171524L136.91368538026074,229.08704722447436L92.01413611508318,168.94098189836154L152.12361082298543,131.75668839761346L175.00000000000003,59.56Z"
           ></path>
@@ -486,9 +486,9 @@ export function FullTopicPerformanceImage () {
         <g className="recharts-layer recharts-radar-polygon">
           <path
             name="Preguntas totales"
-            stroke-dasharray="5 5"
+            strokeDasharray="5 5"
             stroke="#82ca9d"
-            fill-opacity="0.1"
+            fillOpacity="0.1"
             className="recharts-polygon"
             d="M175.00000000000003,59.56L244.66900340272613,94.44082375636822L260.5791721313205,169.53288758268525L215.39457611184466,233.88020160171524L136.91368538026074,229.08704722447436L92.01413611508318,168.94098189836154L152.12361082298543,131.75668839761346L175.00000000000003,59.56Z"
           ></path>

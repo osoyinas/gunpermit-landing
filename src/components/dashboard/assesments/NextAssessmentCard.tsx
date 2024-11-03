@@ -129,27 +129,23 @@ export function NextAssessmentCard () {
         </div>
         <div className="flex items-center space-x-4">
           <CalendarIcon className="h-10 w-10 text-primary" />
-          {loadingNextAssessment
-            ? (
-            <div>
-              <p className="text-sm font-medium">Fecha del Examen</p>
+          <div>
+            <p className="text-sm font-medium">Fecha del Examen</p>
+            {loadingNextAssessment
+              ? (
               <Skeleton className="w-24 h-12" />
-            </div>
-              )
-            : (
-            <div>
-              <p className="text-sm font-medium">Fecha del Examen</p>
-              <p className="text-lg">
-                <span className="font-bold">{localeDateString}</span>
-                <br />
+                )
+              : (
+              <div>
+                <p className="text-lg">
+                  <span className="font-bold">{localeDateString}</span>
+                </p>
                 <TypographyMuted>
-                  <TimeAgoComponent
-                    date={new Date(assessment.date)}
-                  />
+                  <TimeAgoComponent date={new Date(assessment.date)} />
                 </TypographyMuted>
-              </p>
-            </div>
-              )}
+              </div>
+                )}
+          </div>
         </div>
         <br />
         <br />
