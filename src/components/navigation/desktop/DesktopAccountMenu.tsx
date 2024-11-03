@@ -1,3 +1,4 @@
+'use client'
 import { AvatarIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 import {

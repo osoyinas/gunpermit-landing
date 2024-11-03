@@ -1,5 +1,4 @@
-import { Topic } from '@/types/Topic'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,40 +10,22 @@ import {
 } from '@/components/ui/navigation-menu'
 import Link from 'next/link'
 import { ListItem } from './ListItem'
-import { useTopics } from '@hooks/api/quizzes/useTopics'
-import { QuizCategory } from '@/types/Quizzes'
-import { useQuizzes } from '@hooks/api/quizzes/useQuizzes'
+import { getQuizCategories } from '@/services/quizzes/getQuizCategories'
+import { axiosServerInstance } from '@/lib/axios/serverAxios'
+import { getTopics } from '@/services/topics/getTopics'
+export async function DesktopContentMenu () {
+  const categories = await getQuizCategories(axiosServerInstance)
+  const topics = await getTopics(axiosServerInstance)
 
-export function DesktopContentMenu () {
-  const [topics, setTopics] = useState<Topic[] | undefined>()
-  const [categories, setCategories] = useState<QuizCategory[] | undefined>()
-  const { getTopics } = useTopics()
-  const { getQuizCategories } = useQuizzes()
-  useEffect(() => {
-    const fetchTopics = async () => {
-      const response = await getTopics()
-      if (response.ok) {
-        setTopics(response.val)
-      }
-    }
-    const fetchCategories = async () => {
-      const response = await getQuizCategories()
-      if (response.ok) {
-        setCategories(response.val)
-      }
-    }
+  if (!categories.ok || !topics.ok) return null
 
-    fetchTopics()
-    fetchCategories()
-  }, [])
-
-  const tests = categories?.map((category) => ({
+  const tests = categories.val.map((category) => ({
     title: category.title,
     href: `/tests/categories/${category.tag}`,
     description: category.description
   }))
 
-  const resources = topics?.map((topic) => ({
+  const resources = topics.val.map((topic) => ({
     title: topic.title,
     href: `/resources/${topic.id}`,
     description: topic.description
