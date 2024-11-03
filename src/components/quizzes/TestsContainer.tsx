@@ -6,7 +6,7 @@ interface FullscreenContainerProps extends HTMLAttributes<HTMLDivElement> {
 
 export function TestsContainer (props: FullscreenContainerProps) {
   return (
-    <main className='max-w-2xl px-2 md:p-0 md:mx-auto mt-8'{...props} style={
+    <main className='max-w-2xl px-5 md:px-0 md:mx-auto mt-8'{...props} style={
       { minHeight: 'calc(100dvh - 4rem)' }
     }>
       {props.children}

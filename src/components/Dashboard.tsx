@@ -15,8 +15,8 @@ export function Dashboard () {
   const { status } = useSession()
   if (status === 'loading') return <FullscreenLoading></FullscreenLoading>
   return (
-    <FullscreenContainer className="flex flex-col max-w-7xl m-auto py-12">
-      <main className="flex-1  px-2 py-4 space-y-6">
+    <FullscreenContainer className="flex flex-col max-w-7xl m-auto">
+      <main className="flex-1 px-2 py-4 space-y-6">
         <div className="grid gap-4 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           <QuickAccessCard />
           <RecentResultsCard />
