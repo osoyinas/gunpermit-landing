@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -23,6 +23,8 @@ import Link from 'next/link'
 import { z } from '@/lib/zod'
 import { ZodError } from 'zod'
 import { LinkButton } from '@components/ui/linkButton'
+import { SignInWithGoogleButton } from '@components/buttons/signInWithGoogleButton'
+import { SignInWithGithubButton } from '@components/buttons/signInWithGithubButton'
 
 const LoginSchema = z.object({
   email: z.string().email(),
@@ -50,12 +52,15 @@ export default function Page () {
     } catch (e) {
       if (e instanceof ZodError) {
         console.log(e.errors)
-        setError(
-          {
-            email: [e.errors.filter((error) => error.path[0] === 'email')[0]?.message],
-            password: [e.errors.filter((error) => error.path[0] === 'password')[0]?.message]
-          }
-        )
+        setError({
+          email: [
+            e.errors.filter((error) => error.path[0] === 'email')[0]?.message
+          ],
+          password: [
+            e.errors.filter((error) => error.path[0] === 'password')[0]
+              ?.message
+          ]
+        })
       }
       return
     }
@@ -69,6 +74,14 @@ export default function Page () {
     setLoading(false)
   }
 
+  useEffect(() => {
+    const error = searchParams?.get('error_message')
+    if (error) {
+      setError({
+        non_field_errors: error.toString() ? [error.toString()] : undefined
+      })
+    }
+  }, [])
   return (
     <main className="w-full flex justify-center items-center md:py-16">
       <Card className="w-full max-w-[28rem] border-none md:border">
@@ -120,19 +133,30 @@ export default function Page () {
             </div>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button onClick={
-            () => signIn('google', { redirectTo: searchParams?.get('callbackUrl') ?? '/dashboard' })
-          }>
-            Sign in with google
-          </Button>
-          <LinkButton variant="link" href='/auth/register'>
-            Registrase
-          </LinkButton>
-          <Button onClick={handleLogin} disabled={loading}>
-            {loading && <ReloadIcon className="h-4 w-4 animate-spin mr-2" />}
-            {loading ? 'Inciando...' : 'Iniciar sesión'}
-          </Button>
+        <CardFooter className="flex flex-col w-full">
+          <div className="flex justify-between w-full">
+            <LinkButton variant="link" href="/auth/register">
+              Registrase
+            </LinkButton>
+            <Button onClick={handleLogin} disabled={loading}>
+              {loading && <ReloadIcon className="h-4 w-4 animate-spin mr-2" />}
+              {loading ? 'Inciando...' : 'Iniciar sesión'}
+            </Button>
+          </div>
+          <ul className="m-auto mt-8 w-full flex flex-col gap-4">
+            <li className="w-full">
+              <SignInWithGoogleButton
+                onClick={() => signIn('google')}
+                className="w-full"
+              />
+            </li>
+            <li>
+              <SignInWithGithubButton
+                onClick={() => signIn('github')}
+                className="w-full"
+              />
+            </li>
+          </ul>
         </CardFooter>
       </Card>
     </main>

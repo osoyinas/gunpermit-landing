@@ -2,6 +2,8 @@ import NextAuth, { CredentialsSignin } from 'next-auth'
 import { defaultInstace as axios } from '@/lib/axios/defaultAxiosInstance'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
+import { loginWithGoogle } from '@/services/auth/loginWithGoogle'
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.NEXTAUTH_SECRET || 'secret',
   providers: [
@@ -30,28 +32,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     })
   ],
   callbacks: {
-    async signIn ({ account, profile }) {
-      console.log(' Sign In callback')
+    async signIn ({ user, account, profile, email, credentials }) {
       if (account?.provider === 'google') {
-        console.log(profile)
-        console.log(account) // access_token, expires_in, scope, token_type, id_token
+        const response = await loginWithGoogle(account.id_token)
+        if (response.ok) {
+          return true
+        } else {
+          return `/auth/login?error_message=${response.val.detail}`
+        }
       }
       return true
     },
+
     async jwt ({ token, user, account }) {
+      token.token_type = 'Bearer'
+
       if (account?.provider === 'django') {
         const credentialUser = user as any
         token.access_token = credentialUser?.access_token
         token.user = credentialUser?.user
-        token.token_type = 'Bearer'
         token.expires_in = credentialUser?.expires_in
       } else if (account?.provider === 'google') {
-        if (!account || !account.access_token) {
+        const response = await loginWithGoogle(account.id_token)
+        if (response.ok) {
+          const credentialUser = response.val
+          token.access_token = credentialUser.access_token
+          token.expires_in = credentialUser.expires_in
+          token.user = credentialUser
+        } else {
           return null
         }
-
-        token.access_token = account.access_token
-        token.user = user
       }
 
       if (Date.now() > token.expires_in) {
