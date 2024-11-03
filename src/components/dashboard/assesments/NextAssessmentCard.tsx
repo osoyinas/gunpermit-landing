@@ -1,9 +1,5 @@
 'use client'
 import { CalendarIcon } from 'lucide-react'
-import TimeAgo from 'javascript-time-ago'
-import es from 'javascript-time-ago/locale/es'
-import ReactTimeAgo from 'react-time-ago'
-
 import {
   Card,
   CardHeader,
@@ -28,8 +24,8 @@ import { Skeleton } from '../../ui/skeleton'
 import { DetailsButton } from '@/components/dashboard/assesments/DetailsButton'
 import { TypographyMuted } from '@components/typography/TypographyMuted'
 import AddToCalendarButton from '@/components/dashboard/assesments/AddToCalendarButton'
-
-TimeAgo.addDefaultLocale(es)
+import { TimeAgoComponent } from '../results/TimeAgoComponent'
+import { useSession } from 'next-auth/react'
 
 export function NextAssessmentCard () {
   const [assessment, setAssessment] = useState<Assessment | null>(null)
@@ -41,6 +37,7 @@ export function NextAssessmentCard () {
   const { getPlaces, getNextAssessment } = useAssessments()
 
   const [loadingNextAssessment, setLoadingNextAssessment] = useState(true)
+  const { status } = useSession()
   useEffect(() => {
     const fetchPlaces = async () => {
       const response = await getPlaces()
@@ -50,11 +47,10 @@ export function NextAssessmentCard () {
       }
     }
     fetchPlaces()
-  }, [])
+  }, [status])
 
   useEffect(() => {
     if (places == null) return
-    console.log('selectedPlaceId', selectedPlaceId)
     const selectedPlaceExists = places.some((place) => {
       return place.id === selectedPlaceId
     })
@@ -71,7 +67,7 @@ export function NextAssessmentCard () {
       if (response.ok) {
         setAssessment(response.val)
       }
-      setTimeout(() => setLoadingNextAssessment(false), 300)
+      setLoadingNextAssessment(false)
     }
     fetchNextAssessment()
   }, [selectedPlaceId, places])
@@ -147,10 +143,9 @@ export function NextAssessmentCard () {
                 <span className="font-bold">{localeDateString}</span>
                 <br />
                 <TypographyMuted>
-                  <ReactTimeAgo
+                  <TimeAgoComponent
                     date={new Date(assessment.date)}
-                    locale="es-ES"
-                  />{' '}
+                  />
                 </TypographyMuted>
               </p>
             </div>

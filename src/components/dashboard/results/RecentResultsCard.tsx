@@ -1,4 +1,5 @@
-import { QuizAttemptResult } from '@/types/Metrics'
+import { axiosServerInstance } from '@/lib/axios/serverAxios'
+import { getQuizAttempts } from '@/services/metrics/getQuizAttempts'
 import { TypographyMuted } from '@components/typography/TypographyMuted'
 import {
   Card,
@@ -7,7 +8,6 @@ import {
   CardDescription,
   CardContent
 } from '@components/ui/card'
-import { Skeleton } from '@components/ui/skeleton'
 import {
   TableHeader,
   TableRow,
@@ -16,58 +16,13 @@ import {
   TableCell,
   Table
 } from '@components/ui/table'
-import { useQuizAttempts } from '@hooks/api/metrics/useQuizResults'
-import { useEffect, useState } from 'react'
-import ReactTimeAgo from 'react-time-ago'
+import { TimeAgoComponent } from './TimeAgoComponent'
 
-export function RecentResultsCard () {
-  const { getQuizAttempts } = useQuizAttempts()
-  const [attempts, setAttempts] = useState<QuizAttemptResult[] | undefined>()
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getQuizAttempts()
-      if (response.ok) {
-        setAttempts(response.val.results)
-      }
-    }
-    fetchData()
-  }, [])
-
-  if (!attempts) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Resultados Recientes</CardTitle>
-          <CardDescription>Tus últimos intentos de examen</CardDescription>
-        </CardHeader>
-        <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="text-foreground">Puntuación</TableHead>
-              <TableHead className="text-foreground">Realizado</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {
-              Array.from({ length: 5 }).map((_, index) => (
-                <TableRow key={index}>
-                  <TableCell>
-                    <Skeleton className="w-12 h-6" />
-                  </TableCell>
-                  <TableCell>
-                    <Skeleton className="w-16 h-6" />
-                  </TableCell>
-                </TableRow>
-              ))
-            }
-          </TableBody>
-        </Table>
-        </CardContent>
-      </Card>
-    )
-  }
+export async function RecentResultsCard () {
+  const response = await getQuizAttempts(axiosServerInstance
+  )
+  if (!response.ok) return null
+  const attempts = response.val.results
 
   return (
     <Card>
@@ -97,7 +52,7 @@ export function RecentResultsCard () {
                 </TableCell>
                 <TableCell>
                   <TypographyMuted>
-                    <ReactTimeAgo date={new Date(attempt.date)} locale="es" />
+                   <TimeAgoComponent date={new Date(attempt.date)} />
                   </TypographyMuted>
                 </TableCell>
               </TableRow>
