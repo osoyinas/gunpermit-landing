@@ -24,7 +24,7 @@ import { z } from '@/lib/zod'
 import { ZodError } from 'zod'
 import { LinkButton } from '@components/ui/linkButton'
 import { SignInWithGoogleButton } from '@components/buttons/signInWithGoogleButton'
-import { SignInWithGithubButton } from '@components/buttons/signInWithGithubButton'
+import { Providers } from '@/types/Auth'
 
 const LoginSchema = z.object({
   email: z.string().email(),
@@ -66,7 +66,7 @@ export default function Page () {
     }
 
     const callbackUrl = searchParams?.get('callbackUrl') || '/dashboard'
-    await signIn('django', {
+    await signIn(Providers.EMAIL, {
       email,
       password,
       redirectTo: callbackUrl
@@ -147,12 +147,6 @@ export default function Page () {
             <li className="w-full">
               <SignInWithGoogleButton
                 onClick={() => signIn('google')}
-                className="w-full"
-              />
-            </li>
-            <li>
-              <SignInWithGithubButton
-                onClick={() => signIn('github')}
                 className="w-full"
               />
             </li>

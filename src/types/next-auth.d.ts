@@ -12,6 +12,7 @@ declare module 'next-auth' {
     is_superuser: boolean;
     last_login: string;
     date_joined: string;
+    provider: string;
   }
   interface Session {
     user: User;

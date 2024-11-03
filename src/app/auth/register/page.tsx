@@ -17,7 +17,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { ExclamationTriangleIcon, ReloadIcon } from '@radix-ui/react-icons'
 import { RegisterResponseError } from '@/types/Response'
 import { ErrorP } from '@/components/ui/errorP'
-import { UserRegister } from '@/types/Auth'
+import { Providers, UserRegister } from '@/types/Auth'
 import { useRegister } from '@/hooks/api/auth/useRegister'
 import { z } from '@/lib/zod'
 import { ZodError } from 'zod'
@@ -75,7 +75,7 @@ export default function Page () {
     }
     const response = await register({ userRegister })
     if (response.ok) {
-      await signIn('django', {
+      await signIn(Providers.EMAIL, {
         email: userRegister.email,
         password: userRegister.password,
         redirectTo: '/dashboard'

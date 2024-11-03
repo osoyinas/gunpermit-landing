@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export interface AuthTokens {
     access: string;
 }
@@ -20,4 +21,9 @@ export interface User {
 export interface EditableUser {
     first_name: string;
     last_name: string;
+}
+
+export enum Providers {
+    GOOGLE = 'google',
+    EMAIL = 'email',
 }

@@ -3,13 +3,14 @@ import { defaultInstace as axios } from '@/lib/axios/defaultAxiosInstance'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 import { loginWithGoogle } from '@/services/auth/loginWithGoogle'
+import { Providers } from './types/Auth'
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.NEXTAUTH_SECRET || 'secret',
   providers: [
     CredentialsProvider({
-      id: 'django',
-      name: 'Django',
+      id: Providers.EMAIL,
+      name: Providers.EMAIL,
       credentials: {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' }
@@ -47,10 +48,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt ({ token, user, account }) {
       token.token_type = 'Bearer'
 
-      if (account?.provider === 'django') {
+      if (account?.provider === 'email') {
         const credentialUser = user as any
         token.access_token = credentialUser?.access_token
-        token.user = credentialUser?.user
+        token.user = credentialUser
         token.expires_in = credentialUser?.expires_in
       } else if (account?.provider === 'google') {
         const response = await loginWithGoogle(account.id_token)
