@@ -52,18 +52,18 @@ export async function QuizSelectionSkeleton () {
           {[...Array(5)].map((_, index) => (
             <TableRow key={index}>
               <TableCell>
-                <Skeleton className="h-4 w-28" />
+                <Skeleton className="h-6 w-28" />
               </TableCell>
               <TableCell className="text-right">
-                <Skeleton className="h-4 w-8 ml-auto" />
-              </TableCell>
-              <TableCell className="text-right">
-                <Skeleton className="h-4 w-12 ml-auto" />
+                <Skeleton className="h-6 w-12 ml-auto" />
               </TableCell>
               <TableCell>
                 <div className="flex justify-center space-x-2">
+                  <Skeleton className="h-6 w-20" />
+                  <aside>
                   <Skeleton className="h-8 w-20" />
-                  <Skeleton className="h-8 w-20" />
+                  <Skeleton className="h-3 w-18 mt-1" />
+                  </aside>
                 </div>
               </TableCell>
             </TableRow>
