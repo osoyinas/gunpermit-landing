@@ -7,30 +7,18 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { axiosServerInstance } from '@/lib/axios/serverAxios'
-import { getQuizzes } from '@/services/quizzes/getQuizzes'
-import { QuizRow } from './QuizItem'
 import {
   Table,
   TableBody,
+  TableCell,
   TableHead,
   TableHeader,
   TableRow
 } from '@/components/ui/table'
 import { TestsContainer } from './TestsContainer'
+import { Skeleton } from '@components/ui/skeleton'
 
-interface QuizSelectionProps {
-  category?: string;
-}
-
-export async function QuizSelection (props: QuizSelectionProps) {
-  const { category } = props
-  const response = await getQuizzes(axiosServerInstance, {
-    category
-  })
-
-  if (!response.ok) return null
-  const quizzes = response.val
+export async function QuizSelectionSkeleton () {
   return (
     <TestsContainer>
       <Breadcrumb className="mx-auto">
@@ -48,12 +36,12 @@ export async function QuizSelection (props: QuizSelectionProps) {
             <span className="text-xl">/</span>
           </BreadcrumbSeparator>
           <BreadcrumbItem>
-            <BreadcrumbPage>{category}</BreadcrumbPage>
+            <BreadcrumbPage></BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <Table className="max-3xl mt-4">
-        <TableHeader>
+      <Table className="max-w-3xl mt-4">
+      <TableHeader>
           <TableRow>
             <TableHead>Nombre del Test</TableHead>
             <TableHead className="text-right">Intentos</TableHead>
@@ -62,8 +50,24 @@ export async function QuizSelection (props: QuizSelectionProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {quizzes.map((quiz, index) => (
-            <QuizRow key={quiz.id} quiz={quiz} />
+          {[...Array(5)].map((_, index) => (
+            <TableRow key={index}>
+              <TableCell>
+                <Skeleton className="h-4 w-28" />
+              </TableCell>
+              <TableCell className="text-right">
+                <Skeleton className="h-4 w-8 ml-auto" />
+              </TableCell>
+              <TableCell className="text-right">
+                <Skeleton className="h-4 w-12 ml-auto" />
+              </TableCell>
+              <TableCell>
+                <div className="flex justify-center space-x-2">
+                  <Skeleton className="h-8 w-20" />
+                  <Skeleton className="h-8 w-20" />
+                </div>
+              </TableCell>
+            </TableRow>
           ))}
         </TableBody>
       </Table>

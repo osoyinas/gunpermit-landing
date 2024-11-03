@@ -10,6 +10,8 @@ export interface Quiz {
 export interface QuizAttempt extends Quiz {
     passed?: boolean;
     score?: number;
+    score_str?: string;
+    attempts: number;
 }
 
 export interface CompleteQuiz extends QuizAttempt {

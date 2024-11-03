@@ -1,10 +1,10 @@
 import { CategorySelection } from '@/components/quizzes/CategorySelection'
-import { FullscreenLoading } from '@components/FullscreenLoading'
+import { CategorySelectionSkeleton } from '@components/quizzes/CategorySelectionSkeleton'
 import { Suspense } from 'react'
 
 export default function Page () {
   return (
-    <Suspense fallback={<FullscreenLoading />}>
+    <Suspense fallback={<CategorySelectionSkeleton />}>
       <CategorySelection />
     </Suspense>
   )
