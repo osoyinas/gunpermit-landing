@@ -1,7 +1,7 @@
 import NextAuth, { CredentialsSignin } from 'next-auth'
 import { defaultInstace as axios } from '@/lib/axios/defaultAxiosInstance'
 import CredentialsProvider from 'next-auth/providers/credentials'
-
+import GoogleProvider from 'next-auth/providers/google'
 export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.NEXTAUTH_SECRET || 'secret',
   providers: [
@@ -23,9 +23,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
         return data
       }
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
     })
   ],
-  callbacks: { // 604800.0
+  callbacks: {
+    async signIn ({ account, profile }) {
+      console.log(' Sign In callback')
+      if (account?.provider === 'google') {
+        console.log(profile)
+        console.log(account) // access_token, expires_in, scope, token_type, id_token
+      }
+      return true
+    },
     async jwt ({ token, user, account }) {
       if (account?.provider === 'django') {
         const credentialUser = user as any
@@ -33,7 +45,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.user = credentialUser?.user
         token.token_type = 'Bearer'
         token.expires_in = credentialUser?.expires_in
+      } else if (account?.provider === 'google') {
+        if (!account || !account.access_token) {
+          return null
+        }
+
+        token.access_token = account.access_token
+        token.user = user
       }
+
       if (Date.now() > token.expires_in) {
         return null
       }

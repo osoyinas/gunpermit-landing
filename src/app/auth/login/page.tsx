@@ -121,6 +121,11 @@ export default function Page () {
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
+          <Button onClick={
+            () => signIn('google', { redirectTo: searchParams?.get('callbackUrl') ?? '/dashboard' })
+          }>
+            Sign in with google
+          </Button>
           <LinkButton variant="link" href='/auth/register'>
             Registrase
           </LinkButton>
