@@ -18,12 +18,15 @@ export default function RootLayout ({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/gunpermit.svg" type="image/svg+xml" />
+      </head>
       <body className="min-h-screen">
         <Suspense fallback={<FullscreenLoading />}>
           <Provider>
             <ThemeProvider
               attribute="class"
-              defaultTheme="system"
+              defaultTheme="dark"
               enableSystem
               disableTransitionOnChange
             >
