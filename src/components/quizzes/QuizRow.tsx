@@ -1,5 +1,5 @@
 import { QuizAttempt } from '@/types/Quizzes'
-import { BookOpen, Check, Play, X } from 'lucide-react'
+import { BookOpen, Play } from 'lucide-react'
 import { TableCell, TableRow } from '@/components/ui/table'
 import { LinkButton } from '@components/ui/linkButton'
 
@@ -11,11 +11,18 @@ export function QuizRow (props: QuizItemProps) {
   return (
     <TableRow>
       <TableCell className="font-medium">{quiz.title}</TableCell>
-      <TableCell className="text-right">{quiz.attempts}</TableCell>
-      <TableCell className="flex items-center justify-end gap-2 font-bold">
+      <TableCell className="font-bold text-right">
+        <span
+          className={`${
+            quiz.passed === true
+              ? 'text-green-500'
+              : quiz.passed === false
+              ? 'text-red-500'
+              : ''
+          }`}
+        >
           {quiz.score_str != null ? `${quiz.score_str}` : '-'}
-          {quiz.passed === true && <Check className=" text-green-500 w-5" />}
-          {quiz.passed === false && <X className=" text-red-500 w-5" />}
+        </span>
       </TableCell>
       <TableCell>
         <div className="flex justify-center space-x-2">
@@ -23,10 +30,13 @@ export function QuizRow (props: QuizItemProps) {
             <BookOpen className="h-4 w-4 mr-1" />
             Estudio
           </LinkButton>
-          <LinkButton size="sm" variant="default" href={`/tests/${quiz.id}`}>
-            <Play className="h-4 w-4 mr-1" />
-            Test
-          </LinkButton>
+          <aside>
+            <LinkButton size="sm" variant="default" href={`/tests/${quiz.id}`}>
+              <Play className="h-4 w-4 mr-1" />
+              Test
+            </LinkButton>
+            <p className="text-xs opacity-70 text-center">{quiz.attempts} intentos</p>
+          </aside>
         </div>
       </TableCell>
     </TableRow>

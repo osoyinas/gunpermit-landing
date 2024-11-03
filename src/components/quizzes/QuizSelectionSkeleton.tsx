@@ -43,8 +43,7 @@ export async function QuizSelectionSkeleton () {
       <Table className="max-w-3xl mt-4">
       <TableHeader>
           <TableRow>
-            <TableHead>Nombre del Test</TableHead>
-            <TableHead className="text-right">Intentos</TableHead>
+            <TableHead>Test</TableHead>
             <TableHead className="text-right">Nota</TableHead>
             <TableHead className="text-center">Acciones</TableHead>
           </TableRow>
