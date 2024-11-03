@@ -26,7 +26,7 @@ export function QuizRow (props: QuizItemProps) {
       </TableCell>
       <TableCell>
         <div className="flex justify-center space-x-2">
-          <LinkButton size="sm" variant="outline" href={`/tests/${quiz.id}`}>
+          <LinkButton size="sm" variant="outline" href={`/tests/${quiz.id}/study`}>
             <BookOpen className="h-4 w-4 mr-1" />
             Estudio
           </LinkButton>
