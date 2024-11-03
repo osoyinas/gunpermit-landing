@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/breadcrumb'
 import { axiosServerInstance } from '@/lib/axios/serverAxios'
 import { getQuizzes } from '@/services/quizzes/getQuizzes'
-import { QuizRow } from './QuizItem'
+import { QuizRow } from './QuizRow'
 import {
   Table,
   TableBody,
