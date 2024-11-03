@@ -21,7 +21,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         })
         const data = response.data
         if (response.status !== 200) {
-          console.log(response.statusText)
           throw new CredentialsSignin()
         }
         return data
