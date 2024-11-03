@@ -23,23 +23,25 @@ import { z } from '@/lib/zod'
 import { ZodError } from 'zod'
 import { LinkButton } from '@components/ui/linkButton'
 import { signIn } from 'next-auth/react'
+import { SignInWithGoogleButton } from '@components/buttons/signInWithGoogleButton'
 
-const RegisterSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-  repeat_password: z.string().min(8),
-  first_name: z.string().min(2),
-  last_name: z.string().min(2)
-}
-).superRefine(({ repeat_password, password }, ctx) => {
-  if (repeat_password !== password) {
-    ctx.addIssue({
-      code: 'custom',
-      message: 'Las contraseñas no coinciden',
-      path: ['repeat_password']
-    })
-  }
-})
+const RegisterSchema = z
+  .object({
+    email: z.string().email(),
+    password: z.string().min(8),
+    repeat_password: z.string().min(8),
+    first_name: z.string().min(2),
+    last_name: z.string().min(2)
+  })
+  .superRefine(({ repeat_password, password }, ctx) => {
+    if (repeat_password !== password) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Las contraseñas no coinciden',
+        path: ['repeat_password']
+      })
+    }
+  })
 
 export default function Page () {
   const { register } = useRegister()
@@ -60,16 +62,27 @@ export default function Page () {
     } catch (e) {
       if (e instanceof ZodError) {
         console.log(e.errors)
-        setError(
-          {
-            email: [e.errors.filter((error) => error.path[0] === 'email')[0]?.message],
-            password: [e.errors.filter((error) => error.path[0] === 'password')[0]?.message],
-            repeat_password: [e.errors.filter((error) => error.path[0] === 'repeat_password')[0]?.message],
-            first_name: [e.errors.filter((error) => error.path[0] === 'first_name')[0]?.message],
-            last_name: [e.errors.filter((error) => error.path[0] === 'last_name')[0]?.message]
-
-          }
-        )
+        setError({
+          email: [
+            e.errors.filter((error) => error.path[0] === 'email')[0]?.message
+          ],
+          password: [
+            e.errors.filter((error) => error.path[0] === 'password')[0]
+              ?.message
+          ],
+          repeat_password: [
+            e.errors.filter((error) => error.path[0] === 'repeat_password')[0]
+              ?.message
+          ],
+          first_name: [
+            e.errors.filter((error) => error.path[0] === 'first_name')[0]
+              ?.message
+          ],
+          last_name: [
+            e.errors.filter((error) => error.path[0] === 'last_name')[0]
+              ?.message
+          ]
+        })
         setLoading(false)
       }
     }
@@ -89,8 +102,8 @@ export default function Page () {
   const disable =
     Object.values(userRegister).some((value) => value === '') || loading
   return (
-    <main className="w-full flex justify-center items-center">
-      <Card className="w-[400px]">
+    <main className="w-full flex justify-center items-center md:py-16">
+      <Card className="w-full max-w-[28rem] border-none md:border">
         <CardHeader>
           <CardTitle>Registrarse</CardTitle>
           <CardDescription>
@@ -196,19 +209,29 @@ export default function Page () {
             </div>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <LinkButton variant="link" href='/auth/login'>
-            Ya tengo una cuenta
-          </LinkButton>
-          <Button
-            variant="default"
-            className="pl-2"
-            onClick={handleRegister}
-            disabled={disable}
-          >
-            {loading && <ReloadIcon className="h-4 w-4 animate-spin mr-2" />}
-            Registrarse
-          </Button>
+        <CardFooter className="flex flex-col w-full">
+          <div className="flex justify-between w-full">
+            <LinkButton variant="link" href="/auth/login">
+              Ya tengo una cuenta
+            </LinkButton>
+            <Button
+              variant="default"
+              className="pl-2"
+              onClick={handleRegister}
+              disabled={disable}
+            >
+              {loading && <ReloadIcon className="h-4 w-4 animate-spin mr-2" />}
+              Registrarse
+            </Button>
+          </div>
+          <ul className="m-auto mt-8 w-full flex flex-col gap-4">
+            <li className="w-full">
+              <SignInWithGoogleButton
+                onClick={() => signIn('google')}
+                className="w-full"
+              />
+            </li>
+          </ul>
         </CardFooter>
       </Card>
     </main>
