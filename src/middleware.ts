@@ -3,13 +3,14 @@ import { NextResponse } from 'next/server'
 
 const protectedRoutes = ['/dashboard', '/tests', '/account']
 const LOGIN_ROUTE = '/auth/login'
+const AUTH_ROOT = '/auth/'
 
 export default auth((req) => {
   const pathName = req.nextUrl.pathname
   const isProtected = protectedRoutes.some((route) => pathName.startsWith(route))
 
-  // Check if the user is authenticated and redirect to the dashboard if the user is trying to access the login page
-  if (req.auth && req.nextUrl.pathname === LOGIN_ROUTE) {
+  // Check if the user is authenticated and redirect to the dashboard if the user is trying to access auth routes
+  if (req.auth && req.nextUrl.pathname.startsWith(AUTH_ROOT)) {
     const newUrl = new URL('/dashboard', req.nextUrl.origin)
     return Response.redirect(newUrl)
   }
