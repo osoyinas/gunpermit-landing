@@ -62,6 +62,8 @@ export default function Page () {
           ]
         })
       }
+      setLoading(false)
+
       return
     }
 
@@ -76,6 +78,13 @@ export default function Page () {
 
   useEffect(() => {
     const error = searchParams?.get('error_message')
+    const invalidCredentials = searchParams?.get('error') === 'CredentialsSignin'
+
+    if (invalidCredentials) {
+      setError({
+        non_field_errors: ['Correo o contraseña incorrectos.']
+      })
+    }
     if (error) {
       setError({
         non_field_errors: error.toString() ? [error.toString()] : undefined
