@@ -14,7 +14,7 @@ export function useSetupResponseQuiz (): void {
     setQuizResponse({
       answers: quiz.questions.map((question) => ({
         question: question.id,
-        answer: question.answers.findIndex((answer) => answer.is_true)
+        answer: undefined
       }))
     })
   }, [quiz])
