@@ -14,6 +14,7 @@ import { Separator } from '@components/ui/separator'
 import { TypographyP } from '@components/typography/TypographyP'
 import { AvatarIcon, GitHubLogoIcon } from '@radix-ui/react-icons'
 import { signOut } from 'next-auth/react'
+import { useTheme } from 'next-themes'
 
 export function MobileAccountMenu () {
   const [open, setOpen] = useState(false)
@@ -26,6 +27,11 @@ export function MobileAccountMenu () {
   const handleLogout = async () => {
     await signOut()
   }
+  const { theme, setTheme } = useTheme()
+
+  const handleThemeChange = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
@@ -36,7 +42,11 @@ export function MobileAccountMenu () {
 
       <SheetContent side="right">
         <ul className="p-2 text-left flex flex-col gap-4">
-          <li className="font-bold opacity-70">Ajustes</li>
+          <li className="font-bold">
+            <button onClick={handleThemeChange}>
+              Cambiar tema
+              </button>
+            </li>
           <Separator />
           <li>
             <Link href="/account" className="flex items-center gap-2">

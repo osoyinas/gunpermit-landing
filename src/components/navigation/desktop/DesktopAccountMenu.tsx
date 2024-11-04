@@ -11,10 +11,16 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@components/ui/button'
 import { signOut } from 'next-auth/react'
+import { useTheme } from 'next-themes'
 
 export function DesktopAccountMenu () {
   const handleLogout = async () => {
     await signOut()
+  }
+  const { theme, setTheme } = useTheme()
+
+  const handleThemeChange = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
   }
   return (
     <DropdownMenu>
@@ -28,7 +34,7 @@ export function DesktopAccountMenu () {
           <Link href="/account" legacyBehavior passHref>
             <DropdownMenuItem>Perfil</DropdownMenuItem>
           </Link>
-          <DropdownMenuItem disabled>Ajustes</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleThemeChange}>Cambiar tema</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <Link
