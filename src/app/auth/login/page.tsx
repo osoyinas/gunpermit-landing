@@ -145,7 +145,7 @@ export default function Page () {
             </LinkButton>
             <Button onClick={handleLogin} disabled={loading}>
               {loading && <ReloadIcon className="h-4 w-4 animate-spin mr-2" />}
-              {loading ? 'Inciando...' : 'Iniciar sesión'}
+              {loading ? 'Iniciando...' : 'Iniciar sesión'}
             </Button>
           </div>
           <ul className="m-auto mt-8 w-full flex flex-col gap-4">
