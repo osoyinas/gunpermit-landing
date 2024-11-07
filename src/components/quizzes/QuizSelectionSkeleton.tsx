@@ -49,7 +49,7 @@ export async function QuizSelectionSkeleton () {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {[...Array(5)].map((_, index) => (
+          {[...Array(15)].map((_, index) => (
             <TableRow key={index}>
               <TableCell>
                 <Skeleton className="h-6 w-28" />
