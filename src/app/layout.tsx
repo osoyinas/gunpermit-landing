@@ -21,7 +21,7 @@ export default function RootLayout ({
       <head>
         <link rel="icon" href="/gunpermit.svg" type="image/svg+xml" />
       </head>
-      <body className="min-h-screen">
+      <body>
         <Suspense fallback={<FullscreenLoading />}>
           <Provider>
             <ThemeProvider

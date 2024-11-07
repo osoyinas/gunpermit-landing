@@ -1,4 +1,3 @@
-import { FullscreenContainer } from './ui/FullscreenContainer'
 import { NextAssessmentCard } from './dashboard/assesments/NextAssessmentCard'
 import { RecentResultsCard } from './dashboard/results/RecentResultsCard'
 import { PuntuationProgressCard } from './dashboard/stats/progress/PuntuationProgressCard'
@@ -11,8 +10,7 @@ import { TopicPerformanceCardSkeleton } from './dashboard/stats/topics/TopicPerf
 
 export function Dashboard () {
   return (
-    <FullscreenContainer className="flex flex-col max-w-7xl m-auto">
-      <main className="flex-1 px-2 py-4 space-y-6">
+      <main className="flex-1 px-2 py-8 space-y-6 max-w-8xl mx-auto">
         <div className="grid gap-4 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           <QuickAccessCard />
           <Suspense fallback={<RecentResultsCardSkeleton />}>
@@ -29,6 +27,5 @@ export function Dashboard () {
           </Suspense>
         </div>
       </main>
-    </FullscreenContainer>
   )
 }

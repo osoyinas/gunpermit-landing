@@ -6,13 +6,16 @@ export default function NavbarLayout (
   { children }: {children: ReactNode}
 ) {
   return (
-    <main className='flex flex-col'>
+    <div style={
+      {
+        display: 'grid',
+        gridTemplateRows: 'auto 1fr auto',
+        minHeight: '100dvh'
+      }
+    }>
       <Navbar />
-      <div className='flex-1'>
-
       {children}
-      </div>
       <Footer />
-    </main>
+    </div>
   )
 }
