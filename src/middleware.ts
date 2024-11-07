@@ -1,7 +1,7 @@
 import { auth } from '@/auth'
 import { NextResponse } from 'next/server'
 
-const protectedRoutes = ['/dashboard', '/tests', '/account']
+const protectedRoutes = ['/dashboard', '/tests', '/account', '/topics']
 const LOGIN_ROUTE = '/auth/login'
 const AUTH_ROOT = '/auth/'
 

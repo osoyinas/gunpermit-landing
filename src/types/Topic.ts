@@ -3,6 +3,7 @@ export interface Topic {
     id: number;
     title: string;
     description: string;
+    questions_count: number;
 }
 
 export interface Question {

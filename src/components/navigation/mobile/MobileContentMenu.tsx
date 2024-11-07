@@ -60,7 +60,7 @@ export function MobileContentMenu () {
             </Link>
           </li>
           <li>
-            <Link href="/resources" className="flex items-center gap-2">
+            <Link href="/topics" className="flex items-center gap-2">
               <LibraryBig />
               <span>
                 <TypographyP>Material de estudio</TypographyP>

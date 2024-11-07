@@ -27,7 +27,7 @@ export async function DesktopContentMenu () {
 
   const resources = topics.val.map((topic) => ({
     title: topic.title,
-    href: `/resources/${topic.id}`,
+    href: `/topics/${topic.id}`,
     description: topic.description
   }))
 
@@ -60,7 +60,9 @@ export async function DesktopContentMenu () {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Material de estudio</NavigationMenuTrigger>
+          <Link href="/topics" legacyBehavior passHref>
+            <NavigationMenuTrigger>Material de estudio</NavigationMenuTrigger>
+          </Link>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {resources?.map((component) => (

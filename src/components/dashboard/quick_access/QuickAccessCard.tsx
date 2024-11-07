@@ -19,7 +19,7 @@ export function QuickAccessCard () {
           <BookOpenIcon className="mr-2 h-4 w-4" />
           Hacer tests
         </LinkButton>
-        <LinkButton className="w-full" variant="outline" href="/resources">
+        <LinkButton className="w-full" variant="outline" href="/topics">
           <BookOpenIcon className="mr-2 h-4 w-4" />
           Material de Estudio
         </LinkButton>
