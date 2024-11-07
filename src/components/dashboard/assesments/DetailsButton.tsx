@@ -8,7 +8,7 @@ interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
 
 export function DetailsButton (props: Props) {
   return (
-    <LinkButton href={LINK} {...props}>
+    <LinkButton href={LINK} {...props} target='_blank' rel='noopener noreferrer'>
       Ver Detalles
     </LinkButton>
   )
