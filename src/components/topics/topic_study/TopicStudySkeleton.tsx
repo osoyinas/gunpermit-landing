@@ -1,4 +1,4 @@
-import { TestsContainer } from '@components/quizzes/TestsContainer'
+import { BreadcrumContainer } from '@components/quizzes/BreadcrumContainer'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,7 +17,7 @@ interface TopicStudySkeletonProps {
 
 export async function TopicStudySkeleton (props: TopicStudySkeletonProps) {
   return (
-    <TestsContainer>
+    <BreadcrumContainer>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -49,6 +49,6 @@ export async function TopicStudySkeleton (props: TopicStudySkeletonProps) {
           </li>
         ))}
       </ul>
-    </TestsContainer>
+    </BreadcrumContainer>
   )
 }

@@ -6,14 +6,14 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { TestsContainer } from '@components/quizzes/TestsContainer'
+import { BreadcrumContainer } from '@components/quizzes/BreadcrumContainer'
 import { Card, CardContent, CardFooter, CardHeader } from '@components/ui/card'
 import { Skeleton } from '@components/ui/skeleton'
 import { TypographyP } from '@components/typography/TypographyP'
 
 export async function TopicSelectionSkeleton () {
   return (
-    <TestsContainer>
+    <BreadcrumContainer>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -44,6 +44,6 @@ export async function TopicSelectionSkeleton () {
               </Card>
         ))}
       </main>
-    </TestsContainer>
+    </BreadcrumContainer>
   )
 }

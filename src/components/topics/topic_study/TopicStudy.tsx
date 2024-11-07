@@ -2,7 +2,7 @@ import { axiosServerInstance } from '@/lib/axios/serverAxios'
 import { getTopic } from '@/services/topics/getTopic'
 import { getTopicQuestions } from '@/services/topics/getTopicQuestions'
 import { StudyQuestion } from './study_question/StudyQuestion'
-import { TestsContainer } from '@components/quizzes/TestsContainer'
+import { BreadcrumContainer } from '@components/quizzes/BreadcrumContainer'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -30,7 +30,7 @@ export async function TopicStudy (props: TopicStudyProps) {
   const questions = responseQuestions.val
 
   return (
-    <TestsContainer>
+    <BreadcrumContainer>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -66,6 +66,6 @@ export async function TopicStudy (props: TopicStudyProps) {
           </li>
         ))}
       </ul>
-    </TestsContainer>
+    </BreadcrumContainer>
   )
 }

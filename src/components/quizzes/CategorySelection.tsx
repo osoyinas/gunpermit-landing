@@ -18,7 +18,7 @@ import {
 import { Badge } from '@components/ui/badge'
 import { getQuizCategories } from '@/services/quizzes/getQuizCategories'
 import { axiosServerInstance } from '@/lib/axios/serverAxios'
-import { TestsContainer } from './TestsContainer'
+import { BreadcrumContainer } from './BreadcrumContainer'
 
 export async function CategorySelection () {
   const response = await getQuizCategories(axiosServerInstance)
@@ -26,7 +26,7 @@ export async function CategorySelection () {
   if (!response.ok) return null
   const categories = response.val
   return (
-    <TestsContainer>
+    <BreadcrumContainer>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -67,6 +67,6 @@ export async function CategorySelection () {
             </a>
         ))}
       </main>
-    </TestsContainer>
+    </BreadcrumContainer>
   )
 }

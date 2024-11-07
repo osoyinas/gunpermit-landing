@@ -14,13 +14,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { TestsContainer } from './TestsContainer'
+import { BreadcrumContainer } from './BreadcrumContainer'
 import { Skeleton } from '@components/ui/skeleton'
 
 export async function CategorySelectionSkeleton () {
   const categories = Array.from({ length: 2 }, (_, index) => (null))
   return (
-    <TestsContainer>
+    <BreadcrumContainer>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -53,6 +53,6 @@ export async function CategorySelectionSkeleton () {
               </Card>
         ))}
       </main>
-    </TestsContainer>
+    </BreadcrumContainer>
   )
 }

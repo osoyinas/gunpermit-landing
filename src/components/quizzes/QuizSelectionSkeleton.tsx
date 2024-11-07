@@ -15,12 +15,12 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-import { TestsContainer } from './TestsContainer'
+import { BreadcrumContainer } from './BreadcrumContainer'
 import { Skeleton } from '@components/ui/skeleton'
 
 export async function QuizSelectionSkeleton () {
   return (
-    <TestsContainer>
+    <BreadcrumContainer>
       <Breadcrumb className="mx-auto">
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -70,6 +70,6 @@ export async function QuizSelectionSkeleton () {
           ))}
         </TableBody>
       </Table>
-    </TestsContainer>
+    </BreadcrumContainer>
   )
 }

@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-import { TestsContainer } from './TestsContainer'
+import { BreadcrumContainer } from './BreadcrumContainer'
 
 interface QuizSelectionProps {
   category?: string;
@@ -32,7 +32,7 @@ export async function QuizSelection (props: QuizSelectionProps) {
   if (!response.ok) return null
   const quizzes = response.val
   return (
-    <TestsContainer>
+    <BreadcrumContainer>
       <Breadcrumb className="mx-auto">
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -66,6 +66,6 @@ export async function QuizSelection (props: QuizSelectionProps) {
           ))}
         </TableBody>
       </Table>
-    </TestsContainer>
+    </BreadcrumContainer>
   )
 }

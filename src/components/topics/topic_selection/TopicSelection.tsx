@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/breadcrumb'
 import { Badge } from '@components/ui/badge'
 import { axiosServerInstance } from '@/lib/axios/serverAxios'
-import { TestsContainer } from '@components/quizzes/TestsContainer'
+import { BreadcrumContainer } from '@components/quizzes/BreadcrumContainer'
 import { getTopics } from '@/services/topics/getTopics'
 
 export async function TopicSelection () {
@@ -26,7 +26,7 @@ export async function TopicSelection () {
   if (!response.ok) return null
   const topics = response.val
   return (
-    <TestsContainer>
+    <BreadcrumContainer>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -61,6 +61,6 @@ export async function TopicSelection () {
             </a>
         ))}
       </main>
-    </TestsContainer>
+    </BreadcrumContainer>
   )
 }
