@@ -54,7 +54,7 @@ export function BottomButtons () {
       <div></div>
       <Button
         onClick={handleCompleteQuiz}
-        className="text-sm md:text-base lg:text-lg py-2 md:py-4 px-4 md:px-6 rounded-xl transition-all duration-300 hover:scale-105 flex items-center"
+        className="w-full text-sm md:text-base lg:text-lg py-2 md:py-4 px-4 md:px-6 rounded-xl transition-all flex items-center"
         variant="default"
         disabled={disabled}
       >

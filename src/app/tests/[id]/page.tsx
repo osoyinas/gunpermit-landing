@@ -1,8 +1,8 @@
 'use client'
 
-import { MakeQuiz } from '@/components/quizzes/make_quiz/MakeQuiz'
 import { MakeQuizProvider } from '@/context/MakeQuizContext'
 import { FullscreenLoading } from '@components/FullscreenLoading'
+import { SimpleMakeQuiz } from '@components/quizzes/make_quiz/SimpleMakeQuiz'
 import { useSession } from 'next-auth/react'
 
 export default function Page ({ params }: { params: { id: number } }) {
@@ -11,7 +11,7 @@ export default function Page ({ params }: { params: { id: number } }) {
   if (status === 'loading') return <FullscreenLoading />
   return (
     <MakeQuizProvider>
-      <MakeQuiz quizId={id} />
+      <SimpleMakeQuiz quizId={id} />
     </MakeQuizProvider>
   )
 }
