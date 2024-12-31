@@ -22,5 +22,7 @@ export interface TopicData {
 export interface UserQuestionAttemptsResponse {
     topics: { [key: string]: TopicData }
     answered: number
+    correct: number
+    incorrect: number
     total: number
 }

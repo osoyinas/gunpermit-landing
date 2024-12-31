@@ -12,7 +12,7 @@ import { getQuizAttempts } from '@/services/metrics/getQuizAttempts'
 import { PuntuationProgressLineChart } from './PuntuationProgressLineChart'
 
 export async function PuntuationProgressCard () {
-  const response = await getQuizAttempts(axiosServerInstance, { size: 99 })
+  const response = await getQuizAttempts(axiosServerInstance, { size: 1000 })
   if (!response.ok) return null
   const attempts = response.val.results
   const lineChartData = attempts.map((attempt) => ({
