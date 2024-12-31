@@ -12,18 +12,18 @@ export default function Page () {
 
       <TypographyH2>1. Introducción</TypographyH2>
       <TypographyP>
-        En [Nombre de la Aplicación], nos comprometemos a proteger tu privacidad
+        En Gunpermit, nos comprometemos a proteger tu privacidad
         y garantizar la seguridad de tus datos personales. Esta Política de
         Privacidad explica cómo recopilamos, utilizamos y protegemos tu
         información personal cuando utilizas nuestra aplicación. Al registrarte
-        y utilizar [Nombre de la Aplicación], aceptas esta política de
+        y utilizar Gunpermit, aceptas esta política de
         privacidad.
       </TypographyP>
       <br />
 
       <TypographyH2>2. Información que Recopilamos</TypographyH2>
       <TypographyP>
-        Al utilizar [Nombre de la Aplicación], recopilamos y procesamos los
+        Al utilizar Gunpermit, recopilamos y procesamos los
         siguientes datos personales:
       </TypographyP>
       <TypographyList>

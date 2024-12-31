@@ -12,7 +12,7 @@ export default function Page () {
 
       <TypographyH2>1. Introducción</TypographyH2>
       <TypographyP>
-        Bienvenido a [Nombre de la Aplicación]. Al registrarte y utilizar esta
+        Bienvenido a Gunpermit. Al registrarte y utilizar esta
         aplicación, aceptas cumplir con los siguientes Términos y Condiciones.
         Si no estás de acuerdo con alguno de estos términos, no debes usar la
         aplicación.
@@ -21,7 +21,7 @@ export default function Page () {
 
       <TypographyH2>2. Uso Aceptable</TypographyH2>
       <TypographyP>
-        La aplicación [Nombre de la Aplicación] se ofrece para ayudarte a
+        La aplicación Gunpermit se ofrece para ayudarte a
         prepararte para obtener el permiso de armas mediante la realización de
         tests y cuestionarios. No debes utilizar esta aplicación para ninguna
         actividad que viole las leyes locales, estatales o nacionales. El uso
@@ -42,7 +42,7 @@ export default function Page () {
 
       <TypographyH2>4. Recolección y Uso de Información Personal</TypographyH2>
       <TypographyP>
-        Al utilizar [Nombre de la Aplicación], recopilamos los siguientes datos
+        Al utilizar Gunpermit, recopilamos los siguientes datos
         personales:
       </TypographyP>
       <TypographyList>
@@ -64,7 +64,7 @@ export default function Page () {
 
       <TypographyH2>5. Política de Privacidad</TypographyH2>
       <TypographyP>
-        [Nombre de la Aplicación] se compromete a proteger tu privacidad. Puedes
+        Gunpermit se compromete a proteger tu privacidad. Puedes
         consultar nuestra
         <a href="enlace_a_la_politica_de_privacidad">
           Política de Privacidad
@@ -77,7 +77,7 @@ export default function Page () {
       <TypographyP>
         Utilizamos cookies y tecnologías similares para mejorar tu experiencia
         de usuario, autenticar sesiones y analizar el uso de la aplicación. Al
-        utilizar [Nombre de la Aplicación], aceptas el uso de cookies. Puedes
+        utilizar Gunpermit, aceptas el uso de cookies. Puedes
         consultar nuestra
         <a href="enlace_a_la_politica_de_cookies">Política de Cookies</a> para
         más detalles.
@@ -96,7 +96,7 @@ export default function Page () {
 
       <TypographyH2>8. Responsabilidad</TypographyH2>
       <TypographyP>
-        [Nombre de la Aplicación] no se hace responsable por cualquier daño o
+        Gunpermit no se hace responsable por cualquier daño o
         perjuicio resultante del uso incorrecto de la aplicación o por fallos en
         el sistema. El uso de la aplicación es bajo tu propio riesgo.
       </TypographyP>
