@@ -22,7 +22,6 @@ export async function RecentResultsCard () {
   const response = await getQuizAttempts(axiosServerInstance, { size: 100 })
   if (!response.ok) return null
   const attempts = response.val.results
-  console.log(attempts)
   return (
     <Card>
       <CardHeader>
