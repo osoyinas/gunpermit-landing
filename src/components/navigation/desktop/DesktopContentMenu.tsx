@@ -77,7 +77,13 @@ export async function DesktopContentMenu () {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-
+        <NavigationMenuItem>
+          <Link href="/progress" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Progreso
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   )
