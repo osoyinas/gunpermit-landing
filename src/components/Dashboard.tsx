@@ -10,7 +10,7 @@ export function Dashboard () {
         <div className="grid gap-4 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           <QuickAccessCard />
           <Suspense fallback={<RecentResultsCardSkeleton />}>
-            <RecentResultsCard />
+            <RecentResultsCard size={10}/>
           </Suspense>
           <NextAssessmentCard />
         </div>

@@ -18,8 +18,12 @@ import {
 } from '@components/ui/table'
 import { TimeAgoComponent } from './TimeAgoComponent'
 
-export async function RecentResultsCard () {
-  const response = await getQuizAttempts(axiosServerInstance, { size: 100 })
+interface RecentResultsCardProps {
+  size?: number
+}
+
+export async function RecentResultsCard (props: RecentResultsCardProps) {
+  const response = await getQuizAttempts(axiosServerInstance, { size: props.size ?? 5 })
   if (!response.ok) return null
   const attempts = response.val.results
   return (
