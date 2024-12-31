@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
 import { CheckCircle, XCircle, HelpCircle } from 'lucide-react'
 import { getTopicsStatistics } from '@/services/metrics/getTopicsStatistics'
 import { axiosServerInstance } from '@/lib/axios/serverAxios'
@@ -48,9 +47,10 @@ export async function TopicStatisticsCard () {
                       {answered} / {total} respondidas
                     </span>
                   </div>
-                  <Progress
-                    value={total > 0 ? (answered / total) * 100 : 0}
-                    className="h-2"
+                  <TwoColorProgress
+                    correct={correct}
+                    incorrect={incorrect}
+                    total={total}
                   />
                   <div className="flex justify-between text-sm">
                     <div className="flex items-center">
@@ -80,9 +80,10 @@ export async function TopicStatisticsCard () {
               {topicsStatistics.answered} / {topicsStatistics.total} respondidas
             </span>
           </div>
-          <Progress
-            value={(topicsStatistics.answered / topicsStatistics.total) * 100}
-            className="h-2"
+          <TwoColorProgress
+            correct={topicsStatistics.correct}
+            incorrect={topicsStatistics.incorrect}
+            total={topicsStatistics.total}
           />
           <div className="flex justify-between text-sm">
             <div className="flex items-center">
@@ -103,5 +104,31 @@ export async function TopicStatisticsCard () {
         </div>
       </CardFooter>
     </Card>
+  )
+}
+
+function TwoColorProgress ({
+  correct,
+  incorrect,
+  total
+}: {
+  correct: number;
+  incorrect: number;
+  total: number;
+}) {
+  const correctPercentage = (correct / total) * 100
+  const incorrectPercentage = (incorrect / total) * 100
+
+  return (
+    <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+      <div
+        className="h-full bg-green-500"
+        style={{ width: `${correctPercentage}%`, float: 'left' }}
+      />
+      <div
+        className="h-full bg-red-500"
+        style={{ width: `${incorrectPercentage}%`, float: 'left' }}
+      />
+    </div>
   )
 }
