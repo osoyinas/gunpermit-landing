@@ -19,11 +19,10 @@ import {
 import { TimeAgoComponent } from './TimeAgoComponent'
 
 export async function RecentResultsCard () {
-  const response = await getQuizAttempts(axiosServerInstance
-  )
+  const response = await getQuizAttempts(axiosServerInstance, { size: 100 })
   if (!response.ok) return null
   const attempts = response.val.results
-
+  console.log(attempts)
   return (
     <Card>
       <CardHeader>
@@ -34,6 +33,8 @@ export async function RecentResultsCard () {
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead className="text-foreground">Test</TableHead>
+              <TableHead className="text-foreground">Categoría</TableHead>
               <TableHead className="text-foreground">Puntuación</TableHead>
               <TableHead className="text-foreground">Realizado</TableHead>
             </TableRow>
@@ -41,6 +42,10 @@ export async function RecentResultsCard () {
           <TableBody>
             {attempts.map((attempt) => (
               <TableRow key={attempt.id}>
+                <TableCell>{attempt.quiz}</TableCell>
+                <TableCell className="font-bold opacity-85">
+                  {attempt.category}
+                </TableCell>
                 <TableCell>
                   <div
                     className={` px-3 py-1 rounded-full font-bold w-min min-w-[4rem] flex items-center justify-center ${
@@ -52,7 +57,7 @@ export async function RecentResultsCard () {
                 </TableCell>
                 <TableCell>
                   <TypographyMuted>
-                   <TimeAgoComponent date={new Date(attempt.date)} />
+                    <TimeAgoComponent date={new Date(attempt.date)} />
                   </TypographyMuted>
                 </TableCell>
               </TableRow>

@@ -4,6 +4,8 @@ export interface QuizAttemptResult {
     score: string // ex: 3/4
     mark: number // ex  75
     passed: boolean
+    quiz: string
+    category: string
 }
 
 export interface TopicPerformance {
