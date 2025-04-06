@@ -9,15 +9,15 @@ import {
 } from '@/components/ui/breadcrumb'
 import { axiosServerInstance } from '@/lib/axios/serverAxios'
 import { getQuizzes } from '@/services/quizzes/getQuizzes'
-import { QuizRow } from './QuizRow'
 import {
   Table,
-  TableBody,
   TableHead,
   TableHeader,
   TableRow
 } from '@/components/ui/table'
 import { BreadcrumContainer } from './BreadcrumContainer'
+import { QuizTableBody } from './QuizTableBody'
+import { ReactQueryProvider } from '@components/query/ReactQueryProvider'
 
 interface QuizSelectionProps {
   category?: string;
@@ -60,11 +60,9 @@ export async function QuizSelection (props: QuizSelectionProps) {
             <TableHead className="text-center">Acciones</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          {quizzes.map((quiz, index) => (
-            <QuizRow key={quiz.id} quiz={quiz} />
-          ))}
-        </TableBody>
+          <ReactQueryProvider>
+            <QuizTableBody initialData={quizzes} category={category} />
+          </ReactQueryProvider>
       </Table>
     </BreadcrumContainer>
   )

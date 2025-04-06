@@ -1,15 +1,15 @@
 import { QuizAttempt } from '@/types/Quizzes'
+import { PagedResponse } from '@/types/Response'
 import { AxiosInstance } from 'axios'
 import { Err, Ok, Result } from 'ts-results'
 
 export async function getQuizzes (
   axios: AxiosInstance,
-  params: { category?: string } = {}
-): Promise<Result<Array<QuizAttempt>, string>> {
+  params: { category?: string, page?:number, size?:number } = {}
+): Promise<Result<PagedResponse<QuizAttempt>, string>> {
   try {
-    const url = params.category
-      ? `/quizzes/?category=${params.category}`
-      : '/quizzes/'
+    const url = `/quizzes/?${params.category ? `category=${params.category}&` : ''}${params.page ? `page=${params.page}&` : ''}${params.size ? `size=${params.size}` : ''}`.replace(/&$/, '')
+
     const response = await axios.get(url)
     return Ok(response.data)
   } catch (error) {
