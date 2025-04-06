@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Navbar } from './Navbar'
 import Footer from '@components/footer/Footer'
-
+import { SpeedInsights } from '@vercel/speed-insights/next'
 export default function NavbarLayout (
   { children }: {children: ReactNode}
 ) {
@@ -16,6 +16,7 @@ export default function NavbarLayout (
       <Navbar />
       {children}
       <Footer />
+      <SpeedInsights />
     </div>
   )
 }
