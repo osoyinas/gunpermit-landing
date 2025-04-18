@@ -16,7 +16,6 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function Home () {
   return (
@@ -188,81 +187,7 @@ export default function Home () {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center">
-            <Tabs defaultValue="tests" className="w-full max-w-md">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="tests">Tests</TabsTrigger>
-                <TabsTrigger value="estudio">Estudio</TabsTrigger>
-                <TabsTrigger value="progreso">Progreso</TabsTrigger>
-              </TabsList>
-              <TabsContent
-                value="tests"
-                className="border rounded-lg p-6 mt-6 bg-card"
-              >
-                <div className="space-y-4">
-                  <h3 className="text-lg font-bold">Tests por temas</h3>
-                  <ul className="space-y-2">
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-primary" />
-                      <span>Normativa básica</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-primary" />
-                      <span>Funcionamiento de armas</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-primary" />
-                      <span>Seguridad en el manejo</span>
-                    </li>
-                  </ul>
-                </div>
-              </TabsContent>
-              <TabsContent
-                value="estudio"
-                className="border rounded-lg p-6 mt-6 bg-card"
-              >
-                <div className="space-y-4">
-                  <h3 className="text-lg font-bold">Material completo</h3>
-                  <ul className="space-y-2">
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-primary" />
-                      <span>Temario actualizado</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-primary" />
-                      <span>Normativas vigentes</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-primary" />
-                      <span>Guías prácticas</span>
-                    </li>
-                  </ul>
-                </div>
-              </TabsContent>
-              <TabsContent
-                value="progreso"
-                className="border rounded-lg p-6 mt-6 bg-card"
-              >
-                <div className="space-y-4">
-                  <h3 className="text-lg font-bold">Seguimiento detallado</h3>
-                  <ul className="space-y-2">
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-primary" />
-                      <span>Estadísticas por tema</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-primary" />
-                      <span>Gráficos de evolución</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-primary" />
-                      <span>Áreas de mejora</span>
-                    </li>
-                  </ul>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </div>
+          <div className="flex items-center justify-center"></div>
         </div>
       </section>
 
@@ -312,8 +237,8 @@ export default function Home () {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                La aplicación es muy intuitiva y el material de estudio está
-                muy bien organizado. Totalmente recomendable.
+                La aplicación es muy intuitiva y el material de estudio está muy
+                bien organizado. Totalmente recomendable.
               </p>
             </CardContent>
           </Card>
