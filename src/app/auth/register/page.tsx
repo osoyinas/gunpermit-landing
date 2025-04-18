@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle
@@ -24,6 +23,7 @@ import { ZodError } from 'zod'
 import { LinkButton } from '@components/ui/linkButton'
 import { signIn } from 'next-auth/react'
 import { SignInWithGoogleButton } from '@components/buttons/signInWithGoogleButton'
+import { Divider } from '@components/ui/divider'
 
 const RegisterSchema = z
   .object({
@@ -106,9 +106,16 @@ export default function Page () {
       <Card className="w-full max-w-[28rem] border-none md:border">
         <CardHeader>
           <CardTitle>Registrarse</CardTitle>
-          <CardDescription>
-            Regístrate para acceder a la plataforma de tests
-          </CardDescription>
+          <ul className="m-auto py-2 md:py-6 w-full flex flex-col gap-4">
+            <li className="w-full">
+              <SignInWithGoogleButton
+              text='Registrarse con Google'
+                onClick={() => signIn('google')}
+                className="w-full"
+              />
+            </li>
+          </ul>
+          <Divider text="O registrarse con correo electrónico" />
           {error?.non_field_errors && (
             <Alert variant="destructive">
               <ExclamationTriangleIcon className="h-4 w-4" />
@@ -224,14 +231,6 @@ export default function Page () {
               Registrarse
             </Button>
           </div>
-          <ul className="m-auto mt-8 w-full flex flex-col gap-4">
-            <li className="w-full">
-              <SignInWithGoogleButton
-                onClick={() => signIn('google')}
-                className="w-full"
-              />
-            </li>
-          </ul>
         </CardFooter>
       </Card>
     </main>

@@ -17,7 +17,7 @@ export async function DesktopContentMenuSkeleton () {
       <NavigationMenuItem>
           <Link href="/dashboard" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Dashboard
+              Inicio
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

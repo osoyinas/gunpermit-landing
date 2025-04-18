@@ -1,8 +1,11 @@
 import { HTMLAttributes } from 'react'
 
 interface SignInWithGoogleButtonProps
-  extends HTMLAttributes<HTMLButtonElement> {}
+  extends HTMLAttributes<HTMLButtonElement> {
+  text?: string;
+}
 export function SignInWithGoogleButton (props: SignInWithGoogleButtonProps) {
+  const { text = 'Iniciar sesión con Google' } = props
   return (
     <button
       onClick={props.onClick}
@@ -47,7 +50,7 @@ export function SignInWithGoogleButton (props: SignInWithGoogleButtonProps) {
           </g>
         </g>
       </svg>
-      <span >Iniciar sesión con Google</span>
+      <span>{text}</span>
     </button>
   )
 }

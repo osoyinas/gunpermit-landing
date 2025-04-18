@@ -1,11 +1,9 @@
 'use client'
 import { useEffect, useState } from 'react'
-
 import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle
@@ -25,6 +23,7 @@ import { ZodError } from 'zod'
 import { LinkButton } from '@components/ui/linkButton'
 import { SignInWithGoogleButton } from '@components/buttons/signInWithGoogleButton'
 import { Providers } from '@/types/Auth'
+import { Divider } from '@components/ui/divider'
 
 const LoginSchema = z.object({
   email: z.string().email(),
@@ -92,9 +91,16 @@ export default function Page () {
       <Card className="w-full max-w-[28rem] border-none md:border">
         <CardHeader>
           <CardTitle>Inicia sesión</CardTitle>
-          <CardDescription>
-            Inicia sesión para acceder a la plataforma de tests
-          </CardDescription>
+
+          <ul className="m-auto py-2 md:py-6 w-full flex flex-col gap-4">
+            <li className="w-full">
+              <SignInWithGoogleButton
+                onClick={() => signIn('google')}
+                className="w-full"
+              />
+            </li>
+          </ul>
+          <Divider text='O inicia sesión con correo electrónico' />
           {error?.non_field_errors && (
             <Alert variant="destructive">
               <ExclamationTriangleIcon className="h-4 w-4" />
@@ -103,7 +109,6 @@ export default function Page () {
             </Alert>
           )}
         </CardHeader>
-
         <CardContent>
           <form>
             <div className="grid w-full items-center gap-4">
@@ -148,14 +153,6 @@ export default function Page () {
               {loading ? 'Iniciando...' : 'Iniciar sesión'}
             </Button>
           </div>
-          <ul className="m-auto mt-8 w-full flex flex-col gap-4">
-            <li className="w-full">
-              <SignInWithGoogleButton
-                onClick={() => signIn('google')}
-                className="w-full"
-              />
-            </li>
-          </ul>
         </CardFooter>
       </Card>
     </main>
